@@ -14,21 +14,22 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Valid
-public class Client {
+public class Technicien {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Le nom est obligatoire")
     private String nom;
+
     @NotBlank(message = "Le prénom est obligatoire")
     private String prenom;
-    @NotBlank(message = "Le téléphone est obligatoire")
-    private String telephone;
-    @NotBlank(message = "L'email est obligatoire")
-    private String email;
 
-    // Relation avec Véhicule : un client peut avoir plusieurs véhicules
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Vehicule> vehicules;
+
+    // Relation avec RendezVous : un technicien peut avoir plusieurs rendez-vous
+    @OneToMany(mappedBy = "technicien", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<RendezVous> rendezVous;
+
+
+
 }
