@@ -3,6 +3,7 @@ package fr.unilasalle.tp_garage_auto.beans;
 import jakarta.persistence.*;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.List;
@@ -20,9 +21,13 @@ public class Vehicule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "La marque est obligatoire")
     private String marque;
+    @NotBlank(message = "Le modèle est obligatoire")
     private String modele;
+    @NotBlank(message = "L'immatriculation est obligatoire")
     private String immatriculation;
+    @NotBlank(message = "L'année est obligatoire")
     private int annee;
 
     // Relation avec Client
