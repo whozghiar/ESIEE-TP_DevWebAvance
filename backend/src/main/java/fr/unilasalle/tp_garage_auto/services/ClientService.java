@@ -1,13 +1,23 @@
 package fr.unilasalle.tp_garage_auto.services;
 
+// ------ Imports Beans ------
+import fr.unilasalle.tp_garage_auto.DTO.VehiculeDTO;
 import fr.unilasalle.tp_garage_auto.beans.Client;
+// ------ Imports DTO ------
+import fr.unilasalle.tp_garage_auto.DTO.ClientDTO;
+// ------ Imports Exceptions ------
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
 import fr.unilasalle.tp_garage_auto.exceptions.NotFoundException;
+
+// ------ Imports Repositories ------
 import fr.unilasalle.tp_garage_auto.repositories.ClientRepository;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -16,40 +26,68 @@ public class ClientService {
     private final ClientRepository clientRepository;
 
     /**
-     * Récupérer tous les clients
-     * @return
+     * Convertir une entité Client en ClientDTO
      */
-    public List<Client> getAllClients() {
-        return this.clientRepository.findAll();
+    private ClientDTO convertToDTO(Client client) {
+        ClientDTO dto = new ClientDTO();
+        dto.setId(client.getId());
+        dto.setNom(client.getNom());
+        dto.setPrenom(client.getPrenom());
+        dto.setTelephone(client.getTelephone());
+        dto.setEmail(client.getEmail());
+        // Vérifier si la liste des véhicules est null
+        if (client.getVehicules() != null) {
+            dto.setVehicules(client.getVehicules().stream()
+                    .map(v -> new VehiculeDTO(v.getId(), v.getMarque(), v.getModele(), v.getImmatriculation(), v.getAnnee()))
+                    .collect(Collectors.toList()));
+        } else {
+            // Initialiser avec une liste vide si null
+            dto.setVehicules(new ArrayList<>());
+        }
+        return dto;
     }
+
+
+    /**
+     * Récupérer tous les clients
+     */
+    public List<ClientDTO> getAllClients() {
+        return this.clientRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
 
     /**
      * Créer ou mettre à jour un client
-     * @param client
+     * @param clientDto
      * @return
      */
-    public Client updateClient(Client client) throws NotFoundException, DBException {
+    public ClientDTO updateClient(ClientDTO clientDto) throws NotFoundException, DBException {
         Client existingClient = null;
 
-        if (client.getId() != null) {
-            // Modifier un client existant
-            existingClient = this.clientRepository.findById(client.getId()).orElse(null);
+        if (clientDto.getId() != null) {
+            existingClient = this.clientRepository.findById(clientDto.getId()).orElse(null);
             if(existingClient == null) {
-                throw new NotFoundException("Could not find client with id " + client.getId());
+                throw new NotFoundException("Could not find client with id " + clientDto.getId());
             }
+
         } else {
             existingClient = new Client();
         }
 
-        existingClient.setNom(client.getNom());
-        existingClient.setPrenom(client.getPrenom());
-        existingClient.setTelephone(client.getTelephone());
-        existingClient.setEmail(client.getEmail());
+        existingClient.setNom(clientDto.getNom());
+        existingClient.setPrenom(clientDto.getPrenom());
+        existingClient.setTelephone(clientDto.getTelephone());
+        existingClient.setEmail(clientDto.getEmail());
 
-        try {
-            return this.clientRepository.save(existingClient);
-        } catch (DBException e) {
-            throw new DBException("Error while updating client");
+
+        try{
+            Client updatedClient = this.clientRepository.save(existingClient);
+            return this.convertToDTO(updatedClient);
+
+        } catch (Exception e) {
+            throw new DBException("Error while saving client");
         }
     }
 

@@ -1,13 +1,16 @@
 package fr.unilasalle.tp_garage_auto.services;
 
+import fr.unilasalle.tp_garage_auto.DTO.VehiculeDTO;
 import fr.unilasalle.tp_garage_auto.beans.Vehicule;
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
 import fr.unilasalle.tp_garage_auto.exceptions.NotFoundException;
 import fr.unilasalle.tp_garage_auto.repositories.VehiculeRepository;
+import fr.unilasalle.tp_garage_auto.utils.EntityDTOConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -18,8 +21,10 @@ public class VehiculeService {
      * Get all vehicules
      * @return
      */
-    public List<Vehicule> getAllVehicules() {
-        return vehiculeRepository.findAll();
+    public List<VehiculeDTO> getAllVehicules() {
+        return vehiculeRepository.findAll().stream()
+                .map(EntityDTOConverter::convertToVehiculeDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -27,7 +32,8 @@ public class VehiculeService {
      * @param vehicule
      * @return
      */
-    public Vehicule updateVehicule(Vehicule vehicule) throws NotFoundException, DBException {
+    
+    public VehiculeDTO updateVehicule(VehiculeDTO vehicule) throws NotFoundException, DBException {
         Vehicule existingVehicule = null;
 
         if (vehicule.getId() != null) {

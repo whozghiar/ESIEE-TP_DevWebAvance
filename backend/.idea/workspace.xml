@@ -5,11 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ecb7285c-4883-4b62-a64f-fdcba187b7b2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/utils/EntityDTOConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/DTO/ClientDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/DTO/ClientDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/DTO/RendezVousDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/DTO/RendezVousDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/DTO/TechnicienDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/DTO/TechnicienDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/DTO/VehiculeDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/DTO/VehiculeDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/VehiculeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/VehiculeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/services/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/services/ClientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/services/VehiculeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/services/VehiculeService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

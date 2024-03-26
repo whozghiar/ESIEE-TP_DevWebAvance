@@ -1,5 +1,6 @@
 package fr.unilasalle.tp_garage_auto.controllers;
 
+import fr.unilasalle.tp_garage_auto.DTO.VehiculeDTO;
 import fr.unilasalle.tp_garage_auto.beans.Client;
 import fr.unilasalle.tp_garage_auto.beans.Vehicule;
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
@@ -23,14 +24,14 @@ public class VehiculeController {
     private final VehiculeService vehiculeService;
 
     @GetMapping
-    public ResponseEntity<List<Vehicule>> getVehicule() {
+    public ResponseEntity<List<VehiculeDTO>> getVehicule() {
         log.info("Getting all vehicules ...");
-        List<Vehicule> vehicules = this.vehiculeService.getAllVehicules();
+        List<VehiculeDTO> vehicules = this.vehiculeService.getAllVehicules();
         return new ResponseEntity<>(vehicules, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Vehicule> postVehicule(@RequestBody Vehicule vehiculeSent) {
+    public ResponseEntity<VehiculeDTO> postVehicule(@RequestBody VehiculeDTO vehiculeSent) {
         try{
             log.info("Creating vehicule ...");
             return vehiculeSent.getId() == null ?
