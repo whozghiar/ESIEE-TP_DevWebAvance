@@ -10,9 +10,14 @@
       focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4" [(ngModel)]="vehicle.clientVehicle"
              placeholder="Nom Client..."/>
 
-      <input class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500
+      <select class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4" [(ngModel)]="vehicle.technician">
+        <option value="" disabled> Sélectionner un technicien... </option>
+        <option *ngFor="let technician of technicians" [value]="technician">{{ technician.name }} {{technician.surname}}</option>
+      </select>
+
+      <!--<input class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500
       focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4" [(ngModel)]="vehicle.technician"
-             placeholder="Technicien affecté..."/>
+             placeholder="Technicien affecté..."/>-->
 
       <textarea class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm" rows="4" placeholder="Défaut(s) du Véhicule"></textarea>
       <button class="bg-blue-600 text-white rounded shadow p-3" (click)="vehicleService.addVehicle(vehicle)">Ajouter</button>

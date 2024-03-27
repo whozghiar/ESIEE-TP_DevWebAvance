@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {TechnicianComponent}  from "../technician/technician.component";
 
 @Component({
   selector: 'app-vehicule',
@@ -11,7 +12,7 @@ export class VehiculeComponent {
 
   @Input("vehicle")
   vehicle: any = {
-    technician: "UNKNOWN",
+    technician: TechnicianComponent,
     client: "UNKNOWN",
     issue: "UNKNOWN",
     model: "UNKNOWN",

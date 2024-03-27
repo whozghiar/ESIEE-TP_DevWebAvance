@@ -12,9 +12,9 @@ export class VehicleService {
   }
 
   refreshVehicles() {
-    this.httpClient.get("/api/vehicle").subscribe((vehicles: any) => {
+    /*this.httpClient.get("/api/vehicle").subscribe((vehicles: any) => {
       this.vehicleArray = vehicles;
-    });
+    });*/
   }
 
   getAllVehicle() {
