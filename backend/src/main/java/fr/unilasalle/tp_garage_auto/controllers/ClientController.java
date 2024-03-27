@@ -3,6 +3,7 @@ package fr.unilasalle.tp_garage_auto.controllers;
 import fr.unilasalle.tp_garage_auto.DTO.ClientDTO;
 import fr.unilasalle.tp_garage_auto.beans.Client;
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
+import fr.unilasalle.tp_garage_auto.exceptions.DTOException;
 import fr.unilasalle.tp_garage_auto.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +43,15 @@ public class ClientController {
         } catch (NotFoundException e) {
             log.error("Could not find client with id " + clientDto.getId(), e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (DTOException e) {
+            log.error("Error with DTO : ", e);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (RuntimeException e) {
+            log.error("Error Runtime : ", e);
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
+
+
     }
 
     @DeleteMapping("/{id}")

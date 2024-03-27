@@ -1,5 +1,6 @@
 package fr.unilasalle.tp_garage_auto.controllers;
 
+import fr.unilasalle.tp_garage_auto.DTO.TechnicienDTO;
 import fr.unilasalle.tp_garage_auto.beans.RendezVous;
 import fr.unilasalle.tp_garage_auto.beans.Technicien;
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
@@ -21,14 +22,14 @@ public class TechnicienController {
     private final TechnicienService technicienService;
 
     @GetMapping
-    public ResponseEntity<List<Technicien>> getTechnicien() {
+    public ResponseEntity<List<TechnicienDTO>> getTechnicien() {
         log.info("Getting all techniciens ...");
-        List<Technicien> techniciens = this.technicienService.getAllTechniciens();
+        List<TechnicienDTO> techniciens = this.technicienService.getAllTechniciens();
         return new ResponseEntity<>(techniciens, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Technicien> postTechnicien(@RequestBody Technicien technicienSent) {
+    public ResponseEntity<TechnicienDTO> postTechnicien(@RequestBody TechnicienDTO technicienSent) {
         try{
             log.info("Creating technicien ...");
             return technicienSent.getId() == null ?

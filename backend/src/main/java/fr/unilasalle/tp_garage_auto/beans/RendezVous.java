@@ -13,6 +13,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Data
+@Builder
 @Valid
 public class RendezVous {
     @Id

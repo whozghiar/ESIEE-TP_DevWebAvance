@@ -1,5 +1,6 @@
 package fr.unilasalle.tp_garage_auto.controllers;
 
+import fr.unilasalle.tp_garage_auto.DTO.RendezVousDTO;
 import fr.unilasalle.tp_garage_auto.beans.Client;
 import fr.unilasalle.tp_garage_auto.beans.RendezVous;
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
@@ -23,14 +24,14 @@ public class RendezVousController {
     private final RendezVousService rendezVousService;
 
     @GetMapping
-    public ResponseEntity<List<RendezVous>> getRendezVous() {
+    public ResponseEntity<List<RendezVousDTO>> getRendezVous() {
         log.info("Getting all rendez-vous ...");
-        List<RendezVous> rendezvous = this.rendezVousService.getAllRendezVous();
+        List<RendezVousDTO> rendezvous = this.rendezVousService.getAllRendezVous();
         return new ResponseEntity<>(rendezvous, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<RendezVous> postRendezVous(@RequestBody RendezVous rendezVousSent) {
+    public ResponseEntity<RendezVousDTO> postRendezVous(@RequestBody RendezVousDTO rendezVousSent) {
         try{
             log.info("Creating rendez-vous ...");
             return rendezVousSent.getId() == null ?

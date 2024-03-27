@@ -13,6 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Data
+@Builder
 @Valid
 public class Client {
     @Id

@@ -4,6 +4,7 @@ import fr.unilasalle.tp_garage_auto.DTO.VehiculeDTO;
 import fr.unilasalle.tp_garage_auto.beans.Client;
 import fr.unilasalle.tp_garage_auto.beans.Vehicule;
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
+import fr.unilasalle.tp_garage_auto.exceptions.DTOException;
 import fr.unilasalle.tp_garage_auto.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +44,8 @@ public class VehiculeController {
         } catch (NotFoundException e) {
             log.error("Could not find vehicule with id " + vehiculeSent.getId(), e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (DTOException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
