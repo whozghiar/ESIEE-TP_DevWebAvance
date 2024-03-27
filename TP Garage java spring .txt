@@ -1,0 +1,18 @@
+TP Garage java spring 
+features:
+technicien 
+
+DAO de RDV (suppirme ref véhicule dans RDV) objet tampon 
+enregistrer en base de donnée Objet DAO -> Objet normal
+communiqcation avec front en Ojet DAO
+
+front 
+npm install -g @angular/cli
+ng new tp_garage_auto_front --standalone
+cd .\tp_garage_auto_front\
+npm install -D tailwindcss
+npx tailwindcss init
+modif tailwind.config.js
+modif styles.css
+ng serve --open
+

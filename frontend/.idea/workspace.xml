@@ -1,41 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="340a6ae7-ce4f-494c-83ae-50f3466077c7" name="Changes" comment="" />
+    <list default="true" id="a00958b1-4435-4ecc-80fc-69d2ba5cfe2d" name="Changes" comment="front fichiers">
+      <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/app.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/app.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/tailwind.config.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
+  "customColor": "",
+  "associatedIndex": 4
 }]]></component>
-  <component name="ProjectId" id="2eB4FkEEPnxPkqsIqt8IN9H9qBX" />
+  <component name="ProjectId" id="2eDhKDAoqg0JYCiYG6pZZEyeVew" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JavaScript Debug.app.component.html.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "frontend",
+    "last_opened_file_path": "C:/Users/PC-HV13/Documents/ESIEE/DevWeb/TP-Note/frontend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Users\\PC-HV13\\Documents\\ESIEE\\DevWeb\\TP-Note\\frontend\\tp_garage_auto_front\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\PC-HV13\Documents\ESIEE\DevWeb\TP-Note\frontend\tp_garage_auto_front\images" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="340a6ae7-ce4f-494c-83ae-50f3466077c7" name="Changes" comment="" />
-      <created>1711364538123</created>
+      <changelist id="a00958b1-4435-4ecc-80fc-69d2ba5cfe2d" name="Changes" comment="" />
+      <created>1711444991916</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1711364538123</updated>
-      <workItem from="1711364539494" duration="160000" />
+      <updated>1711444991916</updated>
+      <workItem from="1711444993123" duration="19545000" />
     </task>
+    <task id="LOCAL-00001" summary="front fichiers">
+      <option name="closed" value="true" />
+      <created>1711445396565</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1711445396565</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="front fichiers" />
+    <option name="LAST_COMMIT_MESSAGE" value="front fichiers" />
   </component>
 </project>
