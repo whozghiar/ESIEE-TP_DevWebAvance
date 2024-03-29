@@ -1,18 +1,34 @@
 import { Component } from '@angular/core';
+import { NgForOf } from '@angular/common';
+import { TechnicianComponent } from '../technician/technician.component';
 
 @Component({
   selector: 'app-technicianpage',
   standalone: true,
-  imports: [],
+  imports: [NgForOf, TechnicianComponent],
   templateUrl: './technicianpage.component.html',
-  styleUrl: './technicianpage.component.css'
+  styleUrl: './technicianpage.component.css',
 })
 export class TechnicianpageComponent {
-  technicians : any  = [
-    { id: 1, name: 'John' ,surname: 'Padawan'},
-    { id: 2, name: 'Lucien', surname: 'Bobby'},
-    { id: 3, name: 'Theo', surname: 'Lomege'},
-    // Ajoutez plus de techniciens selon les besoins...
+  technicians: any = [
+    {
+      name: 'John',
+      surname: 'Doe',
+      availability: true,
+      avatar: 'https://www.w3schools.com/howto/img_avatar.png',
+    },
+    {
+      name: 'Jane',
+      surname: 'Doe',
+      availability: false,
+      avatar: 'https://www.w3schools.com/howto/img_avatar2.png',
+    },
+    {
+      name: 'Jack',
+      surname: 'Doe',
+      availability: true,
+      avatar: 'https://www.w3schools.com/howto/img_snow.jpg',
+    },
   ];
-  constructor() { }
+  constructor() {}
 }
