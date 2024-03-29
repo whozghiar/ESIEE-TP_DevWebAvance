@@ -33,8 +33,8 @@ public class ClientController {
     @PostMapping
     public ResponseEntity<ClientDTO> postClient(@RequestBody ClientDTO clientDto) {
         try {
-            log.info("Creating or updating client ...");
-            ClientDTO savedClientDto = this.clientService.updateClient(clientDto);
+            log.info("Creating client ...");
+            ClientDTO savedClientDto = this.clientService.createClient(clientDto);
             HttpStatus status = clientDto.getId() == null ? HttpStatus.CREATED : HttpStatus.ACCEPTED;
             return new ResponseEntity<>(savedClientDto, status);
         } catch (DBException e) {
@@ -50,8 +50,26 @@ public class ClientController {
             log.error("Error Runtime : ", e);
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
+    }
 
-
+    @PutMapping
+    public ResponseEntity<ClientDTO> putClient(@RequestBody ClientDTO clientDto) {
+        try {
+            log.info("Updating client ...");
+            return new ResponseEntity<>(this.clientService.updateClient(clientDto), HttpStatus.ACCEPTED);
+        } catch (DBException e) {
+            log.error("Error while updating client", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (NotFoundException e) {
+            log.error("Could not find client with id " + clientDto.getId(), e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (DTOException e) {
+            log.error("Error with DTO : ", e);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (RuntimeException e) {
+            log.error("Error Runtime : ", e);
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
     @DeleteMapping("/{id}")

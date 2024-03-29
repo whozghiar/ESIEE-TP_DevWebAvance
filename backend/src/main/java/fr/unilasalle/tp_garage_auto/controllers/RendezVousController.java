@@ -4,6 +4,7 @@ import fr.unilasalle.tp_garage_auto.DTO.RendezVousDTO;
 import fr.unilasalle.tp_garage_auto.beans.Client;
 import fr.unilasalle.tp_garage_auto.beans.RendezVous;
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
+import fr.unilasalle.tp_garage_auto.exceptions.DTOException;
 import fr.unilasalle.tp_garage_auto.exceptions.NotFoundException;
 import fr.unilasalle.tp_garage_auto.services.ClientService;
 import fr.unilasalle.tp_garage_auto.services.RendezVousService;
@@ -43,6 +44,8 @@ public class RendezVousController {
         } catch (NotFoundException e) {
             log.error("Could not find rendez-vous with id " + rendezVousSent.getId(), e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (DTOException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 

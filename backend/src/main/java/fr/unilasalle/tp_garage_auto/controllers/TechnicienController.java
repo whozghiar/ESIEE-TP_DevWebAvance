@@ -4,6 +4,7 @@ import fr.unilasalle.tp_garage_auto.DTO.TechnicienDTO;
 import fr.unilasalle.tp_garage_auto.beans.RendezVous;
 import fr.unilasalle.tp_garage_auto.beans.Technicien;
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
+import fr.unilasalle.tp_garage_auto.exceptions.DTOException;
 import fr.unilasalle.tp_garage_auto.exceptions.NotFoundException;
 import fr.unilasalle.tp_garage_auto.services.TechnicienService;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +42,8 @@ public class TechnicienController {
         } catch (NotFoundException e) {
             log.error("Could not find technicien with id " + technicienSent.getId(), e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (DTOException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 

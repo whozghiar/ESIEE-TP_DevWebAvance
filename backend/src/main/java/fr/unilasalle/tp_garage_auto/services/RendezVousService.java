@@ -11,6 +11,7 @@ import fr.unilasalle.tp_garage_auto.repositories.RendezVousRepository;
 import fr.unilasalle.tp_garage_auto.repositories.TechnicienRepository;
 import fr.unilasalle.tp_garage_auto.repositories.VehiculeRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -51,8 +52,11 @@ public class RendezVousService {
      * @throws NotFoundException
      * @throws DBException
      */
-    public RendezVousDTO updateRendezVous(RendezVousDTO rendezVousDTO) throws NotFoundException, DBException{
-        return null;
+    @Transactional
+    public RendezVousDTO updateRendezVous(RendezVousDTO rendezVousDTO) throws NotFoundException, DBException, DTOException {
+        RendezVous rendezVous = RendezVousDTO.toEntity(rendezVousDTO);
+        rendezVous = rendezVousRepository.save(rendezVous);
+        return RendezVousDTO.fromEntity(rendezVous);
     }
 
     /**
@@ -61,6 +65,7 @@ public class RendezVousService {
      * @throws NotFoundException
      * @throws DBException
      */
+    @Transactional
     public void deleteRendezVous(Long id) throws NotFoundException, DBException {
         RendezVous existingRendezVous = rendezVousRepository.findById(id).orElse(null);
         if (existingRendezVous == null) {

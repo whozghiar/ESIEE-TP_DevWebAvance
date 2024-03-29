@@ -35,11 +35,25 @@ public class VehiculeController {
     public ResponseEntity<VehiculeDTO> postVehicule(@RequestBody VehiculeDTO vehiculeSent) {
         try{
             log.info("Creating vehicule ...");
-            return vehiculeSent.getId() == null ?
-                    new ResponseEntity<>(this.vehiculeService.updateVehicule(vehiculeSent), HttpStatus.CREATED) :
-                    new ResponseEntity<>(this.vehiculeService.updateVehicule(vehiculeSent), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(this.vehiculeService.createVehicule(vehiculeSent), HttpStatus.CREATED);
         } catch (DBException e){
             log.error("Error while creating vehicule", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (NotFoundException e) {
+            log.error("Could not find vehicule with id " + vehiculeSent.getId(), e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (DTOException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping
+    public ResponseEntity<VehiculeDTO> putVehicule(@RequestBody VehiculeDTO vehiculeSent) {
+        try{
+            log.info("Updating vehicule ...");
+            return new ResponseEntity<>(this.vehiculeService.updateVehicule(vehiculeSent), HttpStatus.ACCEPTED);
+        } catch (DBException e){
+            log.error("Error while updating vehicule", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (NotFoundException e) {
             log.error("Could not find vehicule with id " + vehiculeSent.getId(), e);

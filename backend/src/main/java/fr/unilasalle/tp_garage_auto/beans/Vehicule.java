@@ -32,13 +32,12 @@ public class Vehicule {
     @NotBlank(message = "L'année est obligatoire")
     private int annee;
 
-    // Relation avec Client
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id")
-    private Client client;
-
     // Relation avec RendezVous : un véhicule peut avoir plusieurs rendez-vous
     @OneToMany(mappedBy = "vehicule", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<RendezVous> rendezVous;
+
+    // Relation avec Client : un véhicule appartient à un client
+    @ManyToOne
+    private Client client;
 
 }

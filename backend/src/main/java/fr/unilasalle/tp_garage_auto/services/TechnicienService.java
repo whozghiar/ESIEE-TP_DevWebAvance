@@ -1,10 +1,13 @@
 package fr.unilasalle.tp_garage_auto.services;
 
+import fr.unilasalle.tp_garage_auto.DTO.ClientDTO;
 import fr.unilasalle.tp_garage_auto.DTO.TechnicienDTO;
 import fr.unilasalle.tp_garage_auto.beans.Technicien;
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
+import fr.unilasalle.tp_garage_auto.exceptions.DTOException;
 import fr.unilasalle.tp_garage_auto.exceptions.NotFoundException;
 import fr.unilasalle.tp_garage_auto.repositories.TechnicienRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +24,16 @@ public class TechnicienService {
      * @return
      */
     public List<TechnicienDTO> getAllTechniciens() {
-        return null;
+        return technicienRepository.findAll().stream()
+                .map(technicien -> {
+                    try {
+                        return TechnicienDTO.fromEntity(technicien);
+                    } catch (DTOException e) {
+                        // Gérer l'exception
+                        return null;
+                    }
+                })
+                .collect(Collectors.toList());
     }
 
     /**
@@ -29,8 +41,11 @@ public class TechnicienService {
      * @param technicienDTO
      * @return
      */
-    public TechnicienDTO  updateTechnicien(TechnicienDTO  technicienDTO) throws NotFoundException, DBException {
-        return null;
+    @Transactional
+    public TechnicienDTO  updateTechnicien(TechnicienDTO  technicienDTO) throws NotFoundException, DBException, DTOException {
+        Technicien technicien = TechnicienDTO.toEntity(technicienDTO);
+        technicien = technicienRepository.save(technicien);
+        return TechnicienDTO.fromEntity(technicien);
     }
 
 
@@ -40,6 +55,7 @@ public class TechnicienService {
      * @throws NotFoundException
      * @throws DBException
      */
+    @Transactional
     public void deleteTechnicien(Long id) throws NotFoundException, DBException {
         Technicien existingTechnicien = technicienRepository.findById(id).orElse(null);
         if (existingTechnicien == null) {

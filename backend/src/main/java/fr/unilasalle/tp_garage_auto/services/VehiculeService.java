@@ -8,7 +8,9 @@ import fr.unilasalle.tp_garage_auto.exceptions.DBException;
 import fr.unilasalle.tp_garage_auto.exceptions.DTOException;
 import fr.unilasalle.tp_garage_auto.exceptions.NotFoundException;
 import fr.unilasalle.tp_garage_auto.repositories.VehiculeRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class VehiculeService {
     private final VehiculeRepository vehiculeRepository;
 
@@ -42,14 +45,51 @@ public class VehiculeService {
      * @return
      */
 
+    @Transactional
+    public VehiculeDTO createVehicule(VehiculeDTO vehiculeDTO) throws NotFoundException, DBException, DTOException {
+        if (vehiculeDTO == null) {
+            throw new DTOException("VehiculeDTO is null");
+        }
+
+        if (vehiculeDTO.getId() != null) {
+            throw new DTOException("id must be null");
+        }
+
+        Vehicule vehicule = VehiculeDTO.toEntity(vehiculeDTO);
+
+        try {
+            vehicule = vehiculeRepository.save(vehicule);
+            return VehiculeDTO.fromEntity(vehicule);
+        } catch (Exception e) {
+            throw new DBException("Error while saving vehicule");
+        }
+    }
+
+    @Transactional
     public VehiculeDTO updateVehicule(VehiculeDTO vehiculeDTO) throws NotFoundException, DBException, DTOException {
-        return null;
+        if (vehiculeDTO == null) {
+            throw new DTOException("VehiculeDTO is null");
+        }
+
+        if (vehiculeDTO.getId() == null) {
+            throw new DTOException("id must not be null");
+        }
+
+        Vehicule vehicule = VehiculeDTO.toEntity(vehiculeDTO);
+
+        try {
+            vehicule = vehiculeRepository.save(vehicule);
+            return VehiculeDTO.fromEntity(vehicule);
+        } catch (Exception e) {
+            throw new DBException("Error while saving vehicule");
+        }
     }
 
     /**
      * Delete a vehicule
      * @param id
      */
+    @Transactional
     public void deleteVehicule(Long id) throws NotFoundException, DBException {
         Vehicule existingVehicule = vehiculeRepository.findById(id).orElse(null);
         if (existingVehicule == null) {
