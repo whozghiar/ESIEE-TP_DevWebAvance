@@ -15,6 +15,8 @@ public interface VehiculeRepository extends JpaRepository<Vehicule, Long> {
     Set<Vehicule> findByMarqueContainingIgnoreCase(String marque);
     Set<Vehicule> findByModeleContainingIgnoreCase(String modele);
     Set<Vehicule> findByAnnee(Integer annee);
+    Vehicule findByImmatriculationIgnoreCase(String immatriculation);
+
 
 
 

@@ -1,9 +1,5 @@
 package fr.unilasalle.tp_garage_auto.services;
 
-import fr.unilasalle.tp_garage_auto.DTO.ClientDTO;
-import fr.unilasalle.tp_garage_auto.DTO.VehiculeDTO;
-import fr.unilasalle.tp_garage_auto.beans.Client;
-import fr.unilasalle.tp_garage_auto.beans.Technicien;
 import fr.unilasalle.tp_garage_auto.beans.Vehicule;
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
 import fr.unilasalle.tp_garage_auto.exceptions.DTOException;
@@ -15,9 +11,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -29,8 +24,12 @@ public class VehiculeService {
      * Get all vehicules
      * @return
      */
-    public List<Vehicule> getAllVehicules() {
-        return vehiculeRepository.findAll();
+    public Set<Vehicule> getAllVehicules() throws ServiceException {
+        try {
+            return new HashSet<>(vehiculeRepository.findAll());
+        } catch (Exception e) {
+            throw new ServiceException("Erreur lors de la récupération des vehicules.");
+        }
     }
 
     /**
@@ -55,6 +54,15 @@ public class VehiculeService {
      */
     public Set<Vehicule> getVehiculesByClient(Long client_id) {
         return vehiculeRepository.findByClientId(client_id);
+    }
+
+    /**
+     * Récupère les véhicules par immatriculation
+     * @param immatriculation
+     * @return
+     */
+    public Vehicule getVehiculeByImmatriculation(String immatriculation) {
+        return vehiculeRepository.findByImmatriculationIgnoreCase(immatriculation);
     }
 
     /**

@@ -1,8 +1,5 @@
 package fr.unilasalle.tp_garage_auto.services;
 
-import fr.unilasalle.tp_garage_auto.DTO.ClientDTO;
-import fr.unilasalle.tp_garage_auto.DTO.TechnicienDTO;
-import fr.unilasalle.tp_garage_auto.beans.RendezVous;
 import fr.unilasalle.tp_garage_auto.beans.Technicien;
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
 import fr.unilasalle.tp_garage_auto.exceptions.DTOException;
@@ -13,8 +10,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -25,9 +22,14 @@ public class TechnicienService {
      * Récupérer tous les techniciens
      * @return
      */
-    public List<Technicien> getAllTechniciens() {
-        return technicienRepository.findAll();
+    public Set<Technicien> getAllTechniciens() throws ServiceException {
+        try{
+            return new HashSet<>(technicienRepository.findAll());
+        }catch (Exception e){
+            throw new ServiceException("Erreur lors de la récupération des techniciens.");
+        }
     }
+
 
     /**
      * Récupérer un technicien par id
@@ -43,6 +45,35 @@ public class TechnicienService {
         }
         return technicien;
     }
+
+    /**
+     * Récupérer un technicien par nom
+     * @param nom
+     * @return
+     */
+    public Set<Technicien> getTechnicienByNom(String nom){
+        return technicienRepository.findByNomContainingIgnoreCase(nom);
+    }
+
+    /**
+     * Récupérer un technicien par prenom
+     * @param prenom
+     * @return
+     */
+    public Set<Technicien> getTechnicienByPrenom(String prenom){
+        return technicienRepository.findByPrenomContainingIgnoreCase(prenom);
+    }
+
+    /**
+     * Récupérer un technicien par rendezVousId
+     * @param rendezVousId
+     * @return
+     */
+    public Technicien getTechnicienByRendezVousId(Long rendezVousId) {
+        return technicienRepository.findByRendezVousId(rendezVousId);
+    }
+
+
 
     /**
      * Créer un technicien

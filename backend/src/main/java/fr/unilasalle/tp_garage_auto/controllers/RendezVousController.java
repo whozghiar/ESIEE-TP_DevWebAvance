@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/rendez-vous")
@@ -25,13 +26,136 @@ public class RendezVousController {
 
     private final RendezVousService rendezVousService;
 
+    /**
+     * Méthode GET pour récupérer tous les rendez-vous
+     * @return
+     */
     @GetMapping
-    public ResponseEntity<List<RendezVous>> getRendezVous() {
-        log.info("Récupération de tous les rendez-vous...");
-        List<RendezVous> rendezvous = this.rendezVousService.getAllRendezVous();
-        return new ResponseEntity<>(rendezvous, HttpStatus.OK);
+    public ResponseEntity<Set<RendezVous>> getRendezVous() {
+        try{
+            log.info("Récupération de tous les rendez-vous ...");
+            Set<RendezVous> rendezVous = this.rendezVousService.getAllRendezVous();
+            log.info("Rendez-vous récupérés avec succès : \n\t" + rendezVous);
+            return new ResponseEntity<>(rendezVous, HttpStatus.OK);
+        } catch (ServiceException e) {
+            log.error("Erreur lors de la récupération des rendez-vous.", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
+    /**
+     * Méthode GET pour récupérer un rendez-vous par id
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<RendezVous> getRendezVousById(@PathVariable Long id) {
+        try {
+            log.info("Récupération du rendez-vous avec l'id " + id);
+            RendezVous rendezVous = this.rendezVousService.getRendezVousById(id);
+            log.info("Rendez-vous récupéré avec succès : \n\t" + rendezVous);
+            return new ResponseEntity<>(rendezVous, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            log.error("Impossible de trouver le rendez-vous avec l'id " + id + ".", e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /**
+     * Méthode GET pour récupérer les rendez-vous par client_id
+     * @param client_id
+     * @return
+     */
+    @GetMapping
+    public ResponseEntity<Set<RendezVous>> getRendezVousByClientId(@RequestParam Long client_id) {
+        try {
+            log.info("Récupération des rendez-vous du client avec l'id " + client_id);
+            Set<RendezVous> rendezVous = this.rendezVousService.getRendezVousByClientId(client_id);
+            log.info("Rendez-vous récupérés avec succès : \n\t" + rendezVous);
+            return new ResponseEntity<>(rendezVous, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            log.error("Impossible de trouver les rendez-vous du client avec l'id " + client_id + ".", e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /**
+     * Méthode GET pour récupérer les rendez-vous par technicien_id
+     * @param technicien_id
+     * @return
+     */
+    @GetMapping
+    public ResponseEntity<Set<RendezVous>> getRendezVousByTechnicienId(@RequestParam Long technicien_id) {
+        try {
+            log.info("Récupération des rendez-vous du technicien avec l'id " + technicien_id);
+            Set<RendezVous> rendezVous = this.rendezVousService.getRendezVousByTechnicien(technicien_id);
+            log.info("Rendez-vous récupérés avec succès : \n\t" + rendezVous);
+            return new ResponseEntity<>(rendezVous, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            log.error("Impossible de trouver les rendez-vous du technicien avec l'id " + technicien_id + ".", e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /**
+     * Méthode GET pour récupérer les rendez-vous par vehicule_id
+     * @param vehicule_id
+     * @return
+     */
+    @GetMapping
+    public ResponseEntity<Set<RendezVous>> getRendezVousByVehiculeId(@RequestParam Long vehicule_id) {
+        try {
+            log.info("Récupération des rendez-vous du véhicule avec l'id " + vehicule_id);
+            Set<RendezVous> rendezVous = this.rendezVousService.getRendezVousByVehicule(vehicule_id);
+            log.info("Rendez-vous récupérés avec succès : \n\t" + rendezVous);
+            return new ResponseEntity<>(rendezVous, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            log.error("Impossible de trouver les rendez-vous du véhicule avec l'id " + vehicule_id + ".", e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /**
+     * Méthode GET pour récupérer les rendez-vous par date
+     * @param date
+     * @return
+     */
+    @GetMapping
+    public ResponseEntity<Set<RendezVous>> getRendezVousByDate(@RequestParam String date) {
+        try {
+            log.info("Récupération des rendez-vous du " + date);
+            Set<RendezVous> rendezVous = this.rendezVousService.getRendezVousByDate(date);
+            log.info("Rendez-vous récupérés avec succès : \n\t" + rendezVous);
+            return new ResponseEntity<>(rendezVous, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            log.error("Impossible de trouver les rendez-vous du " + date + ".", e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /**
+     * Méthode GET pour récupérer les rendez-vous par type de service
+     * @param typeService
+     * @return
+     */
+    @GetMapping
+    public ResponseEntity<Set<RendezVous>> getRendezVousByTypeService(@RequestParam String typeService) {
+        try {
+            log.info("Récupération des rendez-vous du type de service " + typeService);
+            Set<RendezVous> rendezVous = this.rendezVousService.getRendezVousByTypeService(typeService);
+            log.info("Rendez-vous récupérés avec succès : \n\t" + rendezVous);
+            return new ResponseEntity<>(rendezVous, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            log.error("Impossible de trouver les rendez-vous du type de service " + typeService + ".", e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /**
+     * Méthode POST pour créer un rendez-vous
+     * @param rendezVous
+     * @return
+     */
     @PostMapping
     public ResponseEntity<RendezVous> postRendezVous(@RequestBody RendezVous rendezVous) {
         try{
@@ -54,6 +178,12 @@ public class RendezVousController {
         }
     }
 
+    /**
+     * Méthode PUT pour mettre à jour un rendez-vous
+     * @param id
+     * @param rendezVous
+     * @return
+     */
     @PutMapping("/{id}")
     public ResponseEntity<RendezVous> putRendezVous(@PathVariable Long id,@RequestBody RendezVous rendezVous) {
         try{
@@ -76,6 +206,11 @@ public class RendezVousController {
         }
     }
 
+    /**
+     * Méthode DELETE pour supprimer un rendez-vous
+     * @param id
+     * @return
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRendezVous(@PathVariable Long id) {
         try {

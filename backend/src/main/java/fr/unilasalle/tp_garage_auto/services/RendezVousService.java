@@ -1,31 +1,22 @@
 package fr.unilasalle.tp_garage_auto.services;
 
-import fr.unilasalle.tp_garage_auto.DTO.RendezVousDTO;
 import fr.unilasalle.tp_garage_auto.beans.RendezVous;
-import fr.unilasalle.tp_garage_auto.beans.Technicien;
-import fr.unilasalle.tp_garage_auto.beans.Vehicule;
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
-import fr.unilasalle.tp_garage_auto.exceptions.DTOException;
 import fr.unilasalle.tp_garage_auto.exceptions.NotFoundException;
 import fr.unilasalle.tp_garage_auto.exceptions.ServiceException;
 import fr.unilasalle.tp_garage_auto.repositories.RendezVousRepository;
-import fr.unilasalle.tp_garage_auto.repositories.TechnicienRepository;
-import fr.unilasalle.tp_garage_auto.repositories.VehiculeRepository;
-
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class RendezVousService {
 
     private final RendezVousRepository rendezVousRepository;
-    private final VehiculeRepository vehiculeRepository;
-    private final TechnicienRepository technicienRepository;
 
 
     /**
@@ -33,8 +24,12 @@ public class RendezVousService {
      * @return
      */
 
-    public List<RendezVous> getAllRendezVous() {
-        return rendezVousRepository.findAll();
+    public Set<RendezVous> getAllRendezVous() throws ServiceException {
+        try{
+            return new HashSet<>(rendezVousRepository.findAll());
+        }catch (Exception e){
+            throw new ServiceException("Erreur lors de la récupération des rendez-vous.");
+        }
     }
 
     /**
@@ -50,6 +45,54 @@ public class RendezVousService {
         }
         return rendezVous;
     }
+
+    /**
+     * Récupérer les rendezVous d'un client par son id
+     * @param client_id
+     * @return
+     */
+    public Set<RendezVous> getRendezVousByClientId(Long client_id) {
+        return rendezVousRepository.findByClientId(client_id);
+    }
+
+    /**
+     * Récupérer les rendezVous d'un technicien par son id
+     * @param technicien_id
+     * @return Set<RendezVous>
+     */
+    public Set<RendezVous> getRendezVousByTechnicien(Long technicien_id) {
+        return rendezVousRepository.findByTechnicienId(technicien_id);
+    }
+
+    /**
+     * Récupérer les rendezVous d'un vehicule par son id
+     * @param vehicule_id
+     * @return Set<RendezVous>
+     */
+    public Set<RendezVous> getRendezVousByVehicule(Long vehicule_id) {
+        return rendezVousRepository.findByVehiculeId(vehicule_id);
+    }
+
+    /**
+     * Récupérer les rendezVous par date
+     * @param date
+     * @return Set<RendezVous>
+     */
+    public Set<RendezVous> getRendezVousByDate(String date) {
+        return rendezVousRepository.findByDate(date);
+    }
+
+    /**
+     * Récupérer les rendezVous par typeService
+     * @param typeService
+     * @return Set<RendezVous>
+     */
+    public Set<RendezVous> getRendezVousByTypeService(String typeService) {
+        return rendezVousRepository.findByTypeServiceContainingIgnoreCase(typeService);
+    }
+
+
+
 
     /**
      * Créer un rendezVous

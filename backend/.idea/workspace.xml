@@ -11,6 +11,8 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/TechnicienController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/TechnicienController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/VehiculeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/VehiculeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/repositories/ClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/repositories/ClientRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/repositories/RendezVousRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/repositories/RendezVousRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/repositories/TechnicienRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/repositories/TechnicienRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/repositories/VehiculeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/repositories/VehiculeRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/services/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/services/ClientService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/services/RendezVousService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/services/RendezVousService.java" afterDir="false" />
@@ -57,6 +59,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "JUnit.ClientServiceTest.bidirectionalAssociationTest.executor": "Run",
+    "OverrideImplement.generate.javadoc": "true",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -136,7 +139,7 @@
       <workItem from="1711631700266" duration="8799000" />
       <workItem from="1711701521791" duration="6899000" />
       <workItem from="1711798762227" duration="9000" />
-      <workItem from="1711798822710" duration="34444000" />
+      <workItem from="1711798822710" duration="37458000" />
     </task>
     <servers />
   </component>

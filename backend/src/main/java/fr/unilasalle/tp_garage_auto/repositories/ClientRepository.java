@@ -12,7 +12,7 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     Set<Client> findByNomContainingIgnoreCase(String nom);
     Set<Client> findByPrenomContainingIgnoreCase(String prenom);
 
-    Set<Client> findByEmailContainingIgnoreCase(String email);
+    Client findByEmailContainingIgnoreCase(String email);
 
-    Set<Client> findByTelephoneContainingIgnoreCase(String telephone);
+    Client findByTelephoneContainingIgnoreCase(String telephone);
 }

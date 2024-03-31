@@ -1,40 +1,25 @@
 package fr.unilasalle.tp_garage_auto.services;
 
 // ------ Imports Beans ------
-import fr.unilasalle.tp_garage_auto.DTO.VehiculeDTO;
+
 import fr.unilasalle.tp_garage_auto.beans.Client;
-// ------ Imports DTO ------
-import fr.unilasalle.tp_garage_auto.DTO.ClientDTO;
-// ------ Imports Exceptions ------
-import fr.unilasalle.tp_garage_auto.beans.Vehicule;
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
 import fr.unilasalle.tp_garage_auto.exceptions.DTOException;
 import fr.unilasalle.tp_garage_auto.exceptions.NotFoundException;
-
-// ------ Imports Repositories ------
 import fr.unilasalle.tp_garage_auto.exceptions.ServiceException;
 import fr.unilasalle.tp_garage_auto.repositories.ClientRepository;
-
-import fr.unilasalle.tp_garage_auto.repositories.VehiculeRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class ClientService {
-
-    // INJECTION DU SERVICE VEHICULE
-    private final VehiculeService vehiculeService;
 
     private final ClientRepository clientRepository;
 
@@ -88,7 +73,7 @@ public class ClientService {
      * @param email
      * @return
      */
-    public Set<Client> getClientsByEmail(String email) {
+    public Client getClientsByEmail(String email) {
         return clientRepository.findByEmailContainingIgnoreCase(email);
     }
 
@@ -97,7 +82,7 @@ public class ClientService {
      * @param telephone
      * @return
      */
-    public Set<Client> getClientsByPhone(String telephone) {
+    public Client getClientsByPhone(String telephone) {
         return clientRepository.findByTelephoneContainingIgnoreCase(telephone);
     }
 

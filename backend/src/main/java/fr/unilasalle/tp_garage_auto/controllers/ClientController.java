@@ -103,12 +103,12 @@ public class ClientController {
      * @return
      */
     @GetMapping
-    public ResponseEntity<Set<Client>> getClientByEmail(@RequestParam String email) {
+    public ResponseEntity<Client> getClientByEmail(@RequestParam String email) {
         try {
             log.info("Récupération du client avec l'email " + email);
-            Set<Client> clients = this.clientService.getClientsByEmail(email);
-            log.info("Client récupéré avec succès : \n\t" + clients);
-            return new ResponseEntity<>(clients, HttpStatus.OK);
+            Client client = this.clientService.getClientsByEmail(email);
+            log.info("Client récupéré avec succès : \n\t" + client);
+            return new ResponseEntity<>(client, HttpStatus.OK);
         } catch (NotFoundException e) {
             log.error("Impossible de trouver le client avec l'email " + email + ".", e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -121,12 +121,12 @@ public class ClientController {
      * @return
      */
     @GetMapping
-    public ResponseEntity<Set<Client>> getClientByTelephone(@RequestParam String telephone) {
+    public ResponseEntity<Client> getClientByTelephone(@RequestParam String telephone) {
         try {
             log.info("Récupération du client avec le téléphone " + telephone);
-            Set<Client> clients = this.clientService.getClientsByPhone(telephone);
-            log.info("Client récupéré avec succès : \n\t" + clients);
-            return new ResponseEntity<>(clients, HttpStatus.OK);
+            Client client = this.clientService.getClientsByPhone(telephone);
+            log.info("Client récupéré avec succès : \n\t" + client);
+            return new ResponseEntity<>(client, HttpStatus.OK);
         } catch (NotFoundException e) {
             log.error("Impossible de trouver le client avec le téléphone " + telephone + ".", e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
