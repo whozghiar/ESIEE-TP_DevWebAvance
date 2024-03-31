@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -24,22 +25,33 @@ import java.util.Set;
 public class TechnicienController {
     private final TechnicienService technicienService;
 
+
     /**
      * Méthode GET pour récupérer tous les techniciens
+     * @param nom : nom du technicien
+     * @param prenom : prenom du technicien
      * @return
      */
     @GetMapping
-    public ResponseEntity<Set<Technicien>> getTechnicien() {
-        try{
-            log.info("Récupération de tous les techniciens ...");
-            Set<Technicien> techniciens = this.technicienService.getAllTechniciens();
-            log.info("Techniciens récupérés avec succès : \n\t" + techniciens);
-            return new ResponseEntity<>(techniciens, HttpStatus.OK);
-        } catch (ServiceException e) {
-            log.error("Erreur lors de la récupération des techniciens.", e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<?> getTechnicien(@RequestParam(required = false) Optional<String> nom,
+                                           @RequestParam(required = false) Optional<String> prenom) {
+        if (nom.isPresent()) {
+            return getTechnicienByNom(nom.get());
+        } else if (prenom.isPresent()) {
+            return getTechnicienByPrenom(prenom.get());
+        } else {
+            try {
+                log.info("Récupération de tous les techniciens ...");
+                Set<Technicien> technicien = this.technicienService.getAllTechniciens();
+                log.info("Techniciens récupérés avec succès : \n\t" + technicien);
+                return new ResponseEntity<>(technicien, HttpStatus.OK);
+            } catch (ServiceException e) {
+                log.error("Erreur lors de la récupération des techniciens.", e);
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         }
     }
+
 
     /**
      * Méthode GET pour récupérer un technicien par id
@@ -64,8 +76,7 @@ public class TechnicienController {
      * @param nom
      * @return
      */
-    @GetMapping
-    public ResponseEntity<Set<Technicien>> getTechnicienByNom(@RequestParam String nom) {
+    public ResponseEntity<Set<Technicien>> getTechnicienByNom(String nom) {
         try {
             log.info("Récupération du technicien avec le nom " + nom);
             Set<Technicien> technicien = this.technicienService.getTechnicienByNom(nom);
@@ -82,8 +93,7 @@ public class TechnicienController {
      * @param prenom
      * @return
      */
-    @GetMapping
-    public ResponseEntity<Set<Technicien>> getTechnicienByPrenom(@RequestParam String prenom) {
+    public ResponseEntity<Set<Technicien>> getTechnicienByPrenom(String prenom) {
         try {
             log.info("Récupération du technicien avec le prenom " + prenom);
             Set<Technicien> technicien = this.technicienService.getTechnicienByPrenom(prenom);
@@ -142,9 +152,6 @@ public class TechnicienController {
         } catch (NotFoundException e) {
             log.error("Impossible de trouver le technicien avec l'id " + technicien.getId() + ".", e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (DTOException e) {
-            log.error("Erreur avec le DTO : ", e);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (ServiceException e) {
             log.error("Erreur de service : ", e);
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);

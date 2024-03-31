@@ -9,7 +9,7 @@ import java.util.Set;
 @Repository
 public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
 
-    Set<RendezVous> findByClientId(Long clientId);
+    //Set<RendezVous> findByClientId(Long clientId);
     Set<RendezVous> findByTechnicienId(Long technicienId);
     Set<RendezVous> findByVehiculeId(Long vehiculeId);
 

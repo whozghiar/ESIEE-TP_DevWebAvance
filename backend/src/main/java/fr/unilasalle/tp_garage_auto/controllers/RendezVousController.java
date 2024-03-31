@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -28,18 +29,36 @@ public class RendezVousController {
 
     /**
      * Méthode GET pour récupérer tous les rendez-vous
+     * @param date : date du rendez-vous
+     * @param typeService : type de service
+     * @param vehicule_id : id du véhicule
+     * @param technicien_id : id du technicien
      * @return
      */
     @GetMapping
-    public ResponseEntity<Set<RendezVous>> getRendezVous() {
-        try{
-            log.info("Récupération de tous les rendez-vous ...");
-            Set<RendezVous> rendezVous = this.rendezVousService.getAllRendezVous();
-            log.info("Rendez-vous récupérés avec succès : \n\t" + rendezVous);
-            return new ResponseEntity<>(rendezVous, HttpStatus.OK);
-        } catch (ServiceException e) {
-            log.error("Erreur lors de la récupération des rendez-vous.", e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<?> getRendezVous(@RequestParam(required = false) Optional<String> date,
+                                           @RequestParam(required = false) Optional<String> typeService,
+                                           @RequestParam(required = false) Optional<Long> vehicule_id,
+                                           @RequestParam(required = false) Optional<Long> technicien_id){
+
+        if (date.isPresent()) {
+            return getRendezVousByDate(date.get());
+        } else if (typeService.isPresent()) {
+            return getRendezVousByTypeService(typeService.get());
+        } else if (vehicule_id.isPresent()) {
+            return getRendezVousByVehiculeId(vehicule_id.get());
+        } else if (technicien_id.isPresent()) {
+            return getRendezVousByTechnicienId(technicien_id.get());
+        } else {
+            try {
+                log.info("Récupération de tous les rendez-vous ...");
+                Set<RendezVous> rendezVous = this.rendezVousService.getAllRendezVous();
+                log.info("Rendez-vous récupérés avec succès : \n\t" + rendezVous);
+                return new ResponseEntity<>(rendezVous, HttpStatus.OK);
+            } catch (ServiceException e) {
+                log.error("Erreur lors de la récupération des rendez-vous.", e);
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         }
     }
 
@@ -66,6 +85,7 @@ public class RendezVousController {
      * @param client_id
      * @return
      */
+    /*
     @GetMapping
     public ResponseEntity<Set<RendezVous>> getRendezVousByClientId(@RequestParam Long client_id) {
         try {
@@ -78,14 +98,14 @@ public class RendezVousController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+     */
 
     /**
      * Méthode GET pour récupérer les rendez-vous par technicien_id
      * @param technicien_id
      * @return
      */
-    @GetMapping
-    public ResponseEntity<Set<RendezVous>> getRendezVousByTechnicienId(@RequestParam Long technicien_id) {
+    public ResponseEntity<Set<RendezVous>> getRendezVousByTechnicienId(Long technicien_id) {
         try {
             log.info("Récupération des rendez-vous du technicien avec l'id " + technicien_id);
             Set<RendezVous> rendezVous = this.rendezVousService.getRendezVousByTechnicien(technicien_id);
@@ -102,8 +122,7 @@ public class RendezVousController {
      * @param vehicule_id
      * @return
      */
-    @GetMapping
-    public ResponseEntity<Set<RendezVous>> getRendezVousByVehiculeId(@RequestParam Long vehicule_id) {
+    public ResponseEntity<Set<RendezVous>> getRendezVousByVehiculeId(Long vehicule_id) {
         try {
             log.info("Récupération des rendez-vous du véhicule avec l'id " + vehicule_id);
             Set<RendezVous> rendezVous = this.rendezVousService.getRendezVousByVehicule(vehicule_id);
@@ -120,8 +139,7 @@ public class RendezVousController {
      * @param date
      * @return
      */
-    @GetMapping
-    public ResponseEntity<Set<RendezVous>> getRendezVousByDate(@RequestParam String date) {
+    public ResponseEntity<Set<RendezVous>> getRendezVousByDate(String date) {
         try {
             log.info("Récupération des rendez-vous du " + date);
             Set<RendezVous> rendezVous = this.rendezVousService.getRendezVousByDate(date);
@@ -134,12 +152,11 @@ public class RendezVousController {
     }
 
     /**
-     * Méthode GET pour récupérer les rendez-vous par type de service
+     * Récupérer les rendez-vous par type de service
      * @param typeService
      * @return
      */
-    @GetMapping
-    public ResponseEntity<Set<RendezVous>> getRendezVousByTypeService(@RequestParam String typeService) {
+    public ResponseEntity<Set<RendezVous>> getRendezVousByTypeService(String typeService) {
         try {
             log.info("Récupération des rendez-vous du type de service " + typeService);
             Set<RendezVous> rendezVous = this.rendezVousService.getRendezVousByTypeService(typeService);
@@ -197,9 +214,6 @@ public class RendezVousController {
         } catch (NotFoundException e) {
             log.error("Impossible de trouver le rendez-vous avec l'id " + rendezVous.getId() + ".", e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (DTOException e) {
-            log.error("Erreur avec le DTO : ", e);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (ServiceException e) {
             log.error("Erreur de service : ", e);
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);

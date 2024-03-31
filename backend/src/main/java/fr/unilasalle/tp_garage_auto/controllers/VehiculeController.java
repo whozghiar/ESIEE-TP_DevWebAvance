@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import fr.unilasalle.tp_garage_auto.services.VehiculeService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -28,18 +29,39 @@ public class VehiculeController {
 
     /**
      * Méthode GET pour récupérer tous les vehicules
+     * @param client_id : id du client
+     * @param marque : marque du vehicule
+     * @param modele : modèle du vehicule
+     * @param annee : année du vehicule
+     * @param immatriculation : immatriculation du vehicule
      * @return
      */
     @GetMapping
-    public ResponseEntity<Set<Vehicule>> getVehicule() {
-        try{
-            log.info("Récupération de tous les vehicules...");
-            Set<Vehicule> vehicules = this.vehiculeService.getAllVehicules();
-            log.info("Vehicules récupérés avec succès : \n\t" + vehicules);
-            return new ResponseEntity<>(vehicules, HttpStatus.OK);
-        } catch (ServiceException e) {
-            log.error("Erreur lors de la récupération des vehicules.", e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<?> getVehicule(@RequestParam(required = false) Optional<String> client_id,
+                                         @RequestParam(required = false) Optional<String> marque,
+                                         @RequestParam(required = false) Optional<String> modele,
+                                         @RequestParam(required = false) Optional<String> annee,
+                                         @RequestParam(required = false) Optional<String> immatriculation){
+        if(client_id.isPresent()){
+            return getVehiculesByClient(Long.parseLong(client_id.get()));
+        } else if (marque.isPresent()) {
+            return getVehiculeByMarque(marque.get());
+        } else if (modele.isPresent()) {
+            return getVehiculeByModele(modele.get());
+        } else if (annee.isPresent()) {
+            return getVehiculeByAnnee(annee.get());
+        } else if (immatriculation.isPresent()) {
+            return getVehiculeByImmatriculation(immatriculation.get());
+        } else {
+            try {
+                log.info("Récupération de tous les vehicules...");
+                Set<Vehicule> vehicules = this.vehiculeService.getAllVehicules();
+                log.info("Vehicules récupérés avec succès : \n\t" + vehicules);
+                return new ResponseEntity<>(vehicules, HttpStatus.OK);
+            } catch (ServiceException e) {
+                log.error("Erreur lors de la récupération des vehicules.", e);
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         }
     }
 
@@ -62,12 +84,12 @@ public class VehiculeController {
     }
 
     /**
-     * Méthode GET pour récupérer les vehicules par id d'un client
+     * Récupérer les vehicules par id d'un client
      * @param client_id
      * @return
      */
-    @GetMapping
-    public ResponseEntity<Set<Vehicule>> getVehiculesByClient(@PathVariable Long client_id) {
+
+    public ResponseEntity<Set<Vehicule>> getVehiculesByClient(Long client_id) {
         try {
             log.info("Récupération des vehicules du client avec l'id " + client_id);
             Set<Vehicule> vehicules = this.vehiculeService.getVehiculesByClient(client_id);
@@ -80,12 +102,11 @@ public class VehiculeController {
     }
 
     /**
-     * Méthode GET pour récupérer les vehicules par marque
+     * Récupérer les vehicules par marque
      * @param marque
      * @return
      */
-    @GetMapping
-    public ResponseEntity<Set<Vehicule>> getVehiculeByMarque(@RequestParam String marque) {
+    public ResponseEntity<Set<Vehicule>> getVehiculeByMarque(String marque) {
         try {
             log.info("Récupération des vehicules de la marque " + marque);
             Set<Vehicule> vehicules = this.vehiculeService.getVehiculeByMarque(marque);
@@ -98,12 +119,11 @@ public class VehiculeController {
     }
 
     /**
-     * Méthode GET pour récupérer les vehicules par modèle
+     * Récupérer les vehicules par modèle
      * @param modele
      * @return
      */
-    @GetMapping
-    public ResponseEntity<Set<Vehicule>> getVehiculeByModele(@RequestParam String modele) {
+    public ResponseEntity<Set<Vehicule>> getVehiculeByModele(String modele) {
         try {
             log.info("Récupération des vehicules du modèle " + modele);
             Set<Vehicule> vehicules = this.vehiculeService.getVehiculeByModele(modele);
@@ -116,12 +136,11 @@ public class VehiculeController {
     }
 
     /**
-     * Méthode GET pour récupérer les vehicules par année
+     * Récupérer les vehicules par année
      * @param annee
      * @return
      */
-    @GetMapping
-    public ResponseEntity<Set<Vehicule>> getVehiculeByAnnee(@RequestParam String annee) {
+    public ResponseEntity<Set<Vehicule>> getVehiculeByAnnee(String annee) {
         try {
             log.info("Récupération des vehicules de l'année " + annee);
             Set<Vehicule> vehicules = this.vehiculeService.getVehiculeByAnnee(Integer.parseInt(annee));
@@ -137,12 +156,11 @@ public class VehiculeController {
     }
 
     /**
-     * Méthode GET pour récupérer les vehicules par immatriculation
+     * Récupérer les vehicules par immatriculation
      * @param immatriculation
      * @return
      */
-    @GetMapping
-    public ResponseEntity<Vehicule> getVehiculeByImmatriculation(@RequestParam String immatriculation) {
+    public ResponseEntity<Vehicule> getVehiculeByImmatriculation(String immatriculation) {
         try {
             log.info("Récupération des vehicules de l'immatriculation " + immatriculation);
             Vehicule vehicule = this.vehiculeService.getVehiculeByImmatriculation(immatriculation);
@@ -173,9 +191,6 @@ public class VehiculeController {
         } catch (NotFoundException e) {
             log.error("Impossible de trouver le vehicule avec l'id " + vehicule.getId() + ".", e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (DTOException e) {
-            log.error("Erreur avec le DTO : ", e);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (ServiceException e) {
             log.error("Erreur de service : ", e);
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);

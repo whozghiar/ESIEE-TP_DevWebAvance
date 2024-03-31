@@ -51,9 +51,11 @@ public class RendezVousService {
      * @param client_id
      * @return
      */
+/*
     public Set<RendezVous> getRendezVousByClientId(Long client_id) {
         return rendezVousRepository.findByClientId(client_id);
     }
+*/
 
     /**
      * Récupérer les rendezVous d'un technicien par son id

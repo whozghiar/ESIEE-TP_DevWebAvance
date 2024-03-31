@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import fr.unilasalle.tp_garage_auto.services.ClientService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -25,20 +26,38 @@ public class ClientController {
 
     private final ClientService clientService;
 
+
     /**
      * Méthode GET pour récupérer tous les clients
+     * @param nom : nom du client
+     * @param prenom : prenom du client
+     * @param email : email du client
+     * @param telephone : telephone du client
      * @return
      */
     @GetMapping
-    public ResponseEntity<Set<Client>> getClient() {
-        log.info("Récupération de tous les clients...");
-        try{
-            Set<Client> clients = this.clientService.getAllClients();
-            log.info("Clients récupérés avec succès : \n\t" + clients);
-            return new ResponseEntity<>(clients, HttpStatus.OK);
-        } catch (ServiceException e) {
-            log.error("Erreur lors de la récupération des clients.", e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<?> getClients(@RequestParam(required = false) Optional<String> nom,
+                                        @RequestParam(required = false) Optional<String> prenom,
+                                        @RequestParam(required = false) Optional<String> email,
+                                        @RequestParam(required = false) Optional<String> telephone) {
+        if (nom.isPresent()) {
+            return getClientByNom(nom.get());
+        } else if (prenom.isPresent()) {
+            return getClientByPrenom(prenom.get());
+        } else if (email.isPresent()) {
+            return getClientByEmail(email.get());
+        } else if (telephone.isPresent()) {
+            return getClientByTelephone(telephone.get());
+        } else {
+            try {
+                log.info("Récupération de tous les clients ...");
+                Set<Client> clients = this.clientService.getAllClients();
+                log.info("Clients récupérés avec succès : \n\t" + clients);
+                return new ResponseEntity<>(clients, HttpStatus.OK);
+            } catch (ServiceException e) {
+                log.error("Erreur lors de la récupération des clients.", e);
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         }
     }
 
@@ -62,12 +81,11 @@ public class ClientController {
 
 
     /**
-     * Méthode GET pour récupérer les clients par nom
+     * Récupérer les clients par nom
      * @param nom
      * @return
      */
-    @GetMapping()
-    public ResponseEntity<Set<Client>> getClientByNom(@RequestParam String nom) {
+    public ResponseEntity<Set<Client>> getClientByNom(String nom) {
         try {
             log.info("Récupération du client avec le nom " + nom);
             Set<Client> clients = this.clientService.getClientsByName(nom);
@@ -80,12 +98,11 @@ public class ClientController {
     }
 
     /**
-     * Méthode GET pour récupérer les clients par prénom
+     * Récupérer les clients par prénom
      * @param prenom
      * @return
      */
-    @GetMapping
-    public ResponseEntity<Set<Client>> getClientByPrenom(@RequestParam String prenom) {
+    public ResponseEntity<Set<Client>> getClientByPrenom(String prenom) {
         try {
             log.info("Récupération du client avec le prenom " + prenom);
             Set<Client> clients = this.clientService.getClientsBySurname(prenom);
@@ -98,12 +115,11 @@ public class ClientController {
     }
 
     /**
-     * Méthode GET pour récupérer les clients par email
+     * Récupérer les clients par email
      * @param email
      * @return
      */
-    @GetMapping
-    public ResponseEntity<Client> getClientByEmail(@RequestParam String email) {
+    public ResponseEntity<Client> getClientByEmail(String email) {
         try {
             log.info("Récupération du client avec l'email " + email);
             Client client = this.clientService.getClientsByEmail(email);
@@ -116,12 +132,11 @@ public class ClientController {
     }
 
     /**
-     * Méthode GET pour récupérer les clients par téléphone
+     * Récupérer les clients par téléphone
      * @param telephone
      * @return
      */
-    @GetMapping
-    public ResponseEntity<Client> getClientByTelephone(@RequestParam String telephone) {
+    public ResponseEntity<Client> getClientByTelephone(String telephone) {
         try {
             log.info("Récupération du client avec le téléphone " + telephone);
             Client client = this.clientService.getClientsByPhone(telephone);
@@ -152,9 +167,6 @@ public class ClientController {
         } catch (NotFoundException e) {
             log.error("Impossible de trouver le client avec l'id " + client.getId() + ".", e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (DTOException e) {
-            log.error("Erreur avec le DTO : ", e);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (ServiceException e) {
             log.error("Erreur de service : ", e);
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
