@@ -3,7 +3,7 @@ import { TechnicianComponent } from '../technician/technician.component';
 import { FormsModule } from '@angular/forms';
 import { VehicleService } from '../../services/vehicle.service';
 import { VehiculeComponent } from '../vehicule/vehicule.component';
-import { NgForOf, NgStyle } from '@angular/common';
+import {NgClass, NgForOf, NgStyle} from '@angular/common';
 import { TechnicianpageComponent } from '../technicianpage/technicianpage.component';
 
 @Component({
@@ -15,16 +15,18 @@ import { TechnicianpageComponent } from '../technicianpage/technicianpage.compon
     VehiculeComponent,
     NgForOf,
     NgStyle,
+    NgClass,
   ],
   templateUrl: './vehiculepage.component.html',
   styleUrl: './vehiculepage.component.css',
 })
 export class VehiculepageComponent {
   vehicle: any = {
-    technician: '',
-    clientVehicle: '',
-    issue: '',
-    model: '',
+    technician: "joe",//TechnicianComponent,
+    client: "UNKNOWN",
+    issue: "UNKNOWN",
+    model: "UNKNOWN",
+    status: true,
   };
 
   //temporaire

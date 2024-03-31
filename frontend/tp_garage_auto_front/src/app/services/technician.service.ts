@@ -41,4 +41,8 @@ export class TechnicianService {
     //   this.refreshTechnicians();
     // })
   }
+
+  getAvailableTechniciansCount() {
+    return this.technicianArray.filter((technician) => technician.availability === true).length;
+  }
 }

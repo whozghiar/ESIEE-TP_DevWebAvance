@@ -40,4 +40,10 @@ export class VehicleService {
       //this.refreshVehicles();
     //})
   }
+
+  getRepairingVehiclesCount() {
+    return this.vehicleArray.filter((vehicle) => vehicle.status === false).length;
+  }
+
 }
+
