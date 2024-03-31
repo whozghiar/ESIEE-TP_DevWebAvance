@@ -7,6 +7,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class DTOException extends Exception{
+public class DTOException extends RuntimeException{
     private String message;
 }

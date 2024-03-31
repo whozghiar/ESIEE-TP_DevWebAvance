@@ -19,9 +19,8 @@ public class VehiculeDTO {
     private String modele;
     private String immatriculation;
     private int annee;
-    // Pas de champ pour Client pour éviter la récursivité
 
-    private Long clientId; // id du client pour éviter la récursivité
+    private Long clientId;
 
     public static VehiculeDTO fromEntity(Vehicule vehicule) throws DTOException {
         // Si le véhicule est null, on throw une exception
@@ -36,7 +35,6 @@ public class VehiculeDTO {
                 .modele(vehicule.getModele())
                 .immatriculation(vehicule.getImmatriculation())
                 .annee(vehicule.getAnnee())
-                .clientId(vehicule.getClient() != null ? vehicule.getClient().getId() : null)
                 .build();
 
     }

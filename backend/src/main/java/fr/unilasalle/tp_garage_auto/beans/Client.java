@@ -1,21 +1,25 @@
 package fr.unilasalle.tp_garage_auto.beans;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString (exclude = "vehicules")
 @Data
 @Builder
 @Valid
+@EqualsAndHashCode(exclude = "vehicules")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +35,7 @@ public class Client {
     private String email;
 
     // Relation avec Véhicule : un client peut avoir plusieurs véhicules
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Vehicule> vehicules;
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference("client-vehicule")
+    private Set<Vehicule> vehicules;
 }

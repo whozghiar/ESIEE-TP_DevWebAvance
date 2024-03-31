@@ -7,6 +7,8 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -23,7 +25,7 @@ public class ClientDTO {
     private String email;
 
 
-    private List<VehiculeDTO> vehicules; // liste des véhicules du client pour éviter la récursivité
+    private Set<VehiculeDTO> vehicules; // liste des véhicules du client pour éviter la récursivité
 
     public static ClientDTO fromEntity(Client client) throws DTOException {
         // Si le client est null, on throw une exception
@@ -39,7 +41,6 @@ public class ClientDTO {
                 .telephone(client.getTelephone())
                 .email(client.getEmail())
                 .build();
-
     }
 
     public static Client toEntity(ClientDTO clientDTO) throws DTOException {

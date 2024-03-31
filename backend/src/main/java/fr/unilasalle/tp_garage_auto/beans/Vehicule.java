@@ -1,22 +1,27 @@
 package fr.unilasalle.tp_garage_auto.beans;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString (exclude = {"client", "rendezVous"})
 @Data
 @Builder
 @Valid
+@EqualsAndHashCode(exclude = {"client", "rendezVous"})
 public class Vehicule {
 
     @Id
@@ -33,11 +38,15 @@ public class Vehicule {
     private int annee;
 
     // Relation avec RendezVous : un véhicule peut avoir plusieurs rendez-vous
-    @OneToMany(mappedBy = "vehicule", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<RendezVous> rendezVous;
+    @OneToMany(mappedBy = "vehicule", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference("vehicule-rendezVous")
+    private Set<RendezVous> rendezVous;
 
-    // Relation avec Client : un véhicule appartient à un client
-    @ManyToOne
+    // Relation avec Client
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
+    @JsonBackReference("client-vehicule")
     private Client client;
+
 
 }

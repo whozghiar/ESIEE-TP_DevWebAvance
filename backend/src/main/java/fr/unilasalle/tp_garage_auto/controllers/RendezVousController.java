@@ -6,6 +6,7 @@ import fr.unilasalle.tp_garage_auto.beans.RendezVous;
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
 import fr.unilasalle.tp_garage_auto.exceptions.DTOException;
 import fr.unilasalle.tp_garage_auto.exceptions.NotFoundException;
+import fr.unilasalle.tp_garage_auto.exceptions.ServiceException;
 import fr.unilasalle.tp_garage_auto.services.ClientService;
 import fr.unilasalle.tp_garage_auto.services.RendezVousService;
 import lombok.RequiredArgsConstructor;
@@ -25,41 +26,67 @@ public class RendezVousController {
     private final RendezVousService rendezVousService;
 
     @GetMapping
-    public ResponseEntity<List<RendezVousDTO>> getRendezVous() {
-        log.info("Getting all rendez-vous ...");
-        List<RendezVousDTO> rendezvous = this.rendezVousService.getAllRendezVous();
+    public ResponseEntity<List<RendezVous>> getRendezVous() {
+        log.info("Récupération de tous les rendez-vous...");
+        List<RendezVous> rendezvous = this.rendezVousService.getAllRendezVous();
         return new ResponseEntity<>(rendezvous, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<RendezVousDTO> postRendezVous(@RequestBody RendezVousDTO rendezVousSent) {
+    public ResponseEntity<RendezVous> postRendezVous(@RequestBody RendezVous rendezVous) {
         try{
-            log.info("Creating rendez-vous ...");
-            return rendezVousSent.getId() == null ?
-                    new ResponseEntity<>(this.rendezVousService.updateRendezVous(rendezVousSent), HttpStatus.CREATED) :
-                    new ResponseEntity<>(this.rendezVousService.updateRendezVous(rendezVousSent), HttpStatus.ACCEPTED);
+            log.info("Création d'un rendez-vous ...");
+            RendezVous savedObjet = this.rendezVousService.createRendezVous(rendezVous);
+            log.info("Rendez-vous créé avec succès : \n\t" + savedObjet);
+            return new ResponseEntity<>(savedObjet, HttpStatus.CREATED);
         } catch (DBException e){
-            log.error("Error while creating rendez-vous", e);
+            log.error("Erreur lors de l'enregistrement du rendez-vous.", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (NotFoundException e) {
-            log.error("Could not find rendez-vous with id " + rendezVousSent.getId(), e);
+            log.error("Impossible de trouver le rendez-vous avec l'id " + rendezVous.getId() + ".", e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (DTOException e) {
+            log.error("Erreur avec le DTO : ", e);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (ServiceException e) {
+            log.error("Erreur de service : ", e);
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+
+    @PutMapping
+    public ResponseEntity<RendezVous> putRendezVous(@RequestBody RendezVous rendezVous) {
+        try{
+            log.info("Mise à jour du rendez-vous ...");
+            RendezVous savedObjet = this.rendezVousService.updateRendezVous(rendezVous);
+            log.info("Rendez-vous mis à jour avec succès : \n\t" + savedObjet);
+            return new ResponseEntity<>(savedObjet, HttpStatus.ACCEPTED);
+        } catch (DBException e){
+            log.error("Erreur lors de la mise à jour du rendez-vous.", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (NotFoundException e) {
+            log.error("Impossible de trouver le rendez-vous avec l'id " + rendezVous.getId() + ".", e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (DTOException e) {
+            log.error("Erreur avec le DTO : ", e);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (ServiceException e) {
+            log.error("Erreur de service : ", e);
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRendezVous(@PathVariable Long id) {
         try {
-            log.info("Deleting rendez-vous with id " + id);
+            log.info("Suppression du rendez-vous avec l'id " + id + ".");
             this.rendezVousService.deleteRendezVous(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (NotFoundException e) {
-            log.error("Could not find rendez-vous with id " + id, e);
+            log.error("Impossible de trouver le rendez-vous avec l'id " + id + ".", e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (DBException e) {
-            log.error("Error while deleting rendez-vous with id " + id, e);
+            log.error("Erreur lors de la suppression du rendez-vous avec l'id " + id + ".", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
