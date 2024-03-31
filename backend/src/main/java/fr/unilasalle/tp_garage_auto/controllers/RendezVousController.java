@@ -54,11 +54,11 @@ public class RendezVousController {
         }
     }
 
-    @PutMapping
-    public ResponseEntity<RendezVous> putRendezVous(@RequestBody RendezVous rendezVous) {
+    @PutMapping("/{id}")
+    public ResponseEntity<RendezVous> putRendezVous(@PathVariable Long id,@RequestBody RendezVous rendezVous) {
         try{
             log.info("Mise à jour du rendez-vous ...");
-            RendezVous savedObjet = this.rendezVousService.updateRendezVous(rendezVous);
+            RendezVous savedObjet = this.rendezVousService.updateRendezVous(id,rendezVous);
             log.info("Rendez-vous mis à jour avec succès : \n\t" + savedObjet);
             return new ResponseEntity<>(savedObjet, HttpStatus.ACCEPTED);
         } catch (DBException e){

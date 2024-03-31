@@ -52,11 +52,11 @@ public class TechnicienController {
 
     }
 
-    @PutMapping
-    public ResponseEntity<Technicien> putTechnicien(@RequestBody Technicien technicien) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Technicien> putTechnicien(@PathVariable Long id,@RequestBody Technicien technicien) {
         try {
             log.info("Mise à jour du technicien ...");
-            Technicien savedObjet = this.technicienService.updateTechnicien(technicien);
+            Technicien savedObjet = this.technicienService.updateTechnicien(id,technicien);
             log.info("Technicien mis à jour avec succès : \n\t" + savedObjet);
             return new ResponseEntity<>(savedObjet, HttpStatus.ACCEPTED);
         } catch (DBException e) {

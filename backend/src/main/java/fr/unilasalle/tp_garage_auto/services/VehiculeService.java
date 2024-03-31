@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,7 +49,46 @@ public class VehiculeService {
     }
 
     /**
-     * Create or update a vehicule
+     * Récupère les véhicules d'un client par son id
+     * @param client_id
+     * @return
+     */
+    public Set<Vehicule> getVehiculesByClient(Long client_id) {
+        return vehiculeRepository.findByClientId(client_id);
+    }
+
+    /**
+     * Récupère les véhicules par marque
+     * @param marque
+     * @return
+     */
+    public Set<Vehicule> getVehiculeByMarque(String marque) {
+        return vehiculeRepository.findByMarqueContainingIgnoreCase(marque);
+    }
+
+    /**
+     * Récupère les véhicules par modèle
+     * @param modele
+     * @return
+     */
+    public Set<Vehicule> getVehiculeByModele(String modele) {
+        return vehiculeRepository.findByModeleContainingIgnoreCase(modele);
+    }
+
+    /**
+     * Récupère les véhicules par année
+     * @param annee
+     * @return
+     */
+    public Set<Vehicule> getVehiculeByAnnee(Integer annee) {
+        return vehiculeRepository.findByAnnee(annee);
+    }
+
+
+
+
+    /**
+     * Créer un vehicule
      * @param vehicule
      * @return
      */
@@ -70,21 +110,35 @@ public class VehiculeService {
         }
     }
 
+    /**
+     * Mise à jour d'un vehicule
+     * @param id
+     * @param vehicule
+     * @return
+     * @throws NotFoundException
+     * @throws DBException
+     */
     @Transactional
-    public Vehicule updateVehicule(Vehicule vehicule) throws NotFoundException, DBException {
+    public Vehicule updateVehicule(Long id,Vehicule vehicule) throws NotFoundException, DBException {
         if (vehicule == null) {
             throw new NotFoundException("Le vehicule ne peut pas être null.");
         }
 
-        if (vehicule.getId() == null) {
-            throw new NotFoundException("Le vehicule doit avoir un id.");
+        if (id == null) {
+            throw new NotFoundException("L'id du vehicule ne peut pas être null.");
         }
 
         Vehicule existingVehicule = vehiculeRepository.findById(vehicule.getId()).orElse(null);
-
         if (existingVehicule == null) {
             throw new NotFoundException("Impossible de trouver le vehicule avec l'id " + vehicule.getId() + ".");
         }
+
+        existingVehicule.setImmatriculation(vehicule.getImmatriculation());
+        existingVehicule.setMarque(vehicule.getMarque());
+        existingVehicule.setModele(vehicule.getModele());
+        existingVehicule.setAnnee(vehicule.getAnnee());
+        existingVehicule.setClient(vehicule.getClient());
+        existingVehicule.setRendezVous(vehicule.getRendezVous());
 
         try {
             return vehiculeRepository.save(vehicule);
@@ -94,7 +148,7 @@ public class VehiculeService {
     }
 
     /**
-     * Delete a vehicule
+     * Supprimer un vehicule
      * @param id
      */
     @Transactional

@@ -87,23 +87,27 @@ public class RendezVousService {
      * @throws DBException
      */
     @Transactional
-    public RendezVous updateRendezVous(RendezVous rendezVous) throws NotFoundException, DBException, ServiceException {
+    public RendezVous updateRendezVous(Long id,RendezVous rendezVous) throws NotFoundException, DBException, ServiceException {
         if(rendezVous == null){
             throw new ServiceException("Le rendez-vous ne peut pas être null.");
         }
 
-        if(rendezVous.getId() == null){
-            throw new ServiceException("Le rendez-vous doit avoir un id.");
+        if(id == null){
+            throw new ServiceException("L'id du rendez-vous ne peut pas être null.");
         }
 
-        RendezVous existingRendezVous = rendezVousRepository.findById(rendezVous.getId()).orElse(null);
-
+        RendezVous existingRendezVous = rendezVousRepository.findById(id).orElse(null);
         if(existingRendezVous == null){
             throw new NotFoundException("Impossible de trouver un rendez-vous avec l'id " + rendezVous.getId() + ".");
         }
 
+        existingRendezVous.setDate(rendezVous.getDate());
+        existingRendezVous.setTypeService(rendezVous.getTypeService());
+        existingRendezVous.setVehicule(rendezVous.getVehicule());
+        existingRendezVous.setTechnicien(rendezVous.getTechnicien());
+
         try{
-            return rendezVousRepository.save(rendezVous);
+            return rendezVousRepository.save(existingRendezVous);
         }catch (Exception e){
             throw new DBException("Erreur lors de la mise à jour du rendez-vous en base.", e);
         }

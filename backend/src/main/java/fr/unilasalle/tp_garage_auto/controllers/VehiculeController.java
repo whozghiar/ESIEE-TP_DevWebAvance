@@ -54,11 +54,11 @@ public class VehiculeController {
         }
     }
 
-    @PutMapping
-    public ResponseEntity<Vehicule> putVehicule(@RequestBody Vehicule vehicule) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Vehicule> putVehicule(@PathVariable Long id,@RequestBody Vehicule vehicule) {
         try{
             log.info("Mise à jour du vehicule ...");
-            Vehicule savedObjet = this.vehiculeService.updateVehicule(vehicule);
+            Vehicule savedObjet = this.vehiculeService.updateVehicule(id, vehicule);
             log.info("Vehicule mis à jour avec succès : \n\t" + savedObjet);
             return new ResponseEntity<>(savedObjet, HttpStatus.ACCEPTED);
         } catch (DBException e){

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import fr.unilasalle.tp_garage_auto.services.ClientService;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/client")
@@ -24,13 +25,120 @@ public class ClientController {
 
     private final ClientService clientService;
 
+    /**
+     * Méthode GET pour récupérer tous les clients
+     * @return
+     */
     @GetMapping
-    public ResponseEntity<List<Client>> getClient() {
+    public ResponseEntity<Set<Client>> getClient() {
         log.info("Récupération de tous les clients...");
-        List<Client> clients = this.clientService.getAllClients();
-        return new ResponseEntity<>(clients, HttpStatus.OK);
+        try{
+            Set<Client> clients = this.clientService.getAllClients();
+            log.info("Clients récupérés avec succès : \n\t" + clients);
+            return new ResponseEntity<>(clients, HttpStatus.OK);
+        } catch (ServiceException e) {
+            log.error("Erreur lors de la récupération des clients.", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
+    /**
+     * Méthode GET pour récupérer un client par id
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Client> getClientById(@PathVariable Long id) {
+        try {
+            log.info("Récupération du client avec l'id " + id);
+            Client client = this.clientService.getClientById(id);
+            log.info("Client récupéré avec succès : \n\t" + client);
+            return new ResponseEntity<>(client, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            log.error("Impossible de trouver le client avec l'id " + id + ".", e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+    /**
+     * Méthode GET pour récupérer les clients par nom
+     * @param nom
+     * @return
+     */
+    @GetMapping()
+    public ResponseEntity<Set<Client>> getClientByNom(@RequestParam String nom) {
+        try {
+            log.info("Récupération du client avec le nom " + nom);
+            Set<Client> clients = this.clientService.getClientsByName(nom);
+            log.info("Client récupéré avec succès : \n\t" + clients);
+            return new ResponseEntity<>(clients, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            log.error("Impossible de trouver le client avec le nom " + nom + ".", e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /**
+     * Méthode GET pour récupérer les clients par prénom
+     * @param prenom
+     * @return
+     */
+    @GetMapping
+    public ResponseEntity<Set<Client>> getClientByPrenom(@RequestParam String prenom) {
+        try {
+            log.info("Récupération du client avec le prenom " + prenom);
+            Set<Client> clients = this.clientService.getClientsBySurname(prenom);
+            log.info("Client récupéré avec succès : \n\t" + clients);
+            return new ResponseEntity<>(clients, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            log.error("Impossible de trouver le client avec le nom " + prenom + ".", e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /**
+     * Méthode GET pour récupérer les clients par email
+     * @param email
+     * @return
+     */
+    @GetMapping
+    public ResponseEntity<Set<Client>> getClientByEmail(@RequestParam String email) {
+        try {
+            log.info("Récupération du client avec l'email " + email);
+            Set<Client> clients = this.clientService.getClientsByEmail(email);
+            log.info("Client récupéré avec succès : \n\t" + clients);
+            return new ResponseEntity<>(clients, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            log.error("Impossible de trouver le client avec l'email " + email + ".", e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /**
+     * Méthode GET pour récupérer les clients par téléphone
+     * @param telephone
+     * @return
+     */
+    @GetMapping
+    public ResponseEntity<Set<Client>> getClientByTelephone(@RequestParam String telephone) {
+        try {
+            log.info("Récupération du client avec le téléphone " + telephone);
+            Set<Client> clients = this.clientService.getClientsByPhone(telephone);
+            log.info("Client récupéré avec succès : \n\t" + clients);
+            return new ResponseEntity<>(clients, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            log.error("Impossible de trouver le client avec le téléphone " + telephone + ".", e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+    /**
+     * Méthode POST pour créer un client
+     * @param client
+     * @return
+     */
     @PostMapping
     public ResponseEntity<Client> postClient(@RequestBody Client client) {
         try {
@@ -53,11 +161,17 @@ public class ClientController {
         }
     }
 
-    @PutMapping
-    public ResponseEntity<Client> putClient(@RequestBody Client client) {
+    /**
+     * Méthode PUT pour mettre à jour un client
+     * @param id
+     * @param client
+     * @return
+     */
+    @PutMapping("/{id}")
+    public ResponseEntity<Client> putClient(@PathVariable Long id, @RequestBody Client client) {
         try {
             log.info("Mis à jour du client ...");
-            Client savedObjet = this.clientService.updateClient(client);
+            Client savedObjet = this.clientService.updateClient(id,client);
             log.info("Client mis à jour avec succès : \n\t" + savedObjet);
             return new ResponseEntity<>(savedObjet, HttpStatus.ACCEPTED);
         } catch (DBException e) {
@@ -75,6 +189,11 @@ public class ClientController {
         }
     }
 
+    /**
+     * Méthode DELETE pour supprimer un client
+     * @param id
+     * @return
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteClient(@PathVariable Long id) {
         try {

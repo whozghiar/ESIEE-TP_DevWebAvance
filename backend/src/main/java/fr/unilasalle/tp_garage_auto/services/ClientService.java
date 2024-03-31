@@ -41,8 +41,12 @@ public class ClientService {
     /**
      * Récupérer tous les clients
      */
-    public List<Client> getAllClients() {
-        return clientRepository.findAll();
+    public Set<Client> getAllClients() throws ServiceException {
+        try {
+            return new HashSet<>(clientRepository.findAll());
+        } catch (Exception e) {
+            throw new ServiceException("Erreur lors de la récupération des clients.");
+        }
     }
 
     /**
@@ -58,6 +62,43 @@ public class ClientService {
             throw new NotFoundException("Impossible de trouver le client avec l'id " + id + ".");
         }
         return client;
+    }
+
+
+    /**
+     * Récupérer les clients par nom
+     * @param nom
+     * @return
+     */
+    public Set<Client> getClientsByName(String nom) {
+        return clientRepository.findByNomContainingIgnoreCase(nom);
+    }
+
+    /**
+     * Récupérer les clients par prénom
+     * @param prenom
+     * @return
+     */
+    public Set<Client> getClientsBySurname(String prenom) {
+        return clientRepository.findByPrenomContainingIgnoreCase(prenom);
+    }
+
+    /**
+     * Récupérer les clients par email
+     * @param email
+     * @return
+     */
+    public Set<Client> getClientsByEmail(String email) {
+        return clientRepository.findByEmailContainingIgnoreCase(email);
+    }
+
+    /**
+     * Récupérer les clients par téléphone
+     * @param telephone
+     * @return
+     */
+    public Set<Client> getClientsByPhone(String telephone) {
+        return clientRepository.findByTelephoneContainingIgnoreCase(telephone);
     }
 
 
@@ -89,22 +130,28 @@ public class ClientService {
      * @return
      */
     @Transactional
-    public Client updateClient(Client client) throws NotFoundException, DBException, ServiceException {
+    public Client updateClient(Long id, Client client) throws NotFoundException, DBException, ServiceException {
         if (client == null) {
             throw new ServiceException("Le client ne peut pas être null.");
         }
 
-        if (client.getId() == null) {
-            throw new ServiceException("Le client doit avoir un id.");
+        if(id == null){
+            throw new ServiceException("L'id du client ne peut pas être null.");
         }
 
-        Client existingClient = this.clientRepository.findById(client.getId()).orElse(null);
+        Client existingClient = this.clientRepository.findById(id).orElse(null);
         if (existingClient == null) {
             throw new NotFoundException("Impossible de trouver un client avec l'id " + client.getId() + ".");
         }
 
+        existingClient.setNom(client.getNom());
+        existingClient.setPrenom(client.getPrenom());
+        existingClient.setTelephone(client.getTelephone());
+        existingClient.setEmail(client.getEmail());
+        existingClient.setVehicules(client.getVehicules());
+
         try {
-            return this.clientRepository.save(client);
+            return this.clientRepository.save(existingClient);
         } catch (Exception e) {
             throw new DBException("Erreur lors de la mise à jour du client en base.", e);
         }

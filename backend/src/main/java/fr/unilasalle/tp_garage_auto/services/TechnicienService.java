@@ -45,7 +45,7 @@ public class TechnicienService {
     }
 
     /**
-     * Créer ou mettre à jour un technicien
+     * Créer un technicien
      * @param technicien
      * @return
      */
@@ -67,21 +67,34 @@ public class TechnicienService {
 
     }
 
+    /**
+     * Mettre à jour un technicien
+     * @param id
+     * @param technicien
+     * @return
+     * @throws NotFoundException
+     * @throws DBException
+     * @throws DTOException
+     * @throws ServiceException
+     */
     @Transactional
-    public Technicien updateTechnicien(Technicien technicien) throws NotFoundException, DBException, DTOException, ServiceException {
+    public Technicien updateTechnicien(Long id,Technicien technicien) throws NotFoundException, DBException, DTOException, ServiceException {
         if(technicien == null){
             throw new ServiceException("Le technicien ne peut pas être null.");
         }
 
-        if(technicien.getId() == null){
-            throw new ServiceException("Le technicien doit avoir un id.");
+        if(id == null){
+            throw new ServiceException("L'id du technicien ne peut pas être null.");
         }
 
         Technicien existingTechnicien = technicienRepository.findById(technicien.getId()).orElse(null);
-
         if(existingTechnicien == null){
             throw new NotFoundException("Impossible de trouver le technicien avec l'id " + technicien.getId() + ".");
         }
+
+        existingTechnicien.setNom(technicien.getNom());
+        existingTechnicien.setPrenom(technicien.getPrenom());
+        existingTechnicien.setRendezVous(technicien.getRendezVous());
 
         try{
             return technicienRepository.save(technicien);
