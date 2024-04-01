@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ecb7285c-4883-4b62-a64f-fdcba187b7b2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Vehicule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Vehicule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BeansTests/VehiculeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BeansTests/VehiculeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/services/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/services/ClientService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,22 +75,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.VehiculeTest">
-    <configuration name="ClientTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="tp_garage_auto" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="BeansTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="BeansTests" />
-      <option name="MAIN_CLASS_NAME" value="BeansTests.ClientTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Spring Boot.TpGarageAutoApplication">
     <configuration name="RendezVousTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="tp_garage_auto" />
       <extension name="coverage">
@@ -152,13 +137,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TpGarageAutoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="tp_garage_auto" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="fr.unilasalle.tp_garage_auto.TpGarageAutoApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="fr.unilasalle.tp_garage_auto.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.TpGarageAutoApplication" />
         <item itemvalue="JUnit.VehiculeTest" />
         <item itemvalue="JUnit.VehiculeTest.testAnneeValidRange" />
         <item itemvalue="JUnit.TechnicienTest" />
         <item itemvalue="JUnit.RendezVousTest" />
-        <item itemvalue="JUnit.ClientTest" />
       </list>
     </recent_temporary>
   </component>
@@ -183,7 +182,7 @@
       <workItem from="1711631700266" duration="8799000" />
       <workItem from="1711701521791" duration="6899000" />
       <workItem from="1711798762227" duration="9000" />
-      <workItem from="1711798822710" duration="42748000" />
+      <workItem from="1711798822710" duration="43853000" />
     </task>
     <servers />
   </component>

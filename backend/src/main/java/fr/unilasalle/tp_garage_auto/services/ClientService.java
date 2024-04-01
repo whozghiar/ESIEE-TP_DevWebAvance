@@ -3,6 +3,7 @@ package fr.unilasalle.tp_garage_auto.services;
 // ------ Imports Beans ------
 
 import fr.unilasalle.tp_garage_auto.beans.Client;
+import fr.unilasalle.tp_garage_auto.beans.Vehicule;
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
 import fr.unilasalle.tp_garage_auto.exceptions.DTOException;
 import fr.unilasalle.tp_garage_auto.exceptions.NotFoundException;
@@ -21,6 +22,7 @@ import java.util.Set;
 @Slf4j
 public class ClientService {
 
+    private final VehiculeService vehiculeService;
     private final ClientRepository clientRepository;
 
     /**
@@ -101,6 +103,20 @@ public class ClientService {
 
         if(client.getId() != null){
             throw new ServiceException("Le client ne peut pas avoir d'id.");
+        }
+
+        // Récupérer le vehiculeID
+        if(client.getVehiculeId() != null){
+            Vehicule vehicule = null;
+            try{
+                vehicule = this.vehiculeService.getVehiculeById(client.getVehiculeId());
+                vehicule.setClient(client);
+            }catch (NotFoundException e){
+                throw new ServiceException("Impossible de trouver un véhicule avec l'id " + client.getVehiculeId() + ".");
+            }
+            client.setVehicules(new HashSet<>());
+            client.getVehicules().add(vehicule);
+
         }
 
         try {

@@ -54,4 +54,7 @@ public class Client {
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference("client-vehicule")
     private Set<Vehicule> vehicules;
+
+    @Transient
+    private Long vehiculeId;
 }
