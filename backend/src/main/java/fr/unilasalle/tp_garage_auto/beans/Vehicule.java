@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.util.HashSet;
@@ -29,12 +29,22 @@ public class Vehicule {
     private Long id;
 
     @NotBlank(message = "La marque est obligatoire")
+    @NotNull(message = "La marque ne peut pas être nulle")
+    @NotEmpty(message = "La marque ne peut pas être vide")
     private String marque;
+
     @NotBlank(message = "Le modèle est obligatoire")
+    @NotNull(message = "Le modèle ne peut pas être nul")
+    @NotEmpty(message = "Le modèle ne peut pas être vide")
     private String modele;
+
     @NotBlank(message = "L'immatriculation est obligatoire")
+    @NotNull(message = "L'immatriculation ne peut pas être nulle")
+    @NotEmpty(message = "L'immatriculation ne peut pas être vide")
+    @Pattern(regexp = "^[A-Z]{2}-[0-9]{3}-[A-Z]{2}$", message = "L'immatriculation doit être au format XX-000-XX")
     private String immatriculation;
-    @NotBlank(message = "L'année est obligatoire")
+
+    @NotNull(message = "L'année ne peut pas être nulle")
     private int annee;
 
     // Relation avec RendezVous : un véhicule peut avoir plusieurs rendez-vous
