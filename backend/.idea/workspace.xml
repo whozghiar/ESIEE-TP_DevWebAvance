@@ -6,14 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ecb7285c-4883-4b62-a64f-fdcba187b7b2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/RendezVous.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/RendezVous.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Technicien.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Technicien.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Vehicule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Vehicule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BeansTests/ClientTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BeansTests/ClientTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BeansTests/RendezVousTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BeansTests/RendezVousTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BeansTests/TechnicienTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BeansTests/TechnicienTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BeansTests/VehiculeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BeansTests/VehiculeTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,6 +53,7 @@
     "JUnit.RendezVousTest.executor": "Run",
     "JUnit.TechnicienTest.executor": "Run",
     "JUnit.VehiculeTest.executor": "Run",
+    "JUnit.VehiculeTest.testAnneeValidRange.executor": "Run",
     "OverrideImplement.generate.javadoc": "true",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
@@ -142,16 +136,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TpGarageAutoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+    <configuration name="VehiculeTest.testAnneeValidRange" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="tp_garage_auto" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="fr.unilasalle.tp_garage_auto.TpGarageAutoApplication" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="fr.unilasalle.tp_garage_auto.*" />
+          <option name="PATTERN" value="BeansTests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="BeansTests" />
+      <option name="MAIN_CLASS_NAME" value="BeansTests.VehiculeTest" />
+      <option name="METHOD_NAME" value="testAnneeValidRange" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -159,10 +155,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.VehiculeTest" />
+        <item itemvalue="JUnit.VehiculeTest.testAnneeValidRange" />
         <item itemvalue="JUnit.TechnicienTest" />
         <item itemvalue="JUnit.RendezVousTest" />
         <item itemvalue="JUnit.ClientTest" />
-        <item itemvalue="Spring Boot.TpGarageAutoApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -187,7 +183,7 @@
       <workItem from="1711631700266" duration="8799000" />
       <workItem from="1711701521791" duration="6899000" />
       <workItem from="1711798762227" duration="9000" />
-      <workItem from="1711798822710" duration="42228000" />
+      <workItem from="1711798822710" duration="42748000" />
     </task>
     <servers />
   </component>

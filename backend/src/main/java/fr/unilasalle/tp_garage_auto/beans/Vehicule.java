@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -45,7 +46,9 @@ public class Vehicule {
     private String immatriculation;
 
     @NotNull(message = "L'année ne peut pas être nulle")
-    private int annee;
+    @Min(value = 1920, message = "L'année doit être supérieure ou égale à 1920")
+    @Max(value = 2025, message = "L'année doit être inférieure ou égale à 2025")
+    private Integer annee;
 
     // Relation avec RendezVous : un véhicule peut avoir plusieurs rendez-vous
     @OneToMany(mappedBy = "vehicule", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

@@ -46,12 +46,43 @@ class VehiculeTest {
     }
 
     @Test
-    public void testAnneeValidationFailure() {
+    public void testAnneeNotNull() {
         Vehicule vehicule = new Vehicule();
-        vehicule.setAnnee(123); // Année incorrecte
+        // Année est null
 
         Set<ConstraintViolation<Vehicule>> violations = validator.validate(vehicule);
-        assertFalse(violations.isEmpty(), "L'année avec une valeur incorrecte devrait échouer la validation");
+        assertFalse(violations.isEmpty(), "L'année ne peut pas être nulle");
+    }
+
+    @Test
+    public void testAnneeMinValue() {
+        Vehicule vehicule = new Vehicule();
+        vehicule.setAnnee(1910); // Année inférieure à la limite minimale (1920)
+
+        Set<ConstraintViolation<Vehicule>> violations = validator.validate(vehicule);
+        assertFalse(violations.isEmpty(), "L'année doit être supérieure ou égale à 1900");
+    }
+
+    @Test
+    public void testAnneeMaxValue() {
+        Vehicule vehicule = new Vehicule();
+        vehicule.setAnnee(2100); // Année supérieure à la limite maximale (2025)
+
+        Set<ConstraintViolation<Vehicule>> violations = validator.validate(vehicule);
+        assertFalse(violations.isEmpty(), "L'année doit être inférieure ou égale à 2100");
+    }
+
+    @Test
+    public void testAnneeValidRange() {
+        Vehicule vehicule = new Vehicule();
+        vehicule.setMarque("Toyota");
+        vehicule.setModele("Corolla");
+        vehicule.setImmatriculation("AA-123-AA");
+        vehicule.setAnnee(2000); // Année dans la plage valide
+
+        Set<ConstraintViolation<Vehicule>> violations = validator.validate(vehicule);
+
+        assertTrue(violations.isEmpty(), "L'année 2000 devrait être valide");
     }
 
     @Test
