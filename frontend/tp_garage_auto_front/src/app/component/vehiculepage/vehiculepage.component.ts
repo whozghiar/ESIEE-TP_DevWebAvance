@@ -21,13 +21,29 @@ import { TechnicianpageComponent } from '../technicianpage/technicianpage.compon
   styleUrl: './vehiculepage.component.css',
 })
 export class VehiculepageComponent {
-  vehicle: any = {
-    technician: "joe",//TechnicianComponent,
-    client: "UNKNOWN",
-    issue: "UNKNOWN",
-    model: "UNKNOWN",
+  vehicles: any = [{
+    id: 0,
+    technician: "jeo",//TechnicianComponent,
+    client: "Jack",
+    issue: "Motor broken",
+    model: "Peugeot 206",
+    status: false
+  },{
+    id: 1,
+    technician: "jo",//TechnicianComponent,
+    client: "Benito",
+    issue: "Motor broken",
+    model: "Peugeot 208",
     status: true,
-  };
+  },{
+    id: 2,
+    technician: "jo",//TechnicianComponent,
+    client: "Benito",
+    issue: "Motor broken",
+    model: "Peugeot 208",
+    status: true,
+  },];
+
 
   //temporaire
   technicians: any = [
