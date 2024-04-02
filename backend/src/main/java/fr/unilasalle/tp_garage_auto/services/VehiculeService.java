@@ -1,5 +1,6 @@
 package fr.unilasalle.tp_garage_auto.services;
 
+import fr.unilasalle.tp_garage_auto.beans.Technicien;
 import fr.unilasalle.tp_garage_auto.beans.Vehicule;
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
 import fr.unilasalle.tp_garage_auto.exceptions.DTOException;
@@ -28,7 +29,7 @@ public class VehiculeService {
         try {
             return new HashSet<>(vehiculeRepository.findAll());
         } catch (Exception e) {
-            throw new ServiceException("Erreur lors de la récupération des vehicules.");
+            throw new ServiceException("Erreur lors de la récupération des vehicules.",new NullPointerException());
         }
     }
 
@@ -42,7 +43,7 @@ public class VehiculeService {
     public Vehicule getVehiculeById(Long id) throws NotFoundException {
         Vehicule vehicule = vehiculeRepository.findById(id).orElse(null);
         if (vehicule == null) {
-            throw new NotFoundException("Impossible de trouver le vehicule avec l'id " + id + ".");
+            throw new NotFoundException("Impossible de trouver le vehicule avec l'id " + id + ".",new NullPointerException());
         }
         return vehicule;
     }
@@ -53,7 +54,11 @@ public class VehiculeService {
      * @return
      */
     public Set<Vehicule> getVehiculesByClient(Long client_id) {
-        return vehiculeRepository.findByClientId(client_id);
+        Set<Vehicule> vehicules = vehiculeRepository.findByClientId(client_id);
+        if(vehicules == null || vehicules.isEmpty()){
+            throw new NotFoundException("Impossible de trouver de vehicules pour le client avec l'id " + client_id + ".",new NullPointerException());
+        }
+        return vehicules;
     }
 
     /**
@@ -62,7 +67,11 @@ public class VehiculeService {
      * @return
      */
     public Vehicule getVehiculeByImmatriculation(String immatriculation) {
-        return vehiculeRepository.findByImmatriculationIgnoreCase(immatriculation);
+        Vehicule vehicule = vehiculeRepository.findByImmatriculationIgnoreCase(immatriculation);
+        if(vehicule == null){
+            throw new NotFoundException("Impossible de trouver un vehicule avec l'immatriculation " + immatriculation + ".",new NullPointerException());
+        }
+        return vehicule;
     }
 
     /**
@@ -71,7 +80,11 @@ public class VehiculeService {
      * @return
      */
     public Set<Vehicule> getVehiculeByMarque(String marque) {
-        return vehiculeRepository.findByMarqueContainingIgnoreCase(marque);
+        Set<Vehicule> vehicules = vehiculeRepository.findByMarqueContainingIgnoreCase(marque);
+        if(vehicules == null || vehicules.isEmpty()){
+            throw new NotFoundException("Impossible de trouver de vehicules de la marque " + marque + ".",new NullPointerException());
+        }
+        return vehicules;
     }
 
     /**
@@ -80,7 +93,11 @@ public class VehiculeService {
      * @return
      */
     public Set<Vehicule> getVehiculeByModele(String modele) {
-        return vehiculeRepository.findByModeleContainingIgnoreCase(modele);
+        Set<Vehicule> vehicules = vehiculeRepository.findByModeleContainingIgnoreCase(modele);
+        if(vehicules == null || vehicules.isEmpty()){
+            throw new NotFoundException("Impossible de trouver de vehicules du modèle " + modele + ".",new NullPointerException());
+        }
+        return vehicules;
     }
 
     /**
@@ -89,7 +106,11 @@ public class VehiculeService {
      * @return
      */
     public Set<Vehicule> getVehiculeByAnnee(Integer annee) {
-        return vehiculeRepository.findByAnnee(annee);
+        Set<Vehicule> vehicules = vehiculeRepository.findByAnnee(annee);
+        if(vehicules == null || vehicules.isEmpty()){
+            throw new NotFoundException("Impossible de trouver de vehicules de l'année " + annee + ".",new NullPointerException());
+        }
+        return vehicules;
     }
 
 
@@ -104,11 +125,11 @@ public class VehiculeService {
     @Transactional
     public Vehicule createVehicule(Vehicule vehicule) throws NotFoundException, DBException, ServiceException {
         if (vehicule == null) {
-            throw new ServiceException("Le vehicule ne peut pas être null.");
+            throw new ServiceException("Le vehicule ne peut pas être null.",new NullPointerException());
         }
 
         if (vehicule.getId() != null) {
-            throw new ServiceException("Le vehicule ne peut pas avoir d'id.");
+            throw new ServiceException("Le vehicule ne peut pas avoir d'id.",new NullPointerException());
         }
 
         try {
@@ -129,16 +150,16 @@ public class VehiculeService {
     @Transactional
     public Vehicule updateVehicule(Long id,Vehicule vehicule) throws NotFoundException, DBException {
         if (vehicule == null) {
-            throw new NotFoundException("Le vehicule ne peut pas être null.");
+            throw new NotFoundException("Le vehicule ne peut pas être null.",new NullPointerException());
         }
 
         if (id == null) {
-            throw new NotFoundException("L'id du vehicule ne peut pas être null.");
+            throw new NotFoundException("L'id du vehicule ne peut pas être null.",new NullPointerException());
         }
 
         Vehicule existingVehicule = vehiculeRepository.findById(vehicule.getId()).orElse(null);
         if (existingVehicule == null) {
-            throw new NotFoundException("Impossible de trouver le vehicule avec l'id " + vehicule.getId() + ".");
+            throw new NotFoundException("Impossible de trouver le vehicule avec l'id " + vehicule.getId() + ".",new NullPointerException());
         }
 
         existingVehicule.setImmatriculation(vehicule.getImmatriculation());
@@ -163,7 +184,7 @@ public class VehiculeService {
     public void deleteVehicule(Long id) throws NotFoundException, DBException {
         Vehicule existingVehicule = vehiculeRepository.findById(id).orElse(null);
         if (existingVehicule == null) {
-            throw new NotFoundException("Could not find vehicule with id " + id);
+            throw new NotFoundException("Could not find vehicule with id " + id,new NullPointerException());
         }
 
         try {

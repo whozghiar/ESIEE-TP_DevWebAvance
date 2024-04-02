@@ -28,7 +28,7 @@ public class RendezVousService {
         try{
             return new HashSet<>(rendezVousRepository.findAll());
         }catch (Exception e){
-            throw new ServiceException("Erreur lors de la récupération des rendez-vous.");
+            throw new ServiceException("Erreur lors de la récupération des rendez-vous.",new NullPointerException());
         }
     }
 
@@ -41,7 +41,7 @@ public class RendezVousService {
     public RendezVous getRendezVousById(Long id) throws NotFoundException {
         RendezVous rendezVous = rendezVousRepository.findById(id).orElse(null);
         if (rendezVous == null) {
-            throw new NotFoundException("Impossible de trouver le rendez-vous avec l'id " + id + ".");
+            throw new NotFoundException("Impossible de trouver le rendez-vous avec l'id " + id + ".",new NullPointerException());
         }
         return rendezVous;
     }
@@ -62,8 +62,12 @@ public class RendezVousService {
      * @param technicien_id
      * @return Set<RendezVous>
      */
-    public Set<RendezVous> getRendezVousByTechnicien(Long technicien_id) {
-        return rendezVousRepository.findByTechnicienId(technicien_id);
+    public Set<RendezVous> getRendezVousByTechnicienId(Long technicien_id) {
+        Set<RendezVous> rendezVous = rendezVousRepository.findByTechnicienId(technicien_id);
+        if (rendezVous == null) {
+            throw new NotFoundException("Impossible de trouver un rendez-vous avec le technicien id " + technicien_id + ".",new NullPointerException());
+        }
+        return rendezVous;
     }
 
     /**
@@ -71,8 +75,12 @@ public class RendezVousService {
      * @param vehicule_id
      * @return Set<RendezVous>
      */
-    public Set<RendezVous> getRendezVousByVehicule(Long vehicule_id) {
-        return rendezVousRepository.findByVehiculeId(vehicule_id);
+    public Set<RendezVous> getRendezVousByVehiculeId(Long vehicule_id) {
+        Set<RendezVous> rendezVous = rendezVousRepository.findByVehiculeId(vehicule_id);
+        if (rendezVous == null) {
+            throw new NotFoundException("Impossible de trouver un rendez-vous avec le vehicule id " + vehicule_id + ".",new NullPointerException());
+        }
+        return rendezVous;
     }
 
     /**
@@ -81,7 +89,11 @@ public class RendezVousService {
      * @return Set<RendezVous>
      */
     public Set<RendezVous> getRendezVousByDate(String date) {
-        return rendezVousRepository.findByDate(date);
+        Set<RendezVous> rendezVous = rendezVousRepository.findByDate(date);
+        if (rendezVous == null) {
+            throw new NotFoundException("Impossible de trouver un rendez-vous avec la date " + date + ".",new NullPointerException());
+        }
+        return rendezVous;
     }
 
     /**
@@ -90,7 +102,11 @@ public class RendezVousService {
      * @return Set<RendezVous>
      */
     public Set<RendezVous> getRendezVousByTypeService(String typeService) {
-        return rendezVousRepository.findByTypeServiceContainingIgnoreCase(typeService);
+        Set<RendezVous> rendezVous = rendezVousRepository.findByTypeServiceContainingIgnoreCase(typeService);
+        if (rendezVous == null) {
+            throw new NotFoundException("Impossible de trouver un rendez-vous avec le type de service " + typeService + ".",new NullPointerException());
+        }
+        return rendezVous;
     }
 
 
@@ -109,11 +125,11 @@ public class RendezVousService {
     public RendezVous createRendezVous(RendezVous rendezVous) throws ServiceException, DBException, NotFoundException {
 
         if(rendezVous == null){
-            throw new ServiceException("Le rendez-vous ne peut pas être null.");
+            throw new ServiceException("Le rendez-vous ne peut pas être null.",new NullPointerException());
         }
 
         if(rendezVous.getId() != null){
-            throw new ServiceException("Le rendez-vous ne peut pas avoir d'id");
+            throw new ServiceException("Le rendez-vous ne peut pas avoir d'id",new NullPointerException());
         }
 
         try{
@@ -134,16 +150,16 @@ public class RendezVousService {
     @Transactional
     public RendezVous updateRendezVous(Long id,RendezVous rendezVous) throws NotFoundException, DBException, ServiceException {
         if(rendezVous == null){
-            throw new ServiceException("Le rendez-vous ne peut pas être null.");
+            throw new ServiceException("Le rendez-vous ne peut pas être null.",new NullPointerException());
         }
 
         if(id == null){
-            throw new ServiceException("L'id du rendez-vous ne peut pas être null.");
+            throw new ServiceException("L'id du rendez-vous ne peut pas être null.",new NullPointerException());
         }
 
         RendezVous existingRendezVous = rendezVousRepository.findById(id).orElse(null);
         if(existingRendezVous == null){
-            throw new NotFoundException("Impossible de trouver un rendez-vous avec l'id " + rendezVous.getId() + ".");
+            throw new NotFoundException("Impossible de trouver un rendez-vous avec l'id " + rendezVous.getId() + ".",new NullPointerException());
         }
 
         existingRendezVous.setDate(rendezVous.getDate());
@@ -168,7 +184,7 @@ public class RendezVousService {
     public void deleteRendezVous(Long id) throws NotFoundException, DBException {
         RendezVous existingRendezVous = rendezVousRepository.findById(id).orElse(null);
         if (existingRendezVous == null) {
-            throw new NotFoundException("Impossible de trouver un rendez-vous avec l'id " + id + ".");
+            throw new NotFoundException("Impossible de trouver un rendez-vous avec l'id " + id + ".",new NullPointerException());
         }
 
         try {

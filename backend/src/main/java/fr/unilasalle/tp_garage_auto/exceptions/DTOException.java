@@ -9,4 +9,5 @@ import lombok.Setter;
 @Setter
 public class DTOException extends RuntimeException{
     private String message;
+    private Throwable cause;
 }

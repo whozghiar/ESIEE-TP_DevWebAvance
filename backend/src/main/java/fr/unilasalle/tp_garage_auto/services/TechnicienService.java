@@ -26,7 +26,7 @@ public class TechnicienService {
         try{
             return new HashSet<>(technicienRepository.findAll());
         }catch (Exception e){
-            throw new ServiceException("Erreur lors de la récupération des techniciens.");
+            throw new ServiceException("Erreur lors de la récupération des techniciens.",e);
         }
     }
 
@@ -41,7 +41,7 @@ public class TechnicienService {
     public Technicien getTechnicienById(Long id) throws NotFoundException, DTOException {
         Technicien technicien = technicienRepository.findById(id).orElse(null);
         if (technicien == null) {
-            throw new NotFoundException("Impossible de trouver le technicien avec l'id " + id + ".");
+            throw new NotFoundException("Impossible de trouver le technicien avec l'id " + id + ".",new NullPointerException());
         }
         return technicien;
     }
@@ -52,7 +52,11 @@ public class TechnicienService {
      * @return
      */
     public Set<Technicien> getTechnicienByNom(String nom){
-        return technicienRepository.findByNomContainingIgnoreCase(nom);
+        Set<Technicien> techniciens = technicienRepository.findByNomContainingIgnoreCase(nom);
+        if(techniciens == null || techniciens.isEmpty()){
+            throw new NotFoundException("Impossible de trouver de techniciens avec le nom " + nom + ".",new NullPointerException());
+        }
+        return techniciens;
     }
 
     /**
@@ -61,7 +65,11 @@ public class TechnicienService {
      * @return
      */
     public Set<Technicien> getTechnicienByPrenom(String prenom){
-        return technicienRepository.findByPrenomContainingIgnoreCase(prenom);
+        Set<Technicien> techniciens = technicienRepository.findByPrenomContainingIgnoreCase(prenom);
+        if(techniciens == null || techniciens.isEmpty()){
+            throw new NotFoundException("Impossible de trouver de techniciens avec le prenom " + prenom + ".",new NullPointerException());
+        }
+        return techniciens;
     }
 
     /**
@@ -70,7 +78,11 @@ public class TechnicienService {
      * @return
      */
     public Technicien getTechnicienByRendezVousId(Long rendezVousId) {
-        return technicienRepository.findByRendezVousId(rendezVousId);
+        Technicien technicien = technicienRepository.findByRendezVousId(rendezVousId);
+        if (technicien == null) {
+            throw new NotFoundException("Impossible de trouver un technicien avec le rendez-vous id " + rendezVousId + ".",new NullPointerException());
+        }
+        return technicien;
     }
 
 
@@ -83,11 +95,11 @@ public class TechnicienService {
     @Transactional
     public Technicien createTechnicien(Technicien  technicien) throws NotFoundException, DBException, ServiceException {
         if(technicien == null){
-            throw new ServiceException("Le technicien ne peut pas être null.");
+            throw new ServiceException("Le technicien ne peut pas être null.",new NullPointerException());
         }
 
         if(technicien.getId() != null){
-            throw new ServiceException("Le technicien ne peut pas avoir d'id.");
+            throw new ServiceException("Le technicien ne peut pas avoir d'id.",new NullPointerException());
         }
 
         try{
@@ -111,16 +123,16 @@ public class TechnicienService {
     @Transactional
     public Technicien updateTechnicien(Long id,Technicien technicien) throws NotFoundException, DBException, DTOException, ServiceException {
         if(technicien == null){
-            throw new ServiceException("Le technicien ne peut pas être null.");
+            throw new ServiceException("Le technicien ne peut pas être null.",new NullPointerException());
         }
 
         if(id == null){
-            throw new ServiceException("L'id du technicien ne peut pas être null.");
+            throw new ServiceException("L'id du technicien ne peut pas être null.",new NullPointerException());
         }
 
         Technicien existingTechnicien = technicienRepository.findById(technicien.getId()).orElse(null);
         if(existingTechnicien == null){
-            throw new NotFoundException("Impossible de trouver le technicien avec l'id " + technicien.getId() + ".");
+            throw new NotFoundException("Impossible de trouver le technicien avec l'id " + technicien.getId() + ".",new NullPointerException());
         }
 
         existingTechnicien.setNom(technicien.getNom());
@@ -145,7 +157,7 @@ public class TechnicienService {
     public void deleteTechnicien(Long id) throws NotFoundException, DBException {
         Technicien existingTechnicien = technicienRepository.findById(id).orElse(null);
         if (existingTechnicien == null) {
-            throw new NotFoundException("Impossible de trouver le technicien avec l'id " + id + ".");
+            throw new NotFoundException("Impossible de trouver le technicien avec l'id " + id + ".",new NullPointerException());
         }
 
         try {

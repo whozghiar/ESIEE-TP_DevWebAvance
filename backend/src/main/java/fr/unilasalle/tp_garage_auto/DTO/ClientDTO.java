@@ -30,7 +30,7 @@ public class ClientDTO {
     public static ClientDTO fromEntity(Client client) throws DTOException {
         // Si le client est null, on throw une exception
         if(client == null){
-            throw new DTOException("Le client ne peut pas être null");
+            throw new DTOException("Le client ne peut pas être null",new NullPointerException());
         }
 
         // On crée un nouveau clientDTO
@@ -46,7 +46,7 @@ public class ClientDTO {
     public static Client toEntity(ClientDTO clientDTO) throws DTOException {
         // Si le clientDTO est null, on retourne null
         if(clientDTO == null){
-            throw new DTOException("Le clientDTO ne peut pas être null");
+            throw new DTOException("Le clientDTO ne peut pas être null",new NullPointerException());
         }
 
         // On crée un nouveau client

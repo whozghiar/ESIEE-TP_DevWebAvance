@@ -20,7 +20,7 @@ public class TechnicienDTO {
 
     public static TechnicienDTO fromEntity(Technicien technicien) throws DTOException {
         if(technicien == null){
-            throw new DTOException("Le technicien ne peut pas être null");
+            throw new DTOException("Le technicien ne peut pas être null",new NullPointerException());
         }
 
         return TechnicienDTO.builder()
@@ -32,7 +32,7 @@ public class TechnicienDTO {
 
     public static Technicien toEntity(TechnicienDTO technicienDTO) throws DTOException {
         if(technicienDTO == null){
-            throw new DTOException("Le technicienDTO ne peut pas être null");
+            throw new DTOException("Le technicienDTO ne peut pas être null",new NullPointerException());
         }
 
         return Technicien.builder()

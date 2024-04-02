@@ -9,4 +9,5 @@ import lombok.Setter;
 @Setter
 public class NotFoundException extends RuntimeException {
     private String message;
+    private Throwable cause;
 }

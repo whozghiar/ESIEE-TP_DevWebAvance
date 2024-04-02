@@ -34,21 +34,16 @@ public class TechnicienController {
      */
     @GetMapping
     public ResponseEntity<?> getTechnicien(@RequestParam(required = false) Optional<String> nom,
-                                           @RequestParam(required = false) Optional<String> prenom) {
+                                           @RequestParam(required = false) Optional<String> prenom) throws ServiceException {
         if (nom.isPresent()) {
             return getTechnicienByNom(nom.get());
         } else if (prenom.isPresent()) {
             return getTechnicienByPrenom(prenom.get());
         } else {
-            try {
-                log.info("Récupération de tous les techniciens ...");
-                Set<Technicien> technicien = this.technicienService.getAllTechniciens();
-                log.info("Techniciens récupérés avec succès : \n\t" + technicien);
-                return new ResponseEntity<>(technicien, HttpStatus.OK);
-            } catch (ServiceException e) {
-                log.error("Erreur lors de la récupération des techniciens.", e);
-                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            log.info("Récupération de tous les techniciens ...");
+            Set<Technicien> technicien = this.technicienService.getAllTechniciens();
+            log.info("Techniciens récupérés avec succès : \n\t" + technicien);
+            return new ResponseEntity<>(technicien, HttpStatus.OK);
         }
     }
 
@@ -60,15 +55,10 @@ public class TechnicienController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<Technicien> getTechnicienById(@PathVariable Long id) {
-        try {
-            log.info("Récupération du technicien avec l'id " + id);
-            Technicien technicien = this.technicienService.getTechnicienById(id);
-            log.info("Technicien récupéré avec succès : \n\t" + technicien);
-            return new ResponseEntity<>(technicien, HttpStatus.OK);
-        } catch (NotFoundException e) {
-            log.error("Impossible de trouver le technicien avec l'id " + id + ".", e);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        log.info("Récupération du technicien avec l'id " + id);
+        Technicien technicien = this.technicienService.getTechnicienById(id);
+        log.info("Technicien récupéré avec succès : \n\t" + technicien);
+        return new ResponseEntity<>(technicien, HttpStatus.OK);
     }
 
     /**
@@ -77,15 +67,10 @@ public class TechnicienController {
      * @return
      */
     public ResponseEntity<Set<Technicien>> getTechnicienByNom(String nom) {
-        try {
-            log.info("Récupération du technicien avec le nom " + nom);
-            Set<Technicien> technicien = this.technicienService.getTechnicienByNom(nom);
-            log.info("Technicien récupéré avec succès : \n\t" + technicien);
-            return new ResponseEntity<>(technicien, HttpStatus.OK);
-        } catch (NotFoundException e) {
-            log.error("Impossible de trouver le technicien avec le nom " + nom + ".", e);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        log.info("Récupération du technicien avec le nom " + nom);
+        Set<Technicien> technicien = this.technicienService.getTechnicienByNom(nom);
+        log.info("Technicien récupéré avec succès : \n\t" + technicien);
+        return new ResponseEntity<>(technicien, HttpStatus.OK);
     }
 
     /**
@@ -94,15 +79,10 @@ public class TechnicienController {
      * @return
      */
     public ResponseEntity<Set<Technicien>> getTechnicienByPrenom(String prenom) {
-        try {
-            log.info("Récupération du technicien avec le prenom " + prenom);
-            Set<Technicien> technicien = this.technicienService.getTechnicienByPrenom(prenom);
-            log.info("Technicien récupéré avec succès : \n\t" + technicien);
-            return new ResponseEntity<>(technicien, HttpStatus.OK);
-        } catch (NotFoundException e) {
-            log.error("Impossible de trouver le technicien avec le prenom " + prenom + ".", e);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        log.info("Récupération du technicien avec le prenom " + prenom);
+        Set<Technicien> technicien = this.technicienService.getTechnicienByPrenom(prenom);
+        log.info("Technicien récupéré avec succès : \n\t" + technicien);
+        return new ResponseEntity<>(technicien, HttpStatus.OK);
     }
 
     /**
@@ -111,25 +91,11 @@ public class TechnicienController {
      * @return
      */
     @PostMapping
-    public ResponseEntity<Technicien> postTechnicien(@RequestBody Technicien technicien) {
-        try{
-            log.info("Création d'un technicien ...");
-            Technicien savedObjet = this.technicienService.createTechnicien(technicien);
-            log.info("Technicien créé avec succès : \n\t" + savedObjet);
-            return new ResponseEntity<>(savedObjet, HttpStatus.CREATED);
-        } catch (DBException e){
-            log.error("Erreur lors de l'enregistrement du technicien.", e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        } catch (NotFoundException e) {
-            log.error("Impossible de trouver le technicien avec l'id " + technicien.getId() + ".", e);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (DTOException e) {
-            log.error("Erreur avec le DTO : ", e);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } catch (ServiceException e) {
-            log.error("Erreur de service : ", e);
-            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-        }
+    public ResponseEntity<Technicien> postTechnicien(@RequestBody Technicien technicien) throws ServiceException {
+        log.info("Création d'un technicien ...");
+        Technicien savedObjet = this.technicienService.createTechnicien(technicien);
+        log.info("Technicien créé avec succès : \n\t" + savedObjet);
+        return new ResponseEntity<>(savedObjet, HttpStatus.CREATED);
 
     }
 
@@ -140,22 +106,11 @@ public class TechnicienController {
      * @return
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Technicien> putTechnicien(@PathVariable Long id,@RequestBody Technicien technicien) {
-        try {
-            log.info("Mise à jour du technicien ...");
-            Technicien savedObjet = this.technicienService.updateTechnicien(id,technicien);
-            log.info("Technicien mis à jour avec succès : \n\t" + savedObjet);
-            return new ResponseEntity<>(savedObjet, HttpStatus.ACCEPTED);
-        } catch (DBException e) {
-            log.error("Erreur lors de la mise à jour du technicien.", e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        } catch (NotFoundException e) {
-            log.error("Impossible de trouver le technicien avec l'id " + technicien.getId() + ".", e);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (ServiceException e) {
-            log.error("Erreur de service : ", e);
-            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-        }
+    public ResponseEntity<Technicien> putTechnicien(@PathVariable Long id,@RequestBody Technicien technicien) throws ServiceException {
+        log.info("Mise à jour du technicien ...");
+        Technicien savedObjet = this.technicienService.updateTechnicien(id,technicien);
+        log.info("Technicien mis à jour avec succès : \n\t" + savedObjet);
+        return new ResponseEntity<>(savedObjet, HttpStatus.ACCEPTED);
     }
 
     /**
@@ -165,17 +120,10 @@ public class TechnicienController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTechnicien(@PathVariable Long id) {
-        try {
-            log.info("Suppression du technicien avec l'id " + id + ".");
-            this.technicienService.deleteTechnicien(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (NotFoundException e) {
-            log.error("Impossible de trouver le technicien avec l'id " + id + ".", e);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (DBException e) {
-            log.error("Erreur lors de la suppression du technicien avec l'id " + id + ".", e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        log.info("Suppression du technicien avec l'id " + id + ".");
+        this.technicienService.deleteTechnicien(id);
+        log.info("Technicien supprimé avec succès.");
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

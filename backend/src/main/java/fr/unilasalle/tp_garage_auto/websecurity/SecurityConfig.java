@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -27,8 +28,11 @@ public class SecurityConfig {
                 // Requêtes autorisées
                 .authorizeHttpRequests(authorize -> authorize
                         //.requestMatchers("/", "/images/**").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
+                // Autoriser les requêtes POST/PUT/DELETE
+                .csrf(AbstractHttpConfigurer::disable)
+
 
                 // OAuth 2.0 Authentification
                 .oauth2Login(withDefaults())

@@ -56,7 +56,7 @@ public class Vehicule {
     private Set<RendezVous> rendezVous;
 
     // Relation avec Client
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id")
     @JsonBackReference("client-vehicule")
     private Client client;

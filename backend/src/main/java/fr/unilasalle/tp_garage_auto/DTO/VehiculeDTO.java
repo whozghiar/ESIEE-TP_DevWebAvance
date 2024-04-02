@@ -25,7 +25,7 @@ public class VehiculeDTO {
     public static VehiculeDTO fromEntity(Vehicule vehicule) throws DTOException {
         // Si le véhicule est null, on throw une exception
         if(vehicule == null){
-            throw new DTOException("Le véhicule ne peut pas être null");
+            throw new DTOException("Le véhicule ne peut pas être null",new NullPointerException());
         }
 
         // On crée un nouveau véhiculeDTO
@@ -42,7 +42,7 @@ public class VehiculeDTO {
     public static Vehicule toEntity(VehiculeDTO vehiculeDTO) throws DTOException {
         // Si le véhiculeDTO est null, on retourne null
         if(vehiculeDTO == null){
-            throw new DTOException("Le véhiculeDTO ne peut pas être null");
+            throw new DTOException("Le véhiculeDTO ne peut pas être null",new NullPointerException());
         }
 
         // On crée un nouveau véhicule

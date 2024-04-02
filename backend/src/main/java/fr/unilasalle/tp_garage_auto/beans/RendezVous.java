@@ -36,13 +36,13 @@ public class RendezVous {
     private String typeService;
 
     // Relation avec Véhicule
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "vehicule_id")
     @JsonBackReference("vehicule-rendezVous")
     private Vehicule vehicule;
 
     // Relation avec Technicien
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "technicien_id")
     @JsonBackReference("technicien-rendezVous")
     private Technicien technicien;

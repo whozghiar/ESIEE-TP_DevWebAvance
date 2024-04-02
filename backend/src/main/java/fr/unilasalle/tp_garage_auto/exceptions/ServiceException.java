@@ -9,4 +9,5 @@ import lombok.Setter;
 @Setter
 public class ServiceException extends Exception{
     private String message;
+    private Throwable cause;
 }

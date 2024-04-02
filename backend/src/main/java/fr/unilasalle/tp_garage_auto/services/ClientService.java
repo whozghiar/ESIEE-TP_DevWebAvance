@@ -32,7 +32,7 @@ public class ClientService {
         try {
             return new HashSet<>(clientRepository.findAll());
         } catch (Exception e) {
-            throw new ServiceException("Erreur lors de la récupération des clients.");
+            throw new ServiceException("Erreur lors de la récupération des clients.",new NullPointerException());
         }
     }
 
@@ -46,7 +46,7 @@ public class ClientService {
     public Client getClientById(Long id) throws NotFoundException {
         Client client = clientRepository.findById(id).orElse(null);
         if (client == null) {
-            throw new NotFoundException("Impossible de trouver le client avec l'id " + id + ".");
+            throw new NotFoundException("Impossible de trouver le client avec l'id " + id + ".",new NullPointerException());
         }
         return client;
     }
@@ -58,7 +58,11 @@ public class ClientService {
      * @return
      */
     public Set<Client> getClientsByName(String nom) {
-        return clientRepository.findByNomContainingIgnoreCase(nom);
+        Set<Client> clients = clientRepository.findByNomContainingIgnoreCase(nom);
+        if (clients.isEmpty()) {
+            throw new NotFoundException("Impossible de trouver un client avec le nom " + nom + ".",new NullPointerException());
+        }
+        return clients;
     }
 
     /**
@@ -67,7 +71,11 @@ public class ClientService {
      * @return
      */
     public Set<Client> getClientsBySurname(String prenom) {
-        return clientRepository.findByPrenomContainingIgnoreCase(prenom);
+        Set<Client> clients = clientRepository.findByPrenomContainingIgnoreCase(prenom);
+        if (clients.isEmpty()) {
+            throw new NotFoundException("Impossible de trouver un client avec le prénom " + prenom + ".",new NullPointerException());
+        }
+        return clients;
     }
 
     /**
@@ -75,8 +83,12 @@ public class ClientService {
      * @param email
      * @return
      */
-    public Client getClientsByEmail(String email) {
-        return clientRepository.findByEmailContainingIgnoreCase(email);
+    public Client getClientByEmail(String email) {
+        Client client = clientRepository.findByEmailContainingIgnoreCase(email);
+        if (client == null) {
+            throw new NotFoundException("Impossible de trouver un client avec l'email " + email + ".",new NullPointerException());
+        }
+        return client;
     }
 
     /**
@@ -85,7 +97,11 @@ public class ClientService {
      * @return
      */
     public Client getClientsByPhone(String telephone) {
-        return clientRepository.findByTelephoneContainingIgnoreCase(telephone);
+        Client client = clientRepository.findByTelephoneContainingIgnoreCase(telephone);
+        if (client == null) {
+            throw new NotFoundException("Impossible de trouver un client avec le téléphone " + telephone + ".",new NullPointerException());
+        }
+        return client;
     }
 
 
@@ -98,25 +114,24 @@ public class ClientService {
     @Transactional
     public Client createClient(Client client) throws DBException, ServiceException {
         if (client == null) {
-            throw new ServiceException("Le client ne peut pas être null.");
+            throw new ServiceException("Le client ne peut pas être null.",new NullPointerException());
         }
 
         if(client.getId() != null){
-            throw new ServiceException("Le client ne peut pas avoir d'id.");
+            throw new ServiceException("Le client ne peut pas avoir d'id.",new NullPointerException());
         }
 
-        // Récupérer le vehiculeID
-        if(client.getVehiculeId() != null){
+        // Cas où l'on associe un véhicule déjà existant au client
+        if(client.getVehiculeId() != null && client.getVehicules().isEmpty()){
             Vehicule vehicule = null;
             try{
                 vehicule = this.vehiculeService.getVehiculeById(client.getVehiculeId());
                 vehicule.setClient(client);
             }catch (NotFoundException e){
-                throw new ServiceException("Impossible de trouver un véhicule avec l'id " + client.getVehiculeId() + ".");
+                throw new ServiceException("Impossible de trouver un véhicule avec l'id " + client.getVehiculeId() + ".",new NullPointerException());
             }
             client.setVehicules(new HashSet<>());
             client.getVehicules().add(vehicule);
-
         }
 
         try {
@@ -133,16 +148,16 @@ public class ClientService {
     @Transactional
     public Client updateClient(Long id, Client client) throws NotFoundException, DBException, ServiceException {
         if (client == null) {
-            throw new ServiceException("Le client ne peut pas être null.");
+            throw new ServiceException("Le client ne peut pas être null.", new NullPointerException());
         }
 
         if(id == null){
-            throw new ServiceException("L'id du client ne peut pas être null.");
+            throw new ServiceException("L'id du client ne peut pas être null.", new NullPointerException());
         }
 
         Client existingClient = this.clientRepository.findById(id).orElse(null);
         if (existingClient == null) {
-            throw new NotFoundException("Impossible de trouver un client avec l'id " + client.getId() + ".");
+            throw new NotFoundException("Impossible de trouver un client avec l'id " + client.getId() + ".", new NullPointerException());
         }
 
         // Récupérer le vehiculeID
@@ -152,7 +167,7 @@ public class ClientService {
                 vehicule = this.vehiculeService.getVehiculeById(client.getVehiculeId());
                 vehicule.setClient(existingClient);
             }catch (NotFoundException e){
-                throw new ServiceException("Impossible de trouver un véhicule avec l'id " + existingClient.getVehiculeId() + ".");
+                throw new ServiceException("Impossible de trouver un véhicule avec l'id " + existingClient.getVehiculeId() + ".", e);
             }
             existingClient.setVehicules(new HashSet<>());
             existingClient.getVehicules().add(vehicule);
@@ -182,7 +197,7 @@ public class ClientService {
     public void deleteClient(Long id) throws NotFoundException, DBException {
         Client existingClient = this.clientRepository.findById(id).orElse(null);
         if (existingClient == null) {
-            throw new NotFoundException("Impossible de trouver un client avec l'id " + id + ".");
+            throw new NotFoundException("Impossible de trouver un client avec l'id " + id + ".", new NullPointerException());
         }
 
         try {

@@ -26,7 +26,7 @@ public class RendezVousDTO {
     public static RendezVousDTO fromEntity(RendezVous rendezVous) throws DTOException {
         // Si le rendez-vous est null, on throw une exception
         if(rendezVous == null){
-            throw new DTOException("Le rendez-vous ne peut pas être null");
+            throw new DTOException("Le rendez-vous ne peut pas être null",new NullPointerException());
         }
 
         // On crée un nouveau rendez-vousDTO
@@ -43,7 +43,7 @@ public class RendezVousDTO {
     public static RendezVous toEntity(RendezVousDTO rendezVousDTO) throws DTOException {
         // Si le rendez-vousDTO est null, on retourne null
         if(rendezVousDTO == null){
-            throw new DTOException("Le rendez-vousDTO ne peut pas être null");
+            throw new DTOException("Le rendez-vousDTO ne peut pas être null",new NullPointerException());
         }
 
         // On crée un nouveau rendez-vous
