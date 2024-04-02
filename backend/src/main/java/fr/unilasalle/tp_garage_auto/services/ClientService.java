@@ -145,6 +145,20 @@ public class ClientService {
             throw new NotFoundException("Impossible de trouver un client avec l'id " + client.getId() + ".");
         }
 
+        // Récupérer le vehiculeID
+        if(existingClient.getVehiculeId() != null){
+            Vehicule vehicule = null;
+            try{
+                vehicule = this.vehiculeService.getVehiculeById(client.getVehiculeId());
+                vehicule.setClient(existingClient);
+            }catch (NotFoundException e){
+                throw new ServiceException("Impossible de trouver un véhicule avec l'id " + existingClient.getVehiculeId() + ".");
+            }
+            existingClient.setVehicules(new HashSet<>());
+            existingClient.getVehicules().add(vehicule);
+
+        }
+
         existingClient.setNom(client.getNom());
         existingClient.setPrenom(client.getPrenom());
         existingClient.setTelephone(client.getTelephone());
