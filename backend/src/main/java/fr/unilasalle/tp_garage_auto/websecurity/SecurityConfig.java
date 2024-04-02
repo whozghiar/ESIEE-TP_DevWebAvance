@@ -1,11 +1,15 @@
 package fr.unilasalle.tp_garage_auto.websecurity;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -28,7 +32,33 @@ public class SecurityConfig {
                 // Requêtes autorisées
                 .authorizeHttpRequests(authorize -> authorize
                         //.requestMatchers("/", "/images/**").permitAll()
-                        .anyRequest().permitAll()
+
+                        // Autoriser les opérations de CRUD sur l'entité Vehicule
+                        .requestMatchers(HttpMethod.GET, "/vehicule/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/vehicule/**").hasAnyRole("ADMIN","EMPLOYE")
+                        .requestMatchers(HttpMethod.PUT, "/vehicule/**").hasAnyRole("ADMIN","EMPLOYE")
+                        .requestMatchers(HttpMethod.DELETE, "/vehicule/**").hasAnyRole("ADMIN")
+
+                        // Autoriser les opérations de CRUD sur l'entité Client
+                        .requestMatchers(HttpMethod.GET, "/client/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/client/**").hasAnyRole("ADMIN","EMPLOYE")
+                        .requestMatchers(HttpMethod.PUT, "/client/**").hasAnyRole("ADMIN","EMPLOYE")
+                        .requestMatchers(HttpMethod.DELETE, "/client/**").hasAnyRole("ADMIN")
+
+                        // Autoriser les opérations de CRUD sur l'entité RendezVous
+                        .requestMatchers(HttpMethod.GET, "/rendez-vous/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/rendez-vous/**").hasAnyRole("ADMIN","EMPLOYE")
+                        .requestMatchers(HttpMethod.PUT, "/rendez-vous/**").hasAnyRole("ADMIN","EMPLOYE")
+                        .requestMatchers(HttpMethod.DELETE, "/rendez-vous/**").hasAnyRole("ADMIN")
+
+                        // Autoriser les opérations de CRUD sur l'entité Technicien
+                        .requestMatchers(HttpMethod.GET, "/technicien/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/technicien/**").hasAnyRole("ADMIN","EMPLOYE")
+                        .requestMatchers(HttpMethod.PUT, "/technicien/**").hasAnyRole("ADMIN","EMPLOYE")
+                        .requestMatchers(HttpMethod.DELETE, "/technicien/**").hasAnyRole("ADMIN")
+
+                        // Ne pas autoriser les autres requêtes
+                        .anyRequest().authenticated()
                 )
                 // Autoriser les requêtes POST/PUT/DELETE
                 .csrf(AbstractHttpConfigurer::disable)
@@ -58,4 +88,11 @@ public class SecurityConfig {
             }
         };
     }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
 }
