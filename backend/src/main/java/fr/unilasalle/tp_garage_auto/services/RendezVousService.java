@@ -46,16 +46,6 @@ public class RendezVousService {
         return rendezVous;
     }
 
-    /**
-     * Récupérer les rendezVous d'un client par son id
-     * @param client_id
-     * @return
-     */
-/*
-    public Set<RendezVous> getRendezVousByClientId(Long client_id) {
-        return rendezVousRepository.findByClientId(client_id);
-    }
-*/
 
     /**
      * Récupérer les rendezVous d'un technicien par son id
@@ -92,6 +82,19 @@ public class RendezVousService {
         Set<RendezVous> rendezVous = rendezVousRepository.findByDate(date);
         if (rendezVous == null) {
             throw new NotFoundException("Impossible de trouver un rendez-vous avec la date " + date + ".",new NullPointerException());
+        }
+        return rendezVous;
+    }
+
+    /**
+     * Récupérer les rendezVous par id du client
+     * @param clientId
+     * @return Set<RendezVous>
+     */
+    public Set<RendezVous> getRendezVousByClientId(Long clientId) {
+        Set<RendezVous> rendezVous = rendezVousRepository.findByClientId(clientId);
+        if (rendezVous == null) {
+            throw new NotFoundException("Impossible de trouver un rendez-vous avec le client id " + clientId + ".",new NullPointerException());
         }
         return rendezVous;
     }

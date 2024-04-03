@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/rendez-vous")
+@RequestMapping("api/rendez-vous")
 @RequiredArgsConstructor
 @Slf4j
 public class RendezVousController {
@@ -26,13 +26,15 @@ public class RendezVousController {
      * @param typeService : type de service
      * @param vehicule_id : id du véhicule
      * @param technicien_id : id du technicien
+     * @param clientId : id du client
      * @return
      */
     @GetMapping
     public ResponseEntity<?> getRendezVous(@RequestParam(required = false) Optional<String> date,
                                            @RequestParam(required = false) Optional<String> typeService,
                                            @RequestParam(required = false) Optional<Long> vehicule_id,
-                                           @RequestParam(required = false) Optional<Long> technicien_id) throws ServiceException {
+                                           @RequestParam(required = false) Optional<Long> technicien_id,
+                                           @RequestParam(required = false) Optional<Long> clientId) throws ServiceException {
 
         if (date.isPresent()) {
             return getRendezVousByDate(date.get());
@@ -42,6 +44,8 @@ public class RendezVousController {
             return getRendezVousByVehiculeId(vehicule_id.get());
         } else if (technicien_id.isPresent()) {
             return getRendezVousByTechnicienId(technicien_id.get());
+        } else if (clientId.isPresent()) {
+            return getRendezVousByClientId(clientId.get());
         } else {
             log.info("Récupération de tous les rendez-vous ...");
             Set<RendezVous> rendezVous = this.rendezVousService.getAllRendezVous();
@@ -63,21 +67,6 @@ public class RendezVousController {
         return new ResponseEntity<>(rendezVous, HttpStatus.OK);
 
     }
-
-    /**
-     * Méthode GET pour récupérer les rendez-vous par client_id
-     * @param client_id
-     * @return
-     */
-    /*
-    @GetMapping
-    public ResponseEntity<Set<RendezVous>> getRendezVousByClientId(@RequestParam Long client_id) {
-        log.info("Récupération des rendez-vous du client avec l'id " + client_id);
-        Set<RendezVous> rendezVous = this.rendezVousService.getRendezVousByClientId(client_id);
-        log.info("Rendez-vous récupérés avec succès : \n\t" + rendezVous);
-        return new ResponseEntity<>(rendezVous, HttpStatus.OK);
-    }
-     */
 
     /**
      * Méthode GET pour récupérer les rendez-vous par technicien_id
@@ -123,6 +112,18 @@ public class RendezVousController {
     public ResponseEntity<Set<RendezVous>> getRendezVousByTypeService(String typeService) {
         log.info("Récupération des rendez-vous du type de service " + typeService);
         Set<RendezVous> rendezVous = this.rendezVousService.getRendezVousByTypeService(typeService);
+        log.info("Rendez-vous récupérés avec succès : \n\t" + rendezVous);
+        return new ResponseEntity<>(rendezVous, HttpStatus.OK);
+    }
+
+    /**
+     * Récupérer les rendez-vous par client_id
+     * @param clientId
+     * @return
+     */
+    public ResponseEntity<Set<RendezVous>> getRendezVousByClientId(Long clientId) {
+        log.info("Récupération des rendez-vous du client avec l'id " + clientId);
+        Set<RendezVous> rendezVous = this.rendezVousService.getRendezVousByClientId(clientId);
         log.info("Rendez-vous récupérés avec succès : \n\t" + rendezVous);
         return new ResponseEntity<>(rendezVous, HttpStatus.OK);
     }

@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/technicien")
+@RequestMapping("api/technicien")
 @RequiredArgsConstructor
 @Slf4j
 public class TechnicienController {
@@ -34,11 +34,14 @@ public class TechnicienController {
      */
     @GetMapping
     public ResponseEntity<?> getTechnicien(@RequestParam(required = false) Optional<String> nom,
-                                           @RequestParam(required = false) Optional<String> prenom) throws ServiceException {
+                                           @RequestParam(required = false) Optional<String> prenom,
+                                           @RequestParam(required = false) Optional<Long> rendezVousId) throws ServiceException {
         if (nom.isPresent()) {
             return getTechnicienByNom(nom.get());
         } else if (prenom.isPresent()) {
             return getTechnicienByPrenom(prenom.get());
+        } else if (rendezVousId.isPresent()) {
+            return getTechnicienByRendezVousId(rendezVousId.get());
         } else {
             log.info("Récupération de tous les techniciens ...");
             Set<Technicien> technicien = this.technicienService.getAllTechniciens();
@@ -81,6 +84,18 @@ public class TechnicienController {
     public ResponseEntity<Set<Technicien>> getTechnicienByPrenom(String prenom) {
         log.info("Récupération du technicien avec le prenom " + prenom);
         Set<Technicien> technicien = this.technicienService.getTechnicienByPrenom(prenom);
+        log.info("Technicien récupéré avec succès : \n\t" + technicien);
+        return new ResponseEntity<>(technicien, HttpStatus.OK);
+    }
+
+    /**
+     * Méthode GET pour récupérer les techniciens par rendezVousId
+     * @param rendezVousId
+     * @return
+     */
+    public ResponseEntity<Technicien> getTechnicienByRendezVousId(Long rendezVousId) {
+        log.info("Récupération du technicien avec le rendezVousId " + rendezVousId);
+        Technicien technicien = this.technicienService.getTechnicienByRendezVousId(rendezVousId);
         log.info("Technicien récupéré avec succès : \n\t" + technicien);
         return new ResponseEntity<>(technicien, HttpStatus.OK);
     }

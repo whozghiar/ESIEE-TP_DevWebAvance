@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/client")
+@RequestMapping("api/client")
 @RequiredArgsConstructor
 @Slf4j
 public class ClientController {
