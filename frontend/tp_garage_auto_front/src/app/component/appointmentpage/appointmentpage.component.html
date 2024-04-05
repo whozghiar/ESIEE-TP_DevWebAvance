@@ -1,0 +1,50 @@
+<div class="flex flex-col pt-20">
+  <!-- En-tête du Calendrier : Mois et Année -->
+  <div class="text-center flex justify-center space-x-4 my-5">
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      (click)="prevMonth()"
+    >
+      Previous Month
+    </button>
+    <h1 class="text-2xl font-bold">{{ currentMonth }} / {{ currentYear }}</h1>
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      (click)="nextMonth()"
+    >
+      Next Month
+    </button>
+  </div>
+
+  <!-- En-tête du Calendrier : Jours de la semaine -->
+  <div class="grid text-center grid-cols-7">
+    <div class="border rounded-t">Dimanche</div>
+    <div class="border rounded-t">Lundi</div>
+    <div class="border rounded-t">Mardi</div>
+    <div class="border rounded-t">Mercredi</div>
+    <div class="border rounded-t">Jeudi</div>
+    <div class="border rounded-t">Vendredi</div>
+    <div class="border rounded-t">Samedi</div>
+  </div>
+
+  <!-- Contenu du Calendrier : Les jours -->
+  <div class="grid grid-cols-7 border-t border-gray-200">
+    <!-- Génération des jours -->
+    <div
+      *ngFor="let day of days; let i = index"
+      class="border-r border-b border-gray-200"
+    >
+      <div class="p-2 text-right">{{ day.date }}</div>
+      <div class="p-2">
+        <!-- Ici, listez les rendez-vous pour le jour concerné -->
+        <div
+          *ngFor="let appointment of day.appointments"
+          class="bg-blue-100 rounded-lg p-1 my-1"
+        >
+          <div>{{ appointment.time }}</div>
+          <div>{{ appointment.clientName }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
