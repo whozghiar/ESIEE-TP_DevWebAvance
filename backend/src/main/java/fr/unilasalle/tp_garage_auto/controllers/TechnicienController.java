@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class TechnicienController {
      * @return
      */
     @GetMapping
+    @PreAuthorize("hasAnyRole('client_admin','client_employe')")
     public ResponseEntity<?> getTechnicien(@RequestParam(required = false) Optional<String> nom,
                                            @RequestParam(required = false) Optional<String> prenom,
                                            @RequestParam(required = false) Optional<Long> rendezVousId) throws ServiceException {
@@ -57,6 +59,7 @@ public class TechnicienController {
      * @return
      */
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('client_admin','client_employe')")
     public ResponseEntity<Technicien> getTechnicienById(@PathVariable Long id) {
         log.info("Récupération du technicien avec l'id " + id);
         Technicien technicien = this.technicienService.getTechnicienById(id);
@@ -106,6 +109,7 @@ public class TechnicienController {
      * @return
      */
     @PostMapping
+    @PreAuthorize("hasAnyRole('client_admin','client_employe')")
     public ResponseEntity<Technicien> postTechnicien(@RequestBody Technicien technicien) throws ServiceException {
         log.info("Création d'un technicien ...");
         Technicien savedObjet = this.technicienService.createTechnicien(technicien);

@@ -51,11 +51,18 @@
             <version>3.2.4</version>
         </dependency>
         <!-- OKTA -->
-        <!-- https://mvnrepository.com/artifact/com.okta.spring/okta-spring-boot-starter -->
+        <!-- https://mvnrepository.com/artifact/com.okta.spring/okta-spring-boot-starter
         <dependency>
             <groupId>com.okta.spring</groupId>
             <artifactId>okta-spring-boot-starter</artifactId>
             <version>3.0.6</version>
+        </dependency>
+        -->
+        <!-- https://mvnrepository.com/artifact/org.keycloak/keycloak-spring-boot-starter -->
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-core</artifactId>
+            <version>24.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

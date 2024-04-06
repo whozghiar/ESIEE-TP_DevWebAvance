@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import fr.unilasalle.tp_garage_auto.services.VehiculeService;
@@ -37,6 +38,7 @@ public class VehiculeController {
      * @return
      */
     @GetMapping
+    @PreAuthorize("hasAnyRole('client_admin','client_employe')")
     public ResponseEntity<?> getVehicule(@RequestParam(required = false) Optional<String> client_id,
                                          @RequestParam(required = false) Optional<String> marque,
                                          @RequestParam(required = false) Optional<String> modele,
@@ -66,6 +68,7 @@ public class VehiculeController {
      * @return
      */
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('client_admin','client_employe')")
     public ResponseEntity<Vehicule> getVehiculeById(@PathVariable Long id) {
         log.info("Récupération du vehicule avec l'id " + id);
         Vehicule vehicule = this.vehiculeService.getVehiculeById(id);
@@ -141,6 +144,7 @@ public class VehiculeController {
      * @return
      */
     @PostMapping
+    @PreAuthorize("hasAnyRole('client_admin','client_employe')")
     public ResponseEntity<Vehicule> postVehicule(@RequestBody Vehicule vehicule) throws ServiceException {
         log.info("Création d'un vehicule ...");
         Vehicule savedObjet = this.vehiculeService.createVehicule(vehicule);

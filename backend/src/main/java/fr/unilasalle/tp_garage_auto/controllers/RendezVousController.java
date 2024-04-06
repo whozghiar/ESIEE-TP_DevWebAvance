@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -30,6 +31,7 @@ public class RendezVousController {
      * @return
      */
     @GetMapping
+    @PreAuthorize("hasAnyRole('client_admin','client_employe')")
     public ResponseEntity<?> getRendezVous(@RequestParam(required = false) Optional<String> date,
                                            @RequestParam(required = false) Optional<String> typeService,
                                            @RequestParam(required = false) Optional<Long> vehicule_id,
@@ -60,6 +62,7 @@ public class RendezVousController {
      * @return
      */
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('client_admin','client_employe')")
     public ResponseEntity<RendezVous> getRendezVousById(@PathVariable Long id) {
         log.info("Récupération du rendez-vous avec l'id " + id);
         RendezVous rendezVous = this.rendezVousService.getRendezVousById(id);
@@ -134,6 +137,7 @@ public class RendezVousController {
      * @return
      */
     @PostMapping
+    @PreAuthorize("hasAnyRole('client_admin','client_employe')")
     public ResponseEntity<RendezVous> postRendezVous(@RequestBody RendezVous rendezVous) throws ServiceException {
         log.info("Création d'un rendez-vous ...");
         RendezVous savedObjet = this.rendezVousService.createRendezVous(rendezVous);

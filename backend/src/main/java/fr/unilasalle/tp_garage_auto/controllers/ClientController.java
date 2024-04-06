@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import fr.unilasalle.tp_garage_auto.services.ClientService;
@@ -31,6 +32,7 @@ public class ClientController {
      * @return
      */
     @GetMapping
+    @PreAuthorize("hasAnyRole('client_admin','client_employe')")
     public ResponseEntity<?> getClients(@RequestParam(required = false) Optional<String> nom,
                                         @RequestParam(required = false) Optional<String> prenom,
                                         @RequestParam(required = false) Optional<String> email,
@@ -57,6 +59,7 @@ public class ClientController {
      * @return
      */
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('client_admin','client_employe')")
     public ResponseEntity<Client> getClientById(@PathVariable Long id) {
         log.info("Récupération du client avec l'id " + id);
         Client client = this.clientService.getClientById(id);
@@ -126,6 +129,7 @@ public class ClientController {
      * @return
      */
     @PostMapping
+    @PreAuthorize("hasAnyRole('client_admin','client_employe')")
     public ResponseEntity<Client> postClient(@RequestBody Client client) throws ServiceException {
 
         log.info("Création d'un client ...");
