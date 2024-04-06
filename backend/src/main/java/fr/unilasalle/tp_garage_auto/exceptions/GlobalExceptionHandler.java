@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.security.access.AccessDeniedException;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -54,6 +55,16 @@ public class GlobalExceptionHandler {
             log.error(body.getType() + " : \n\t" + msg);
         });
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    // Gestionnaire pour AccessDeniedException
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<API_ERRORS> handleAccessDeniedException(AccessDeniedException e, WebRequest request) {
+        API_ERRORS body = new API_ERRORS(LocalDateTime.now(), HttpStatus.FORBIDDEN, "Accès refusé", Collections.singletonList(e.getMessage()));
+        body.getErrors_msg().forEach(msg ->{
+            log.error(body.getType() + " : \n\t" + msg);
+        });
+        return new ResponseEntity<>(body, HttpStatus.FORBIDDEN);
     }
 
     // Gestionnaire de RuntimeException

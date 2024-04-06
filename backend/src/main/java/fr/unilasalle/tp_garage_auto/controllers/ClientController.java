@@ -32,7 +32,6 @@ public class ClientController {
      * @return
      */
     @GetMapping
-    @PreAuthorize("hasAnyRole('client_admin','client_employe')")
     public ResponseEntity<?> getClients(@RequestParam(required = false) Optional<String> nom,
                                         @RequestParam(required = false) Optional<String> prenom,
                                         @RequestParam(required = false) Optional<String> email,
@@ -59,7 +58,6 @@ public class ClientController {
      * @return
      */
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('client_admin','client_employe')")
     public ResponseEntity<Client> getClientById(@PathVariable Long id) {
         log.info("Récupération du client avec l'id " + id);
         Client client = this.clientService.getClientById(id);

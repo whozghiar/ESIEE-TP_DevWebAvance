@@ -25,11 +25,13 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
             = new JwtGrantedAuthoritiesConverter();
 
 
-    @Value("${jwt.auth.converter.resourecID}")
+    @Value("${jwt.auth.converter.principleAttribute}")
     private String principleAttribute;
 
-    @Value("${jwt.auth.converter.principleAttribute")
+
+    @Value("${jwt.auth.converter.resourecID}")
     private String resourceIdentifier;
+
     @Override
     public AbstractAuthenticationToken convert(@NonNull Jwt source) {
         Collection<GrantedAuthority> authorities = Stream.concat(
