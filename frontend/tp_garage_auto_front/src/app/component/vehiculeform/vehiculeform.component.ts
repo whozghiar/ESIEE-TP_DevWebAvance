@@ -4,8 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VehicleService } from '../../services/vehicle.service';
 import { ClientService } from '../../services/client.service';
 import { TechnicianService } from '../../services/technician.service';
-import { ClientComponent } from '../client/client.component';
-import { TechnicianComponent } from '../technician/technician.component';
+import { AppointmentService } from '../../services/appointment.service';
 
 @Component({
   selector: 'app-vehiculeform',
@@ -17,16 +16,35 @@ import { TechnicianComponent } from '../technician/technician.component';
 export class VehiculeformComponent {
   vehicle: any = {
     id: Number,
-    brand: String,
-    model: String,
-    plateNumber: String,
-    year: String,
-    technician: TechnicianComponent,
-    client: ClientComponent,
+    brand: '',
+    model: '',
+    plateNumber: '',
+    year: '',
+    appointmentsVehicle: [],
+    clientVehicle: '',
   };
 
+  clients: any = [];
+  appointments: any = [];
+
+  constructor(
+    protected vehicleService: VehicleService,
+    protected clientService: ClientService,
+    protected appointmentService: AppointmentService,
+  ) {}
+
+  ngOnInit() {
+    this.vehicle.appointmentsVehicle =
+      this.appointmentService.getAllAppointments();
+    this.vehicle.clients = this.clientService.getAllClients();
+  }
+
+  handleTrigger(id: number) {
+    this.vehicleService.removeVehicle(id);
+  }
+
   //temporaire
-  technicians: any = [
+  /*technicians: any = [
     { id: 1, name: 'John', surname: 'Padawan' },
     { id: 2, name: 'Lucien', surname: 'Bobby' },
     { id: 3, name: 'Theo', surname: 'Lomege' },
@@ -35,23 +53,5 @@ export class VehiculeformComponent {
   clients: any = [
     { id: 1, name: 'John', surname: 'Doe' },
     { id: 2, name: 'Jane', surname: 'Doe' },
-  ];
-
-  /*technicians: any = [];
-  clients: any = [];*/
-
-  constructor(
-    protected vehicleService: VehicleService,
-    protected clientService: ClientService,
-    protected technicianService: TechnicianService,
-  ) {}
-
-  ngOnInit() {
-    this.technicians = this.technicianService.getAllTechnicians();
-    this.clients = this.clientService.getAllClients();
-  }
-
-  handleTrigger(id: number) {
-    this.vehicleService.removeVehicle(id);
-  }
+  ];*/
 }
