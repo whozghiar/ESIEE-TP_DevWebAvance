@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ecb7285c-4883-4b62-a64f-fdcba187b7b2" name="Changes" comment="" />
+    <list default="true" id="ecb7285c-4883-4b62-a64f-fdcba187b7b2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../frontend/tp_garage_auto_front/src/app/auth/auth.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/tp_garage_auto_front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/tp_garage_auto_front/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/tp_garage_auto_front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/tp_garage_auto_front/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/tp_garage_auto_front/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/tp_garage_auto_front/src/app/app.config.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

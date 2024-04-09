@@ -1,20 +1,22 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientService } from '../../services/client.service';
+import { NgForOf } from '@angular/common';
 
 @Component({
   selector: 'app-clientform',
   standalone: true,
-  imports: [FormsModule],
+  imports: [NgForOf, ReactiveFormsModule, FormsModule],
   templateUrl: './clientform.component.html',
   styleUrl: './clientform.component.css',
 })
 export class ClientformComponent {
   client = {
-    id: 1,
-    name: 'John',
-    surname: 'Doe',
-    email: 'john.doe@gmail.com',
+    name: '',
+    surname: '',
+    phone: '',
+    email: '',
+    vehicules: [],
   };
 
   constructor(protected clientService: ClientService) {}
