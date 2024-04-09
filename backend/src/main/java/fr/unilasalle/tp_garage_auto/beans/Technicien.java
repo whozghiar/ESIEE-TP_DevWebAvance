@@ -41,7 +41,6 @@ public class Technicien {
     private String prenom;
 
 
-    // Relation avec RendezVous : un technicien peut avoir plusieurs rendez-vous
     @OneToMany(mappedBy = "technicien", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference("technicien-rendezVous")
     private Set<RendezVous> rendezVous;

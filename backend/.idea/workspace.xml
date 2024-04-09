@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ecb7285c-4883-4b62-a64f-fdcba187b7b2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/RendezVousController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/RendezVousController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/TechnicienController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/TechnicienController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/VehiculeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/VehiculeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/websecurity/SecurityRoles.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Technicien.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Technicien.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/AccueilController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/AccueilController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/websecurity/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/websecurity/SecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +187,7 @@
       <workItem from="1711798822710" duration="43853000" />
       <workItem from="1712419072194" duration="1101000" />
       <workItem from="1712420994667" duration="7954000" />
-      <workItem from="1712567234797" duration="5533000" />
+      <workItem from="1712567234797" duration="8379000" />
     </task>
     <servers />
   </component>
