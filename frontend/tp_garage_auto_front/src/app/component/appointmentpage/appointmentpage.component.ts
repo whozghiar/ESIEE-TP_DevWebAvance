@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForOf } from '@angular/common';
 import { AppointmentService } from '../../services/appointment.service';
+import { AppointmentformComponent } from '../appointmentform/appointmentform.component';
 
 interface Appointment {
   time: string;
@@ -15,7 +16,7 @@ interface Day {
 @Component({
   selector: 'app-appointmentpage',
   standalone: true,
-  imports: [NgForOf],
+  imports: [NgForOf, AppointmentformComponent],
   templateUrl: './appointmentpage.component.html',
   styleUrl: './appointmentpage.component.css',
 })

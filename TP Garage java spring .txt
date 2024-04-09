@@ -16,3 +16,19 @@ modif tailwind.config.js
 modif styles.css
 ng serve --open
 
+
+front :
+garage auto lien vers acceuil
+
+onglet navbar 
+-RDV 
+	-ajouter un RDV
+	-voir mes rdv
+véhicule
+	-en réparation
+	-réparés
+technicien (la gueule des tech)
+à propos
+
+user
+	

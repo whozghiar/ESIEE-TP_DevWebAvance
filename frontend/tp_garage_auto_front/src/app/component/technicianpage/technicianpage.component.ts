@@ -2,11 +2,17 @@ import { Component } from '@angular/core';
 import { NgForOf } from '@angular/common';
 import { TechnicianComponent } from '../technician/technician.component';
 import { TechnicianformComponent } from '../technicianform/technicianform.component';
+import { AppointmentformComponent } from '../appointmentform/appointmentform.component';
 
 @Component({
   selector: 'app-technicianpage',
   standalone: true,
-  imports: [NgForOf, TechnicianComponent, TechnicianformComponent],
+  imports: [
+    NgForOf,
+    TechnicianComponent,
+    TechnicianformComponent,
+    AppointmentformComponent,
+  ],
   templateUrl: './technicianpage.component.html',
   styleUrl: './technicianpage.component.css',
 })

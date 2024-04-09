@@ -3,12 +3,13 @@ import { VehiculepageComponent } from './component/vehiculepage/vehiculepage.com
 import { TechnicianpageComponent } from './component/technicianpage/technicianpage.component';
 import { VehiculeformComponent } from './component/vehiculeform/vehiculeform.component';
 import { AppointmentpageComponent } from './component/appointmentpage/appointmentpage.component';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
 
 export const routes: Routes = [
   { path: 'techniciens', component: TechnicianpageComponent },
   { path: 'vehicules', component: VehiculepageComponent },
   { path: 'appointments', component: AppointmentpageComponent },
   { path: 'vehicules/:id', component: VehiculeformComponent },
-  { path: 'dashboard', component: VehiculeformComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: '**', redirectTo: 'dashboard' },
 ];

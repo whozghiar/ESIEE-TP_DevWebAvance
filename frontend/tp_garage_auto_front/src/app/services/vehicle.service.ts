@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VehicleService {
   private vehicleArray: any[] = [];
@@ -17,7 +17,7 @@ export class VehicleService {
     });*/
   }
 
-  getAllVehicle() {
+  getAllVehicles() {
     return this.vehicleArray;
   }
 
@@ -33,17 +33,14 @@ export class VehicleService {
     })*/
   }
 
-
-
   removeVehicle(id: number) {
     //this.httpClient.delete("/api/vehicles/" + id).subscribe(() => {
-      //this.refreshVehicles();
+    //this.refreshVehicles();
     //})
   }
 
   getRepairingVehiclesCount() {
-    return this.vehicleArray.filter((vehicle) => vehicle.status === false).length;
+    return this.vehicleArray.filter((vehicle) => vehicle.status === false)
+      .length;
   }
-
 }
-

@@ -1,51 +1,66 @@
-<div class="bg-white py-24 sm:py-32">
-  <div
-    class="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3"
-  >
-    <div class="max-w-2xl">
-      <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-        Listes des Techniciens
-      </h2>
-      <p class="mt-6 text-lg leading-8 text-gray-600">
-        Libero fames augue nisl porttitor nisi, quis. Id ac elit odio vitae
-        elementum enim vitae ullamcorper suspendisse.
-      </p>
-    </div>
-    <ul
-      role="list"
-      class="grid gap-x-4 gap-y-4 sm:grid-cols-2 sm:gap-y-4 xl:col-span-2"
-    >
-      <div *ngFor="let technician of technicians">
-        <!--<app-technician></app-technician>-->
-        <li>
-          <div
-            class="flex items-center gap-x-6 border-2 border-gray-400 rounded-lg p-4 shadow-md hover:shadow-lg transition duration-300 ease-in-out cursor-pointer bg-white hover:bg-gray-50 hover:border-gray-200"
-          >
-            <img
-              class="h-16 w-16 rounded-full"
-              [src]="technician.avatar"
-              alt="photo du technicien"
-            />
-            <div>
-              <h3
-                class="text-base font-semibold leading-7 tracking-tight text-gray-900"
-              >
-                {{ technician.name }} {{ technician.surname }}
-              </h3>
-              <p class="text-sm font-semibold leading-6 text-indigo-600">
-                {{ technician.availability ? "Disponible" : "Non disponible" }}
-              </p>
-            </div>
-          </div>
-        </li>
+<div class="container mx-auto px-4 pt-20">
+  <div class="flex flex-wrap justify-center">
+    <!--liste des techniciens-->
+    <div class="w-full md:w-8/12 lg:w-6/12 xl:w-4/12 px-4">
+      <div class="max-w-2xl my-5">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          Listes des Techniciens
+        </h2>
       </div>
+      <ul
+        role="list"
+        class="grid gap-x-4 gap-y-4 sm:grid-cols-2 sm:gap-y-4 xl:col-span-2"
+      >
+        <div
+          *ngFor="let technician of technicians"
+          class="flex-grow w-full h-full"
+        >
+          <!--<app-technician></app-technician>-->
+          <li>
+            <div
+              class="flex items-center gap-x-4 border-2 border-gray-400 rounded-lg p-3 h-full shadow-md hover:shadow-lg transition duration-300 ease-in-out cursor-pointer bg-white hover:bg-gray-50 hover:border-gray-200"
+            >
+              <img
+                class="h-16 w-16 rounded-full"
+                [src]="technician.avatar"
+                alt="photo du technicien"
+              />
+              <div>
+                <h3
+                  class="text-base font-semibold leading-7 tracking-tight text-gray-900"
+                >
+                  {{ technician.name }} {{ technician.surname }}
+                </h3>
+                <p class="text-sm font-semibold leading-6 text-indigo-600">
+                  {{
+                    technician.availability ? "Disponible" : "Non disponible"
+                  }}
+                </p>
+              </div>
+            </div>
+          </li>
+        </div>
 
-      <!-- More people -->
-    </ul>
-  </div>
+        <!-- More people -->
+      </ul>
+    </div>
 
-  <!--formulaire d'ajout du technicien-->
-  <div>
-    <app-technicianform></app-technicianform>
+    <!--formulaire d'ajout du technicien-->
+    <div class="w-full md:w-8/12 lg:w-6/12 xl:w-4/12 px-4">
+      <div
+        class="relative flex flex-col min-w-0 break-words bg-gray-100 w-full mb-6 shadow-xl rounded-lg transition duration-300 ease-in-out hover:shadow-2xl"
+      >
+        <div class="flex-auto p-5 lg:p-10 animate-fade-in-down">
+          <h4 class="text-2xl font-semibold text-gray-800">
+            Créer un nouveau rendez-vous
+          </h4>
+          <p class="leading-relaxed mt-1 mb-4 text-gray-600">
+            Remplissez le formulaire ci-dessous pour créer un nouveau
+            rendez-vous.
+          </p>
+          <app-technicianform></app-technicianform>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
