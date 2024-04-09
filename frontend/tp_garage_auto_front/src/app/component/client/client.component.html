@@ -1,0 +1,57 @@
+<div class="container mx-auto px-4 pt-20">
+  <div class="flex flex-wrap justify-center">
+    <!-- Client list -->
+    <div class="w-full md:w-8/12 lg:w-6/12 xl:w-4/12 px-4">
+      <div class="max-w-2xl my-5">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          Client List
+        </h2>
+      </div>
+      <ul
+        role="list"
+        class="grid gap-x-4 gap-y-4 sm:grid-cols-2 sm:gap-y-4 xl:col-span-2"
+      >
+        <div *ngFor="let client of clients" class="flex-grow w-full h-full">
+          <li>
+            <div
+              class="flex items-center gap-x-4 border-2 border-gray-400 rounded-lg p-3 h-full shadow-md hover:shadow-lg transition duration-300 ease-in-out cursor-pointer bg-white hover:bg-gray-50 hover:border-gray-200"
+            >
+              <img
+                class="h-16 w-16 rounded-full"
+                [src]="client.name"
+                alt="client photo"
+              />
+              <div>
+                <h3
+                  class="text-base font-semibold leading-7 tracking-tight text-gray-900"
+                >
+                  {{ client.name }} {{ client.surname }}
+                </h3>
+                <p class="text-sm font-semibold leading-6 text-indigo-600">
+                  {{ client.email }}
+                </p>
+              </div>
+            </div>
+          </li>
+        </div>
+      </ul>
+    </div>
+
+    <!-- Client form -->
+    <div class="w-full md:w-8/12 lg:w-6/12 xl:w-4/12 px-4">
+      <div
+        class="relative flex flex-col min-w-0 break-words bg-gray-100 w-full mb-6 shadow-xl rounded-lg transition duration-300 ease-in-out hover:shadow-2xl"
+      >
+        <div class="flex-auto p-5 lg:p-10 animate-fade-in-down">
+          <h4 class="text-2xl font-semibold text-gray-800">
+            Create a new client
+          </h4>
+          <p class="leading-relaxed mt-1 mb-4 text-gray-600">
+            Fill in the form below to create a new client.
+          </p>
+          <app-clientform></app-clientform>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
