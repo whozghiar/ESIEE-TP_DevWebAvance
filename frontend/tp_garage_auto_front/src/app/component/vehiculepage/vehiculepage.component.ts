@@ -3,7 +3,7 @@ import { TechnicianComponent } from '../technician/technician.component';
 import { FormsModule } from '@angular/forms';
 import { VehicleService } from '../../services/vehicle.service';
 import { VehiculeComponent } from '../vehicule/vehicule.component';
-import {NgClass, NgForOf, NgStyle} from '@angular/common';
+import { NgClass, NgForOf, NgStyle } from '@angular/common';
 import { TechnicianpageComponent } from '../technicianpage/technicianpage.component';
 
 @Component({
@@ -21,38 +21,11 @@ import { TechnicianpageComponent } from '../technicianpage/technicianpage.compon
   styleUrl: './vehiculepage.component.css',
 })
 export class VehiculepageComponent {
-  vehicles: any = [{
-    id: 0,
-    technician: "jeo",//TechnicianComponent,
-    client: "Jack",
-    issue: "Motor broken",
-    model: "Peugeot 206",
-    status: false
-  },{
-    id: 1,
-    technician: "jo",//TechnicianComponent,
-    client: "Benito",
-    issue: "Motor broken",
-    model: "Peugeot 208",
-    status: true,
-  },{
-    id: 2,
-    technician: "jo",//TechnicianComponent,
-    client: "Benito",
-    issue: "Motor broken",
-    model: "Peugeot 208",
-    status: true,
-  },];
+  vehicles: any = [];
 
-
-  //temporaire
-  technicians: any = [
-    { id: 1, name: 'John', surname: 'Padawan' },
-    { id: 2, name: 'Lucien', surname: 'Bobby' },
-    { id: 3, name: 'Theo', surname: 'Lomege' },
-  ];
-
-  constructor(protected vehicleService: VehicleService) {}
+  constructor(protected vehicleService: VehicleService) {
+    this.vehicles = this.vehicleService.getAllVehicles();
+  }
 
   handleTrigger(id: number) {
     this.vehicleService.removeVehicle(id);
