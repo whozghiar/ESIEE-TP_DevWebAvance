@@ -2,14 +2,19 @@
   <div class="flex flex-col gap-3">
     <input
       class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4"
+      [(ngModel)]="vehicle.brand"
+      placeholder="Modèle du Véhicule..."
+    />
+    <input
+      class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4"
       [(ngModel)]="vehicle.model"
       placeholder="Modèle du Véhicule..."
     />
 
     <input
       class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4"
-      [(ngModel)]="vehicle.clientVehicle"
-      placeholder="Nom Client..."
+      [(ngModel)]="vehicle.plateNumber"
+      placeholder="Immatriculation..."
     />
 
     <select
@@ -19,6 +24,16 @@
       <option value="" disabled>Sélectionner un technicien...</option>
       <option *ngFor="let technician of technicians" [value]="technician">
         {{ technician.name }} {{ technician.surname }}
+      </option>
+    </select>
+
+    <select
+      class="mt-1 w-full border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4"
+      [(ngModel)]="vehicle.client"
+    >
+      <option value="" disabled>Sélectionner un technicien...</option>
+      <option *ngFor="let client of clients" [value]="client">
+        {{ client.name }} {{ client.surname }}
       </option>
     </select>
 

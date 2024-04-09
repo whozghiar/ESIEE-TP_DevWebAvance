@@ -4,34 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a00958b1-4435-4ecc-80fc-69d2ba5cfe2d" name="Changes" comment="component service page appointment">
-      <change afterPath="$PROJECT_DIR$/../.idea/TP-Note.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/dashboard/dashboard.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/dashboard/dashboard.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/dashboard/dashboard.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/dashboard/dashboard.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TP Garage java spring .txt" beforeDir="false" afterPath="$PROJECT_DIR$/../TP Garage java spring .txt" afterDir="false" />
+    <list default="true" id="a00958b1-4435-4ecc-80fc-69d2ba5cfe2d" name="Changes" comment="embellisement des component">
       <change beforePath="$PROJECT_DIR$/../backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/blobs/version" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/app.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/appointmentform/appointmentform.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/appointmentform/appointmentform.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/appointmentform/appointmentform.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/appointmentform/appointmentform.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/appointmentpage/appointmentpage.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/appointmentpage/appointmentpage.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/appointmentpage/appointmentpage.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/appointmentpage/appointmentpage.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/client/client.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/client/client.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/clientform/clientform.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/clientform/clientform.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/clientform/clientform.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/clientform/clientform.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/technicianform/technicianform.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/technicianform/technicianform.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/technicianpage/technicianpage.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/technicianpage/technicianpage.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/technicianpage/technicianpage.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/technicianpage/technicianpage.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/vehiculeform/vehiculeform.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/vehiculeform/vehiculeform.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/vehiculeform/vehiculeform.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/vehiculeform/vehiculeform.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/services/client.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/services/client.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/services/vehicle.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/services/vehicle.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,27 +51,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "JavaScript Debug.app.component.html.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "frontend",
-    "last_opened_file_path": "C:/Users/PC-HV13/Documents/ESIEE/DevWeb/TP-Note/backend",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\PC-HV13\\Documents\\ESIEE\\DevWeb\\TP-Note\\frontend\\tp_garage_auto_front\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "editor.preferences.appearance",
-    "ts.external.directory.path": "C:\\Users\\PC-HV13\\Documents\\ESIEE\\DevWeb\\TP-Note\\frontend\\tp_garage_auto_front\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;JavaScript Debug.app.component.html.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;frontend&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/PC-HV13/Documents/ESIEE/DevWeb/TP-Note/backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\PC-HV13\\Documents\\ESIEE\\DevWeb\\TP-Note\\frontend\\tp_garage_auto_front\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.appearance&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\PC-HV13\\Documents\\ESIEE\\DevWeb\\TP-Note\\frontend\\tp_garage_auto_front\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\PC-HV13\Documents\ESIEE\DevWeb\TP-Note\frontend\tp_garage_auto_front\images" />
@@ -125,6 +103,7 @@
       <workItem from="1712297877327" duration="9426000" />
       <workItem from="1712410251630" duration="8334000" />
       <workItem from="1712504384889" duration="8880000" />
+      <workItem from="1712643478376" duration="2958000" />
     </task>
     <task id="LOCAL-00001" summary="front fichiers">
       <option name="closed" value="true" />
@@ -166,7 +145,23 @@
       <option name="project" value="LOCAL" />
       <updated>1712308565949</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="embellisement des component">
+      <option name="closed" value="true" />
+      <created>1712644063716</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1712644063716</updated>
+    </task>
+    <task id="LOCAL-00007" summary="embellisement des component">
+      <option name="closed" value="true" />
+      <created>1712644129458</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1712644129458</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,6 +174,7 @@
     <MESSAGE value="component technician , correction navbar" />
     <MESSAGE value="component technician page et service technicien" />
     <MESSAGE value="component service page appointment" />
-    <option name="LAST_COMMIT_MESSAGE" value="component service page appointment" />
+    <MESSAGE value="embellisement des component" />
+    <option name="LAST_COMMIT_MESSAGE" value="embellisement des component" />
   </component>
 </project>

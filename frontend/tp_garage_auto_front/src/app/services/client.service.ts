@@ -13,9 +13,9 @@ export class ClientService {
 
   refreshClients() {
     // Uncomment the following line when your API endpoint is ready
-    // this.httpClient.get("/api/technician").subscribe((technicians: any) => {
-    //   this.technicianArray = technicians;
-    // });
+    this.httpClient.get('/api/client').subscribe((clients: any) => {
+      this.clientArray = clients;
+    });
   }
 
   getAllClients() {
