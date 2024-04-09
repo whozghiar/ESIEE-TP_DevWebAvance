@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ecb7285c-4883-4b62-a64f-fdcba187b7b2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Technicien.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/TechnicienController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/repositories/TechnicienRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/services/TechnicienService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/RendezVous.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/RendezVous.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Vehicule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Vehicule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/services/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/services/ClientService.java" afterDir="false" />
-    </list>
+    <list default="true" id="ecb7285c-4883-4b62-a64f-fdcba187b7b2" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,34 +21,119 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2eDTahp4rpc3gQVMTh2RrZbycCl" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.TpGarageAutoApplication.executor": "Run",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.ClientServiceTest.bidirectionalAssociationTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ClientTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RendezVousTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TechnicienTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VehiculeTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VehiculeTest.testAnneeValidRange.executor&quot;: &quot;Run&quot;,
+    &quot;OverrideImplement.generate.javadoc&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.TpGarageAutoApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;theo&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager">
+}</component>
+  <component name="RunManager" selected="Spring Boot.TpGarageAutoApplication">
+    <configuration name="RendezVousTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tp_garage_auto" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="BeansTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="BeansTests" />
+      <option name="MAIN_CLASS_NAME" value="BeansTests.RendezVousTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TechnicienTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tp_garage_auto" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="BeansTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="BeansTests" />
+      <option name="MAIN_CLASS_NAME" value="BeansTests.TechnicienTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VehiculeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tp_garage_auto" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="BeansTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="BeansTests" />
+      <option name="MAIN_CLASS_NAME" value="BeansTests.VehiculeTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VehiculeTest.testAnneeValidRange" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tp_garage_auto" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="BeansTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="BeansTests" />
+      <option name="MAIN_CLASS_NAME" value="BeansTests.VehiculeTest" />
+      <option name="METHOD_NAME" value="testAnneeValidRange" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TpGarageAutoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="tp_garage_auto" />
@@ -76,6 +151,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.TpGarageAutoApplication" />
+        <item itemvalue="JUnit.VehiculeTest" />
+        <item itemvalue="JUnit.VehiculeTest.testAnneeValidRange" />
+        <item itemvalue="JUnit.TechnicienTest" />
+        <item itemvalue="JUnit.RendezVousTest" />
       </list>
     </recent_temporary>
   </component>
@@ -94,11 +173,38 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1711438216707</updated>
-      <workItem from="1711438218142" duration="5067000" />
+      <workItem from="1711438218142" duration="9283000" />
+      <workItem from="1711525899083" duration="692000" />
+      <workItem from="1711536192388" duration="12352000" />
+      <workItem from="1711631700266" duration="8799000" />
+      <workItem from="1711701521791" duration="6899000" />
+      <workItem from="1711798762227" duration="9000" />
+      <workItem from="1711798822710" duration="43853000" />
+      <workItem from="1712419072194" duration="1101000" />
+      <workItem from="1712420994667" duration="7954000" />
+      <workItem from="1712567234797" duration="8756000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="jwt.this$0" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
