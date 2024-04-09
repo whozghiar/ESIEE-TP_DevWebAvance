@@ -38,7 +38,7 @@ public class VehiculeController {
      * @return
      */
     @GetMapping
-    @PreAuthorize("hasAnyRole('client_admin','client_employe')")
+    @PreAuthorize("hasAnyRole('admin','technicien','client')")
     public ResponseEntity<?> getVehicule(@RequestParam(required = false) Optional<String> client_id,
                                          @RequestParam(required = false) Optional<String> marque,
                                          @RequestParam(required = false) Optional<String> modele,
@@ -68,7 +68,7 @@ public class VehiculeController {
      * @return
      */
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('client_admin','client_employe')")
+    @PreAuthorize("hasAnyRole('admin','technicien','client')")
     public ResponseEntity<Vehicule> getVehiculeById(@PathVariable Long id) {
         log.info("Récupération du vehicule avec l'id " + id);
         Vehicule vehicule = this.vehiculeService.getVehiculeById(id);
@@ -139,25 +139,12 @@ public class VehiculeController {
 
 
     /**
-     * Méthode POST pour créer un vehicule
-     * @param vehicule
-     * @return
-     */
-    @PostMapping
-    @PreAuthorize("hasAnyRole('client_admin','client_employe')")
-    public ResponseEntity<Vehicule> postVehicule(@RequestBody Vehicule vehicule) throws ServiceException {
-        log.info("Création d'un vehicule ...");
-        Vehicule savedObjet = this.vehiculeService.createVehicule(vehicule);
-        log.info("Vehicule créé avec succès : \n\t" + savedObjet);
-        return new ResponseEntity<>(savedObjet, HttpStatus.CREATED);
-    }
-
-    /**
      * Méthode PUT pour mettre à jour un vehicule
      * @param id
      * @return
      */
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('admin','technicien')")
     public ResponseEntity<Vehicule> putVehicule(@PathVariable Long id,@RequestBody Vehicule vehicule) {
         log.info("Mise à jour du vehicule ...");
         Vehicule savedObjet = this.vehiculeService.updateVehicule(id, vehicule);
@@ -166,11 +153,26 @@ public class VehiculeController {
     }
 
     /**
+     * Méthode POST pour créer un vehicule
+     * @param vehicule
+     * @return
+     */
+    @PostMapping
+    @PreAuthorize("hasAnyRole('admin','technicien')")
+    public ResponseEntity<Vehicule> postVehicule(@RequestBody Vehicule vehicule) throws ServiceException {
+        log.info("Création d'un vehicule ...");
+        Vehicule savedObjet = this.vehiculeService.createVehicule(vehicule);
+        log.info("Vehicule créé avec succès : \n\t" + savedObjet);
+        return new ResponseEntity<>(savedObjet, HttpStatus.CREATED);
+    }
+
+    /**
      * Méthode DELETE pour supprimer un vehicule
      * @param id
      * @return
      */
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('admin','technicien')")
     public ResponseEntity<Void> deleteVehicule(@PathVariable Long id) {
         log.info("Suppression du vehicule ...");
         this.vehiculeService.deleteVehicule(id);
