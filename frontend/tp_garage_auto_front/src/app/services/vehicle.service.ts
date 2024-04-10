@@ -12,9 +12,12 @@ export class VehicleService {
   }
 
   refreshVehicles() {
-    /*this.httpClient.get("/api/vehicle").subscribe((vehicles: any) => {
-      this.vehicleArray = vehicles;
-    });*/
+    this.httpClient
+      .get('http://localhost:8080/api/vehicle')
+      .subscribe((vehicles: any) => {
+        this.vehicleArray = vehicles;
+      });
+    console.log(this.vehicleArray);
   }
 
   getAllVehicles() {
@@ -24,19 +27,25 @@ export class VehicleService {
   addVehicle(vehicleSent: any) {
     let vehicle = {
       client: vehicleSent.client,
-      model: vehicleSent.model,
-      issue: vehicleSent.issue,
-      technician: vehicleSent.technician,
+      modele: vehicleSent.model,
+      marque: vehicleSent.brand,
+      annee: vehicleSent.year,
+      immatriculation: vehicleSent.plateNumber,
+      rendezVous: vehicleSent.appointmentsVehicle,
     };
-    /*this.httpClient.post("/api/vehicles", vehicle).subscribe(() => {
-      this.refreshVehicles();
-    })*/
+    this.httpClient
+      .post('http://localhost:8080/api/vehicles', vehicle)
+      .subscribe(() => {
+        this.refreshVehicles();
+      });
   }
 
   removeVehicle(id: number) {
-    //this.httpClient.delete("/api/vehicles/" + id).subscribe(() => {
-    //this.refreshVehicles();
-    //})
+    this.httpClient
+      .delete('http://localhost:8080/api/vehicles/' + id)
+      .subscribe(() => {
+        this.refreshVehicles();
+      });
   }
 
   getRepairingVehiclesCount() {

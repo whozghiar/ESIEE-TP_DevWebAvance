@@ -38,7 +38,7 @@ public class VehiculeController {
      * @return
      */
     @GetMapping
-    @PreAuthorize("hasAnyRole('admin','technicien','client')")
+    //@PreAuthorize("hasAnyRole('admin','technicien','client')")
     public ResponseEntity<?> getVehicule(@RequestParam(required = false) Optional<String> client_id,
                                          @RequestParam(required = false) Optional<String> marque,
                                          @RequestParam(required = false) Optional<String> modele,
