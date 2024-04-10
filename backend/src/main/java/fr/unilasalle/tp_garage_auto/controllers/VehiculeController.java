@@ -158,7 +158,7 @@ public class VehiculeController {
      * @return
      */
     @PostMapping
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    //@PreAuthorize("hasAnyRole('admin','technicien')")
     public ResponseEntity<Vehicule> postVehicule(@RequestBody Vehicule vehicule) throws ServiceException {
         log.info("Création d'un vehicule ...");
         Vehicule savedObjet = this.vehiculeService.createVehicule(vehicule);
@@ -172,7 +172,7 @@ public class VehiculeController {
      * @return
      */
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    //@PreAuthorize("hasAnyRole('admin','technicien')")
     public ResponseEntity<Void> deleteVehicule(@PathVariable Long id) {
         log.info("Suppression du vehicule ...");
         this.vehiculeService.deleteVehicule(id);

@@ -109,7 +109,7 @@ public class TechnicienController {
      * @return
      */
     @PostMapping
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    //@PreAuthorize("hasAnyRole('admin','technicien')")
     public ResponseEntity<Technicien> postTechnicien(@RequestBody Technicien technicien) throws ServiceException {
         log.info("Création d'un technicien ...");
         Technicien savedObjet = this.technicienService.createTechnicien(technicien);

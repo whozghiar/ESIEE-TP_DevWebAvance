@@ -8,16 +8,16 @@ export class VehicleService {
   private vehicleArray: any[] = [];
 
   constructor(private httpClient: HttpClient) {
+    console.log('Vehicle service constructor');
     this.refreshVehicles();
   }
 
   refreshVehicles() {
-    this.httpClient
-      .get('http://localhost:8080/api/vehicle')
-      .subscribe((vehicles: any) => {
-        this.vehicleArray = vehicles;
-      });
-    console.log(this.vehicleArray);
+    this.httpClient.get('/api/vehicule').subscribe((vehicles: any) => {
+      console.log(vehicles, 'vehicles');
+      this.vehicleArray = vehicles;
+    });
+    console.log(this.vehicleArray + 'vehicle array');
   }
 
   getAllVehicles() {
@@ -33,19 +33,15 @@ export class VehicleService {
       immatriculation: vehicleSent.plateNumber,
       rendezVous: vehicleSent.appointmentsVehicle,
     };
-    this.httpClient
-      .post('http://localhost:8080/api/vehicles', vehicle)
-      .subscribe(() => {
-        this.refreshVehicles();
-      });
+    this.httpClient.post('/api/vehicules', vehicle).subscribe(() => {
+      this.refreshVehicles();
+    });
   }
 
   removeVehicle(id: number) {
-    this.httpClient
-      .delete('http://localhost:8080/api/vehicles/' + id)
-      .subscribe(() => {
-        this.refreshVehicles();
-      });
+    this.httpClient.delete('/api/vehicules/' + id).subscribe(() => {
+      this.refreshVehicles();
+    });
   }
 
   getRepairingVehiclesCount() {

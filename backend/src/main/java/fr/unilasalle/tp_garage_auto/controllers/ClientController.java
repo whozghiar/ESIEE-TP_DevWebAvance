@@ -129,7 +129,7 @@ public class ClientController {
      * @return
      */
     @PostMapping
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    //@PreAuthorize("hasAnyRole('admin','technicien')")
     public ResponseEntity<Client> postClient(@RequestBody Client client) throws ServiceException {
 
         log.info("Création d'un client ...");

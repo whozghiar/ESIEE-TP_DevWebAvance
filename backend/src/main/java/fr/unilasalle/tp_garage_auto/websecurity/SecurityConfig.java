@@ -46,7 +46,7 @@ public class SecurityConfig {
         http
                 // Autoriser les requêtes POST/PUT/DELETE
                 .csrf(AbstractHttpConfigurer::disable);
-
+        http.cors(AbstractHttpConfigurer::disable);
         http
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt

@@ -137,7 +137,7 @@ public class RendezVousController {
      * @return
      */
     @PostMapping
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    //@PreAuthorize("hasAnyRole('admin','technicien')")
     public ResponseEntity<RendezVous> postRendezVous(@RequestBody RendezVous rendezVous) throws ServiceException {
         log.info("Création d'un rendez-vous ...");
         RendezVous savedObjet = this.rendezVousService.createRendezVous(rendezVous);
