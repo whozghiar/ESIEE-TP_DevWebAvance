@@ -39,21 +39,21 @@ public class VehiculeController {
      */
     @GetMapping
     //@PreAuthorize("hasAnyRole('admin','technicien','client')")
-    public ResponseEntity<?> getVehicule(@RequestParam(required = false) Optional<String> client_id,
-                                         @RequestParam(required = false) Optional<String> marque,
-                                         @RequestParam(required = false) Optional<String> modele,
-                                         @RequestParam(required = false) Optional<String> annee,
-                                         @RequestParam(required = false) Optional<String> immatriculation) throws ServiceException {
-        if(client_id.isPresent()){
-            return getVehiculesByClient(Long.parseLong(client_id.get()));
-        } else if (marque.isPresent()) {
-            return getVehiculeByMarque(marque.get());
-        } else if (modele.isPresent()) {
-            return getVehiculeByModele(modele.get());
-        } else if (annee.isPresent()) {
-            return getVehiculeByAnnee(annee.get());
-        } else if (immatriculation.isPresent()) {
-            return getVehiculeByImmatriculation(immatriculation.get());
+    public ResponseEntity<?> getVehicule(@RequestParam(required = false, name = "client_id") String client_id,
+                                         @RequestParam(required = false, name = "marque") String marque,
+                                         @RequestParam(required = false, name = "modele") String modele,
+                                         @RequestParam(required = false, name = "annee") String annee,
+                                         @RequestParam(required = false, name = "immatriculation") String immatriculation) throws ServiceException {
+        if(client_id != null){
+            return getVehiculesByClient(Long.parseLong(client_id));
+        } else if (marque != null) {
+            return getVehiculeByMarque(marque);
+        } else if (modele != null) {
+            return getVehiculeByModele(modele);
+        } else if (annee != null) {
+            return getVehiculeByAnnee(annee);
+        } else if (immatriculation != null) {
+            return getVehiculeByImmatriculation(immatriculation);
         } else {
                 log.info("Récupération de tous les vehicules...");
                 Set<Vehicule> vehicules = this.vehiculeService.getAllVehicules();

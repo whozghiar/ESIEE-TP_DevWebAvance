@@ -8,16 +8,15 @@ export class VehicleService {
   private vehicleArray: any[] = [];
 
   constructor(private httpClient: HttpClient) {
-    console.log('Vehicle service constructor');
+    console.log('Constructeur VehicleService');
     this.refreshVehicles();
   }
 
   refreshVehicles() {
     this.httpClient.get('/api/vehicule').subscribe((vehicles: any) => {
-      console.log(vehicles, 'vehicles');
       this.vehicleArray = vehicles;
     });
-    console.log(this.vehicleArray + 'vehicle array');
+    console.log("Véhicules : \n\t", this.vehicleArray);
   }
 
   getAllVehicles() {

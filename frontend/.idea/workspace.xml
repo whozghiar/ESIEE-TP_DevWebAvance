@@ -5,16 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a00958b1-4435-4ecc-80fc-69d2ba5cfe2d" name="Changes" comment="embellisement des component">
-      <change afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/auth/auth.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/app.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/app.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/client/client.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/client/client.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/clientform/clientform.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/clientform/clientform.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/clientpage/clientpage.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tp_garage_auto_front/src/app/component/clientpage/clientpage.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/fr/unilasalle/tp_garage_auto/controllers/AccueilController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/fr/unilasalle/tp_garage_auto/controllers/VehiculeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/fr/unilasalle/tp_garage_auto/controllers/VehiculeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/fr/unilasalle/tp_garage_auto/websecurity/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/fr/unilasalle/tp_garage_auto/websecurity/SecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +67,7 @@
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "C:\\Users\\theol\\Documents\\ESIEE Amiens\\I5\\Developpement Web Avancé\\TP - DevWeb Avancé\\frontend\\tp_garage_auto_front\\node_modules\\prettier",
     "settings.editor.selected.configurable": "editor.preferences.appearance",
-    "ts.external.directory.path": "C:\\Users\\theol\\Documents\\ESIEE Amiens\\I5\\Developpement Web Avancé\\TP - DevWeb Avancé\\frontend\\tp_garage_auto_front\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2023.3.5\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -86,13 +80,6 @@
     <option name="myCommands">
       <command value="prettier" />
     </option>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-WS-241.14494.235" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -109,6 +96,7 @@
       <workItem from="1712410251630" duration="8334000" />
       <workItem from="1712504384889" duration="8880000" />
       <workItem from="1712643478376" duration="2958000" />
+      <workItem from="1712851343745" duration="694000" />
     </task>
     <task id="LOCAL-00001" summary="front fichiers">
       <option name="closed" value="true" />
