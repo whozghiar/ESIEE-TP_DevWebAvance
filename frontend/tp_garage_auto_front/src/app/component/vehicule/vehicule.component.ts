@@ -1,35 +1,29 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {TechnicianComponent}  from "../technician/technician.component";
-import {NgClass, NgSwitch, NgSwitchCase} from "@angular/common";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { TechnicianComponent } from '../technician/technician.component';
+import { NgClass, NgSwitch, NgSwitchCase } from '@angular/common';
 
 @Component({
   selector: 'app-vehicule',
   standalone: true,
-  imports: [
-    NgClass,
-    NgSwitch,
-    NgSwitchCase
-  ],
+  imports: [NgClass, NgSwitch, NgSwitchCase],
   templateUrl: './vehicule.component.html',
-  styleUrl: './vehicule.component.css'
+  styleUrl: './vehicule.component.css',
 })
 export class VehiculeComponent {
-
   @Input() column!: number;
-  @Input("vehicle")
+  @Input('vehicle')
   vehicle: any = {
-    id: 0,
-    technician: "UNKNOWN",//TechnicianComponent,
-    client: "UNKNOWN",
-    issue: "UNKNOWN",
-    model: "UNKNOWN",
-    status: false,
-  }
+    id: Number,
+    brand: '',
+    model: '',
+    plateNumber: '',
+    year: '',
+    appointmentsVehicle: [],
+    clientVehicle: '',
+  };
 
-  @Output("trigger")
+  @Output('trigger')
   trigger: EventEmitter<any> = new EventEmitter<any>();
-
-
 
   launchTrigger() {
     this.trigger.emit();

@@ -38,7 +38,7 @@ public class VehiculeController {
      * @return
      */
     @GetMapping
-    @PreAuthorize("hasAnyRole('admin','technicien','client')")
+    //@PreAuthorize("hasAnyRole('admin','technicien','client')")
     public ResponseEntity<?> getVehicule(@RequestParam(required = false) Optional<String> client_id,
                                          @RequestParam(required = false) Optional<String> marque,
                                          @RequestParam(required = false) Optional<String> modele,
@@ -68,7 +68,7 @@ public class VehiculeController {
      * @return
      */
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien','client')")
+    //@PreAuthorize("hasAnyRole('admin','technicien','client')")
     public ResponseEntity<Vehicule> getVehiculeById(@PathVariable Long id) {
         log.info("Récupération du vehicule avec l'id " + id);
         Vehicule vehicule = this.vehiculeService.getVehiculeById(id);
@@ -144,7 +144,7 @@ public class VehiculeController {
      * @return
      */
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    //@PreAuthorize("hasAnyRole('admin','technicien')")
     public ResponseEntity<Vehicule> putVehicule(@PathVariable Long id,@RequestBody Vehicule vehicule) {
         log.info("Mise à jour du vehicule ...");
         Vehicule savedObjet = this.vehiculeService.updateVehicule(id, vehicule);
@@ -158,7 +158,7 @@ public class VehiculeController {
      * @return
      */
     @PostMapping
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    //@PreAuthorize("hasAnyRole('admin','technicien')")
     public ResponseEntity<Vehicule> postVehicule(@RequestBody Vehicule vehicule) throws ServiceException {
         log.info("Création d'un vehicule ...");
         Vehicule savedObjet = this.vehiculeService.createVehicule(vehicule);
@@ -172,7 +172,7 @@ public class VehiculeController {
      * @return
      */
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    //@PreAuthorize("hasAnyRole('admin','technicien')")
     public ResponseEntity<Void> deleteVehicule(@PathVariable Long id) {
         log.info("Suppression du vehicule ...");
         this.vehiculeService.deleteVehicule(id);

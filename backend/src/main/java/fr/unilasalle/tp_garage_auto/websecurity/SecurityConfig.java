@@ -37,9 +37,9 @@ public class SecurityConfig {
                 // Requêtes autorisées
                 .authorizeHttpRequests(authorize -> authorize
                         //.requestMatchers("/", "/images/**").permitAll()
-                        .requestMatchers("swagger-ui/**","swagger-ui.html","swagger-resources/**","v3/api-docs/**").authenticated()
+                        .requestMatchers("swagger-ui/**","swagger-ui.html","swagger-resources/**","v3/api-docs/**").permitAll()//authenticated()
                         // Ne pas autoriser les autres requêtes
-                        .anyRequest().denyAll()
+                        .anyRequest().permitAll()//denyAll()
                 );
         http
                 // Autoriser les requêtes POST/PUT/DELETE

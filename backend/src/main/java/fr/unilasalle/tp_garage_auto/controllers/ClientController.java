@@ -129,7 +129,7 @@ public class ClientController {
      * @return
      */
     @PostMapping
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    //@PreAuthorize("hasAnyRole('admin','technicien')")
     public ResponseEntity<Client> postClient(@RequestBody Client client) throws ServiceException {
 
         log.info("Création d'un client ...");
@@ -146,7 +146,7 @@ public class ClientController {
      * @return
      */
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    //@PreAuthorize("hasAnyRole('admin','technicien')")
     public ResponseEntity<Client> putClient(@PathVariable Long id, @RequestBody Client client) throws ServiceException {
         log.info("Mis à jour du client ...");
         Client savedObjet = this.clientService.updateClient(id,client);
@@ -160,7 +160,7 @@ public class ClientController {
      * @return
      */
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    //@PreAuthorize("hasAnyRole('admin','technicien')")
     public ResponseEntity<Void> deleteClient(@PathVariable Long id) {
         log.info("Suppression du client avec l'id " + id);
         this.clientService.deleteClient(id);

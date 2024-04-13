@@ -137,7 +137,7 @@ public class RendezVousController {
      * @return
      */
     @PostMapping
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    //@PreAuthorize("hasAnyRole('admin','technicien')")
     public ResponseEntity<RendezVous> postRendezVous(@RequestBody RendezVous rendezVous) throws ServiceException {
         log.info("Création d'un rendez-vous ...");
         RendezVous savedObjet = this.rendezVousService.createRendezVous(rendezVous);
@@ -152,7 +152,7 @@ public class RendezVousController {
      * @return
      */
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    //@PreAuthorize("hasAnyRole('admin','technicien')")
     public ResponseEntity<RendezVous> putRendezVous(@PathVariable Long id,@RequestBody RendezVous rendezVous) throws ServiceException {
         log.info("Mise à jour du rendez-vous ...");
         RendezVous savedObjet = this.rendezVousService.updateRendezVous(id,rendezVous);
@@ -166,7 +166,7 @@ public class RendezVousController {
      * @return
      */
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    //@PreAuthorize("hasAnyRole('admin','technicien')")
     public ResponseEntity<Void> deleteRendezVous(@PathVariable Long id) {
         log.info("Suppression du rendez-vous avec l'id " + id + ".");
         this.rendezVousService.deleteRendezVous(id);

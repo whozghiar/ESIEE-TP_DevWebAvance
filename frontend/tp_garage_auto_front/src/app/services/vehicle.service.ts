@@ -9,34 +9,42 @@ export class VehicleService {
 
   constructor(private httpClient: HttpClient) {
     this.refreshVehicles();
+    console.log('constructor vehicles');
   }
 
   refreshVehicles() {
-    /*this.httpClient.get("/api/vehicle").subscribe((vehicles: any) => {
+    this.httpClient.get('/api/vehicule').subscribe((vehicles: any) => {
+      console.log(vehicles, 'get vehicles requete envoyée');
       this.vehicleArray = vehicles;
-    });*/
+    });
+    console.log(this.vehicleArray + 'refresh vehicles');
   }
 
   getAllVehicles() {
+    console.log(this.vehicleArray, 'getall vehicles');
     return this.vehicleArray;
   }
 
   addVehicle(vehicleSent: any) {
     let vehicle = {
       client: vehicleSent.client,
-      model: vehicleSent.model,
-      issue: vehicleSent.issue,
-      technician: vehicleSent.technician,
+      modele: vehicleSent.model,
+      marque: vehicleSent.brand,
+      annee: vehicleSent.year,
+      immatriculation: vehicleSent.plateNumber,
+      rendezVous: vehicleSent.appointmentsVehicle,
     };
-    /*this.httpClient.post("/api/vehicles", vehicle).subscribe(() => {
+    console.log(vehicle, 'vehicle ajout');
+    this.httpClient.post('/api/vehicule', vehicle).subscribe(() => {
       this.refreshVehicles();
-    })*/
+      console.log(vehicle, 'vehicle ajout requete envoyée" ');
+    });
   }
 
   removeVehicle(id: number) {
-    //this.httpClient.delete("/api/vehicles/" + id).subscribe(() => {
-    //this.refreshVehicles();
-    //})
+    this.httpClient.delete('/api/vehicule/' + id).subscribe(() => {
+      this.refreshVehicles();
+    });
   }
 
   getRepairingVehiclesCount() {

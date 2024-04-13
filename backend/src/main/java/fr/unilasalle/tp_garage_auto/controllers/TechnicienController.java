@@ -34,7 +34,7 @@ public class TechnicienController {
      * @return
      */
     @GetMapping
-    @PreAuthorize("hasAnyRole('admin','technicien','client')")
+    //@PreAuthorize("hasAnyRole('admin','technicien','client')")
     public ResponseEntity<?> getTechnicien(@RequestParam(required = false) Optional<String> nom,
                                            @RequestParam(required = false) Optional<String> prenom,
                                            @RequestParam(required = false) Optional<Long> rendezVousId) throws ServiceException {
@@ -59,7 +59,7 @@ public class TechnicienController {
      * @return
      */
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien','client')")
+    //@PreAuthorize("hasAnyRole('admin','technicien','client')")
     public ResponseEntity<Technicien> getTechnicienById(@PathVariable Long id) {
         log.info("Récupération du technicien avec l'id " + id);
         Technicien technicien = this.technicienService.getTechnicienById(id);
@@ -109,7 +109,7 @@ public class TechnicienController {
      * @return
      */
     @PostMapping
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    //@PreAuthorize("hasAnyRole('admin','technicien')")
     public ResponseEntity<Technicien> postTechnicien(@RequestBody Technicien technicien) throws ServiceException {
         log.info("Création d'un technicien ...");
         Technicien savedObjet = this.technicienService.createTechnicien(technicien);
@@ -125,7 +125,7 @@ public class TechnicienController {
      * @return
      */
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    //@PreAuthorize("hasAnyRole('admin','technicien')")
     public ResponseEntity<Technicien> putTechnicien(@PathVariable Long id,@RequestBody Technicien technicien) throws ServiceException {
         log.info("Mise à jour du technicien ...");
         Technicien savedObjet = this.technicienService.updateTechnicien(id,technicien);
@@ -139,7 +139,7 @@ public class TechnicienController {
      * @return
      */
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    //@PreAuthorize("hasAnyRole('admin','technicien')")
     public ResponseEntity<Void> deleteTechnicien(@PathVariable Long id) {
         log.info("Suppression du technicien avec l'id " + id + ".");
         this.technicienService.deleteTechnicien(id);

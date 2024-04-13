@@ -23,9 +23,17 @@ import { TechnicianpageComponent } from '../technicianpage/technicianpage.compon
 export class VehiculepageComponent {
   vehicles: any = [];
 
-  constructor(protected vehicleService: VehicleService) {
+  constructor(private vehicleService: VehicleService) {}
+
+  ngOnInit() {
     this.vehicles = this.vehicleService.getAllVehicles();
+    console.log(this.vehicles, 'vehicles page véhicule');
   }
+
+  /*constructor(protected vehicleService: VehicleService) {
+    this.vehicles = this.vehicleService.getAllVehicles();
+    console.log(this.vehicles, 'vehicles page véhicule');
+  }*/
 
   handleTrigger(id: number) {
     this.vehicleService.removeVehicle(id);
