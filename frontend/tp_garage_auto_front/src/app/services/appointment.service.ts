@@ -14,22 +14,25 @@ export class AppointmentService {
     this.httpClient.get('/api/rendez-vous').subscribe((appointments: any) => {
       this.appointmentArray = appointments;
     });
+    console.log(this.appointmentArray, 'appointments refresh');
   }
 
   getAllAppointments() {
+    this.refreshAppointments();
     return this.appointmentArray;
   }
 
   addAppointment(appointmentSent: any) {
     let appointment = {
-      client: appointmentSent.client,
-      vehicle: appointmentSent.vehicle,
+      //technicien: appointmentSent.technicien,
+      //vehicule: appointmentSent.vehicule,
       date: appointmentSent.date,
-      status: appointmentSent.status,
+      typeService: appointmentSent.typeService,
     };
     this.httpClient.post('/api/rendez-vous', appointment).subscribe(() => {
       this.refreshAppointments();
     });
+    console.log(appointment, 'appointment added');
   }
 
   removeAppointment(id: number) {
