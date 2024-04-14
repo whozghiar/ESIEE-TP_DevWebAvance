@@ -16,12 +16,12 @@ import { AppointmentService } from '../../services/appointment.service';
 export class VehiculeformComponent {
   vehicle: any = {
     id: Number,
-    brand: '',
-    model: '',
-    plateNumber: '',
-    year: '',
-    appointmentsVehicle: [],
-    clientVehicle: '',
+    marque: '',
+    modele: '',
+    immatriculation: '',
+    annee: '',
+    rendezVous: [],
+    client: '',
   };
 
   clients: any = [];
@@ -42,16 +42,4 @@ export class VehiculeformComponent {
   handleTrigger(id: number) {
     this.vehicleService.removeVehicle(id);
   }
-
-  //temporaire
-  /*technicians: any = [
-    { id: 1, name: 'John', surname: 'Padawan' },
-    { id: 2, name: 'Lucien', surname: 'Bobby' },
-    { id: 3, name: 'Theo', surname: 'Lomege' },
-  ];
-
-  clients: any = [
-    { id: 1, name: 'John', surname: 'Doe' },
-    { id: 2, name: 'Jane', surname: 'Doe' },
-  ];*/
 }

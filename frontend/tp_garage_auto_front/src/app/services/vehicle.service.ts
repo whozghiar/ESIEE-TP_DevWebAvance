@@ -37,14 +37,16 @@ export class VehicleService {
     console.log(vehicle, 'vehicle ajout');
     this.httpClient.post('/api/vehicule', vehicle).subscribe(() => {
       this.refreshVehicles();
-      console.log(vehicle, 'vehicle ajout requete envoyée" ');
+      //console.log(vehicle, 'vehicle ajout requete envoyée" ');
     });
   }
 
   removeVehicle(id: number) {
     this.httpClient.delete('/api/vehicule/' + id).subscribe(() => {
+      console.log('delete requete envoyée ');
       this.refreshVehicles();
     });
+    console.log('fct delete vehicle');
   }
 
   getRepairingVehiclesCount() {

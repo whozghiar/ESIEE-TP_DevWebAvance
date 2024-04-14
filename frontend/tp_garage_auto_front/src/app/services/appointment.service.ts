@@ -11,7 +11,7 @@ export class AppointmentService {
   }
 
   refreshAppointments() {
-    this.httpClient.get('/api/appointement').subscribe((appointments: any) => {
+    this.httpClient.get('/api/rendez-vous').subscribe((appointments: any) => {
       this.appointmentArray = appointments;
     });
   }
@@ -27,13 +27,13 @@ export class AppointmentService {
       date: appointmentSent.date,
       status: appointmentSent.status,
     };
-    this.httpClient.post('/api/appointments', appointment).subscribe(() => {
+    this.httpClient.post('/api/rendez-vous', appointment).subscribe(() => {
       this.refreshAppointments();
     });
   }
 
   removeAppointment(id: number) {
-    this.httpClient.delete('/api/appointments/' + id).subscribe(() => {
+    this.httpClient.delete('/api/rendez-vous/' + id).subscribe(() => {
       this.refreshAppointments();
     });
   }

@@ -2,27 +2,32 @@
   <div class="flex flex-col gap-3">
     <input
       class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4"
-      [(ngModel)]="client.name"
-      placeholder="Client's first name..."
+      [(ngModel)]="client.nom"
+      placeholder="Prénom du Client..."
     />
 
     <input
       class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4"
-      [(ngModel)]="client.surname"
-      placeholder="Client's last name..."
+      [(ngModel)]="client.prenom"
+      placeholder="Nom du Client..."
     />
 
     <input
       class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4"
       [(ngModel)]="client.email"
-      placeholder="Client's email..."
+      placeholder="Email du Client..."
+    />
+    <input
+      class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4"
+      [(ngModel)]="client.telephone"
+      placeholder="n° de téléphone du Client..."
     />
 
     <button
       class="bg-blue-600 text-white rounded shadow p-3"
-      (click)="clientService.addClient(client)"
+      (click)="logClient(); addClient(client)"
     >
-      Add Client
+      Ajouter le Client
     </button>
   </div>
 </div>

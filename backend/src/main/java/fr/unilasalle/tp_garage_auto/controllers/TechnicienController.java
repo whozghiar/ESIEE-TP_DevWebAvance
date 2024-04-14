@@ -20,7 +20,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("api/technicien")
+@RequestMapping("technicien")
 @RequiredArgsConstructor
 @Slf4j
 public class TechnicienController {

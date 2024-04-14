@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("api/rendez-vous")
+@RequestMapping("rendez-vous")
 @RequiredArgsConstructor
 @Slf4j
 public class RendezVousController {
@@ -31,7 +31,7 @@ public class RendezVousController {
      * @return
      */
     @GetMapping
-    @PreAuthorize("hasAnyRole('admin','technicien','client')")
+    //@PreAuthorize("hasAnyRole('admin','technicien','client')")
     public ResponseEntity<?> getRendezVous(@RequestParam(required = false) Optional<String> date,
                                            @RequestParam(required = false) Optional<String> typeService,
                                            @RequestParam(required = false) Optional<Long> vehicule_id,
@@ -62,7 +62,7 @@ public class RendezVousController {
      * @return
      */
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien','client')")
+    //@PreAuthorize("hasAnyRole('admin','technicien','client')")
     public ResponseEntity<RendezVous> getRendezVousById(@PathVariable Long id) {
         log.info("Récupération du rendez-vous avec l'id " + id);
         RendezVous rendezVous = this.rendezVousService.getRendezVousById(id);

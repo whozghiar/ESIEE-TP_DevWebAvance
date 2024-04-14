@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("api/client")
+@RequestMapping("client")
 @RequiredArgsConstructor
 @Slf4j
 public class ClientController {
@@ -32,7 +32,7 @@ public class ClientController {
      * @return
      */
     @GetMapping
-    @PreAuthorize("hasAnyRole('admin','technicien','client')")
+    //@PreAuthorize("hasAnyRole('admin','technicien','client')")
     public ResponseEntity<?> getClients(@RequestParam(required = false) Optional<String> nom,
                                         @RequestParam(required = false) Optional<String> prenom,
                                         @RequestParam(required = false) Optional<String> email,
@@ -59,7 +59,7 @@ public class ClientController {
      * @return
      */
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien','client')")
+    //@PreAuthorize("hasAnyRole('admin','technicien','client')")
     public ResponseEntity<Client> getClientById(@PathVariable Long id) {
         log.info("Récupération du client avec l'id " + id);
         Client client = this.clientService.getClientById(id);

@@ -12,15 +12,7 @@ import { NgClass, NgSwitch, NgSwitchCase } from '@angular/common';
 export class VehiculeComponent {
   @Input() column!: number;
   @Input('vehicle')
-  vehicle: any = {
-    id: Number,
-    brand: '',
-    model: '',
-    plateNumber: '',
-    year: '',
-    appointmentsVehicle: [],
-    clientVehicle: '',
-  };
+  vehicle: any = {};
 
   @Output('trigger')
   trigger: EventEmitter<any> = new EventEmitter<any>();
