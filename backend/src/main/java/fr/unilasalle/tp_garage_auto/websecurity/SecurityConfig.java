@@ -40,9 +40,8 @@ public class SecurityConfig {
                                 .permitAll()
                                 //.authenticated()
                         // Ne pas autoriser les autres requêtes
-                        //  .denyAll()
                         .anyRequest()
-                            .permitAll()
+                            .authenticated()
                 );
         http
                 // Autoriser les requêtes POST/PUT/DELETE

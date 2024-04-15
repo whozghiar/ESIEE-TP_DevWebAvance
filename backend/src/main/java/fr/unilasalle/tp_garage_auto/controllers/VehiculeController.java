@@ -7,6 +7,11 @@ import fr.unilasalle.tp_garage_auto.exceptions.DBException;
 import fr.unilasalle.tp_garage_auto.exceptions.DTOException;
 import fr.unilasalle.tp_garage_auto.exceptions.NotFoundException;
 import fr.unilasalle.tp_garage_auto.exceptions.ServiceException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -24,6 +29,13 @@ import java.util.Set;
 @RequestMapping("api/vehicule")
 @RequiredArgsConstructor
 @Slf4j
+@SecurityScheme(
+        name = "bearerAuth",
+        scheme = "bearer",
+        bearerFormat = "JWT",
+        type = SecuritySchemeType.HTTP,
+        in = SecuritySchemeIn.HEADER
+)
 public class VehiculeController {
 
     private final VehiculeService vehiculeService;
@@ -38,7 +50,11 @@ public class VehiculeController {
      * @return
      */
     @GetMapping
-    //@PreAuthorize("hasAnyRole('admin','technicien','client')")
+    @PreAuthorize("hasAnyRole('admin','client','technicien')")
+    @Operation(summary = "Récupérer tous les vehicules",
+            description = "Récupérer tous les vehicules en fonction de certains critères",
+            tags = { "vehicule" },
+            security = { @SecurityRequirement(name = "bearerAuth") })
     public ResponseEntity<?> getVehicule(@RequestParam(required = false, name = "client_id") String client_id,
                                          @RequestParam(required = false, name = "marque") String marque,
                                          @RequestParam(required = false, name = "modele") String modele,
@@ -69,6 +85,10 @@ public class VehiculeController {
      */
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('admin','technicien','client')")
+    @Operation(summary = "Récupérer un vehicule par son id",
+            description = "Récupérer un vehicule en fonction de son id",
+            tags = { "vehicule" },
+            security = { @SecurityRequirement(name = "bearerAuth") })
     public ResponseEntity<Vehicule> getVehiculeById(@PathVariable Long id) {
         log.info("Récupération du vehicule avec l'id " + id);
         Vehicule vehicule = this.vehiculeService.getVehiculeById(id);
@@ -145,6 +165,10 @@ public class VehiculeController {
      */
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('admin','technicien')")
+    @Operation(summary = "Mettre à jour un vehicule",
+            description = "Mettre à jour un vehicule en fonction de ses informations",
+            tags = { "vehicule" },
+            security = { @SecurityRequirement(name = "bearerAuth") })
     public ResponseEntity<Vehicule> putVehicule(@PathVariable Long id,@RequestBody Vehicule vehicule) {
         log.info("Mise à jour du vehicule ...");
         Vehicule savedObjet = this.vehiculeService.updateVehicule(id, vehicule);
@@ -158,7 +182,11 @@ public class VehiculeController {
      * @return
      */
     @PostMapping
-    //@PreAuthorize("hasAnyRole('admin','technicien')")
+    @PreAuthorize("hasAnyRole('admin','technicien')")
+    @Operation(summary = "Créer un vehicule",
+            description = "Créer un vehicule en fonction de ses informations",
+            tags = { "vehicule" },
+            security = { @SecurityRequirement(name = "bearerAuth") })
     public ResponseEntity<Vehicule> postVehicule(@RequestBody Vehicule vehicule) throws ServiceException {
         log.info("Création d'un vehicule ...");
         Vehicule savedObjet = this.vehiculeService.createVehicule(vehicule);
@@ -172,7 +200,11 @@ public class VehiculeController {
      * @return
      */
     @DeleteMapping("/{id}")
-    //@PreAuthorize("hasAnyRole('admin','technicien')")
+    @PreAuthorize("hasAnyRole('admin','technicien')")
+    @Operation(summary = "Supprimer un vehicule",
+            description = "Supprimer un vehicule en fonction de son id",
+            tags = { "vehicule" },
+            security = { @SecurityRequirement(name = "bearerAuth") })
     public ResponseEntity<Void> deleteVehicule(@PathVariable Long id) {
         log.info("Suppression du vehicule ...");
         this.vehiculeService.deleteVehicule(id);
