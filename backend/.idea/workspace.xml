@@ -4,28 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ecb7285c-4883-4b62-a64f-fdcba187b7b2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/RendezVous.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/RendezVous.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Technicien.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Technicien.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Vehicule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/beans/Vehicule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/RendezVousController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/RendezVousController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/TechnicienController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/TechnicienController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/VehiculeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/controllers/VehiculeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/exceptions/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/exceptions/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/repositories/ClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/repositories/ClientRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/repositories/TechnicienRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/repositories/TechnicienRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/repositories/VehiculeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/repositories/VehiculeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/services/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/services/ClientService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/services/TechnicienService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/services/TechnicienService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/services/VehiculeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/services/VehiculeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/websecurity/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/unilasalle/tp_garage_auto/websecurity/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/.idea/frontend.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/tp_garage_auto_front/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/tp_garage_auto_front/angular.json" afterDir="false" />
-    </list>
+    <list default="true" id="ecb7285c-4883-4b62-a64f-fdcba187b7b2" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -217,7 +196,7 @@
       <workItem from="1712921618241" duration="3835000" />
       <workItem from="1712933458430" duration="1454000" />
       <workItem from="1713088243421" duration="158000" />
-      <workItem from="1713187561754" duration="7160000" />
+      <workItem from="1713187561754" duration="7907000" />
     </task>
     <servers />
   </component>
