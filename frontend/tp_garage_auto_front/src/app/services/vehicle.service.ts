@@ -10,6 +10,7 @@ export class VehicleService {
   constructor(private httpClient: HttpClient) {
     console.log('Constructeur VehicleService');
     this.refreshVehicles();
+    console.log('constructor vehicles');
   }
 
   refreshVehicles() {
@@ -20,6 +21,7 @@ export class VehicleService {
   }
 
   getAllVehicles() {
+    console.log(this.vehicleArray, 'getall vehicles');
     return this.vehicleArray;
   }
 
@@ -38,9 +40,11 @@ export class VehicleService {
   }
 
   removeVehicle(id: number) {
-    this.httpClient.delete('/api/vehicules/' + id).subscribe(() => {
+    this.httpClient.delete('/api/vehicule/' + id).subscribe(() => {
+      console.log('delete requete envoyée ');
       this.refreshVehicles();
     });
+    console.log('fct delete vehicle');
   }
 
   getRepairingVehiclesCount() {

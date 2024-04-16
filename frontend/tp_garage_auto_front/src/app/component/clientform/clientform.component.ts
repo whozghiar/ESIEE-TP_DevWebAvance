@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ClientService } from '../../services/client.service';
 
@@ -10,12 +10,22 @@ import { ClientService } from '../../services/client.service';
   styleUrl: './clientform.component.css',
 })
 export class ClientformComponent {
+  @Input('client')
   client = {
-    id: 1,
-    name: 'John',
-    surname: 'Doe',
-    email: 'john.doe@gmail.com',
+    nom: '',
+    prenom: '',
+    telephone: '',
+    email: '',
   };
 
-  constructor(protected clientService: ClientService) {}
+  @Output('add')
+  add = new EventEmitter<string>();
+
+  addClient(client: any) {
+    this.add.emit(client);
+  }
+
+  logClient() {
+    console.log(this.client);
+  }
 }

@@ -9,76 +9,63 @@
     *ngSwitchCase="1"
     class="px-4 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500"
   >
-    {{ vehicle.model }}
+    {{ vehicle.marque }}
   </div>
-  <div *ngSwitchCase="2">
-    <span
+  <div
+    *ngSwitchCase="2"
+    class="px-4 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500"
+  >
+    {{ vehicle.modele }}
+    <!--<span
       [ngClass]="
-        vehicle.status
+        vehicle.modele
           ? 'text-green-800 bg-green-100'
           : 'text-red-800 bg-red-100'
       "
       class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full shadow-lg transition-all duration-500 ease-in-out"
     >
       {{ vehicle.status ? "En cours" : "À réparer" }}
-    </span>
+    </span>-->
   </div>
   <div
     *ngSwitchCase="3"
     class="px-4 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500"
   >
-    {{ vehicle.brand }}
+    {{ vehicle.immatriculation }}
   </div>
 
-  <div class="flex items-center" *ngSwitchCase="4">
+  <div
+    *ngSwitchCase="4"
+    class="px-4 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500"
+  >
+    {{ vehicle.annee }}
+  </div>
+
+  <div class="flex items-center" *ngSwitchCase="5">
     <div class="flex-shrink-0 w-10 h-10">
       <img
         class="w-10 h-10 rounded-full"
         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
-        alt="photo technicien"
+        alt="photo Client"
       />
     </div>
     <div class="ml-4">
       <div
         class="px-2 py-1 text-xs font-medium leading-4 tracking-wider text-left text-gray-500"
       >
-        {{ vehicle.clientVehicle }}
+        {{ vehicle.client }}
       </div>
       <div class="text-sm leading-5 text-gray-500">
-        {{ vehicle.clientVehicle.name }}
+        {{ vehicle.client }}
       </div>
     </div>
   </div>
+
+  <div
+    *ngSwitchCase="6"
+    class="px-4 py-3 text-xs font-medium rounded-lg border border-indigo-900 leading-4 tracking-wider text-left text-gray-500"
+    (click)="launchTrigger()"
+  >
+    Supprimer
+  </div>
 </ng-container>
-
-<!--
-
-
-
-
-  <td class="px-4 py-3 whitespace-no-wrap text-sm leading-5 text-gray-500">n°{{vehicle.id}}</td>
-  <td class="px-4 py-3 text-sm leading-5 text-gray-500 whitespace-no-wrap ">{{vehicle.model}}</td>
-  <td class="px-4 py-3 whitespace-no-wrap ">
-              <span class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full "
-                    [ngClass]="vehicle.status? 'text-green-800 bg-green-100':'text-red-800 bg-red-100'"
-              >{{vehicle.status ? "En cours" : "À réparer" }}</span>
-  </td>
-  <td class="px-4 py-3 whitespace-no-wrap text-xs leading-5 text-gray-500 ">{{vehicle.issue}}</td>
-  <td class="px-4 py-3 whitespace-no-wrap ">
-    <div class="flex items-center">
-      <div class="flex-shrink-0 w-10 h-10">
-        <img class="w-10 h-10 rounded-full"
-             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
-             alt="">
-      </div>
-      <div class="ml-4">
-        <div class="text-sm font-medium leading-5 text-gray-900">{{vehicle.technician}}
-        </div>
-        <div class="text-sm leading-5 text-gray-500">johnexample.com</div>
-      </div>
-    </div>
-  </td>
-  <td class="px-4 py-3 text-sm font-medium leading-5  whitespace-no-wrap ">
-    <div class="text-indigo-600 hover:text-indigo-900" (click)="launchTrigger()">Supprimer</div>
-  </td>
--->

@@ -20,7 +20,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("api/client")
+@RequestMapping("client")
 @RequiredArgsConstructor
 @Slf4j
 @SecurityScheme(

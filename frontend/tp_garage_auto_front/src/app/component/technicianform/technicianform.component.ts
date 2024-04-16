@@ -13,11 +13,13 @@ import { TechnicianService } from '../../services/technician.service';
 })
 export class TechnicianformComponent {
   technician: any = {
-    name: '',
-    surname: '',
+    nom: '',
+    prenom: '',
     availability: true,
-    avatar: '',
-    description: '',
+    avatar: 'https://www.w3schools.com/howto/img_avatar.png',
   };
+  logTechnician() {
+    console.log(this.technician);
+  }
   constructor(protected technicianService: TechnicianService) {}
 }

@@ -2,13 +2,13 @@
   <div class="flex flex-col gap-3">
     <input
       class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4"
-      [(ngModel)]="technician.name"
+      [(ngModel)]="technician.prenom"
       placeholder="Prénom du technicien..."
     />
 
     <input
       class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4"
-      [(ngModel)]="technician.surname"
+      [(ngModel)]="technician.nom"
       placeholder="Nom technicien..."
     />
 
@@ -19,7 +19,7 @@
     ></textarea>
     <button
       class="bg-blue-600 text-white rounded shadow p-3"
-      (click)="technicianService.addTechnician(technician)"
+      (click)="logTechnician(); technicianService.addTechnician(technician)"
     >
       Ajouter le technicien
     </button>

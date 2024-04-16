@@ -26,7 +26,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("api/vehicule")
+@RequestMapping("vehicule")
 @RequiredArgsConstructor
 @Slf4j
 @SecurityScheme(

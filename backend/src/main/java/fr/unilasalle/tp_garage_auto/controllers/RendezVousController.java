@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("api/rendez-vous")
+@RequestMapping("rendez-vous")
 @RequiredArgsConstructor
 @Slf4j
 @SecurityScheme(

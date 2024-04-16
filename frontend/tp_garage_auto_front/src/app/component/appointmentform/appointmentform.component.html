@@ -9,8 +9,8 @@
 
     <input
       class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4"
-      [(ngModel)]="appointment.clientAppointment"
-      placeholder="Nom Client..."
+      [(ngModel)]="appointment.typeService"
+      placeholder="Type de Service..."
     />
 
     <select
@@ -18,18 +18,18 @@
       [(ngModel)]="appointment.technician"
     >
       <option value="" disabled>Sélectionner un technicien...</option>
-      <option *ngFor="let technician of technicians" [value]="technician">
-        {{ technician.name }} {{ technician.surname }}
+      <option *ngFor="let technicien of techniciens" [value]="technicien">
+        {{ technicien.nom }} {{ technicien.prenom }}
       </option>
     </select>
 
     <select
       class="mt-1 w-full border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4"
-      [(ngModel)]="appointment.vehicle"
+      [(ngModel)]="appointment.vehicule"
     >
       <option value="" disabled>Sélectionner un véhicule...</option>
-      <option *ngFor="let vehicle of vehicles" [value]="vehicle">
-        {{ vehicle.model }} {{ vehicle.clientVehicle }}
+      <option *ngFor="let vehicule of vehicules" [value]="vehicule">
+        {{ vehicule.modele }} {{ vehicule.marque }}
       </option>
     </select>
 
@@ -40,7 +40,7 @@
     ></textarea>
     <button
       class="bg-blue-600 text-white rounded shadow p-3"
-      (click)="appointmentService.addAppointment(appointment)"
+      (click)="logAppointment(); appointmentService.addAppointment(appointment)"
     >
       Ajouter Rendez-vous
     </button>

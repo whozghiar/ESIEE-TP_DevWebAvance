@@ -15,18 +15,17 @@ import { AppointmentService } from '../../services/appointment.service';
 export class AppointmentformComponent {
   appointment: any = {
     date: '',
-    time: '',
-    vehicle: '',
-    client: '',
-    description: '',
+    typeService: '',
+    vehicule: '',
+    technicien: '',
   };
 
-  technicians: any[] = [];
-  vehicles: any[] = [];
+  techniciens: any[] = [];
+  vehicules: any[] = [];
 
   ngOnInit() {
-    this.technicians = this.technicianService.getAllTechnicians();
-    this.vehicles = this.vehicleService.getAllVehicles();
+    this.techniciens = this.technicianService.getAllTechnicians();
+    this.vehicules = this.vehicleService.getAllVehicles();
   }
 
   // Exemple de données pour le calendrier
@@ -36,4 +35,8 @@ export class AppointmentformComponent {
     private vehicleService: VehicleService,
     protected appointmentService: AppointmentService,
   ) {}
+
+  logAppointment() {
+    console.log(this.appointment, 'appointment form');
+  }
 }

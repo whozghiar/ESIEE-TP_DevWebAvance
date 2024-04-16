@@ -13,11 +13,5 @@ export class TechnicianComponent {
   }
 
   @Input('technician')
-  technician: any = {
-    name: 'UNKNOWN',
-    surname: 'UNKNOWN',
-    availability: true,
-    avatar: '',
-    description: 'UNKNOWN',
-  };
+  technician: any = {};
 }
