@@ -72,20 +72,6 @@ public class TechnicienService {
         return techniciens;
     }
 
-    /**
-     * Récupérer un technicien par rendezVousId
-     * @param rendezVousId
-     * @return
-     */
-    public Technicien getTechnicienByRendezVousId(Long rendezVousId) {
-        Technicien technicien = technicienRepository.findByRendezVousId(rendezVousId);
-        if (technicien == null) {
-            throw new NotFoundException("Impossible de trouver un technicien avec le rendez-vous id " + rendezVousId + ".",new NullPointerException());
-        }
-        return technicien;
-    }
-
-
 
     /**
      * Créer un technicien
@@ -137,7 +123,6 @@ public class TechnicienService {
 
         existingTechnicien.setNom(technicien.getNom());
         existingTechnicien.setPrenom(technicien.getPrenom());
-        existingTechnicien.setRendezVous(technicien.getRendezVous());
 
         try{
             return technicienRepository.save(technicien);

@@ -11,7 +11,5 @@ public interface TechnicienRepository extends JpaRepository<Technicien, Long> {
 
     Set<Technicien> findByNomContainingIgnoreCase(String nom);
     Set<Technicien> findByPrenomContainingIgnoreCase(String prenom);
-    Technicien findByRendezVousId(Long rendezVousId);
-
 
 }

@@ -121,25 +121,13 @@ public class ClientService {
             throw new ServiceException("Le client ne peut pas avoir d'id.",new NullPointerException());
         }
 
-        // Cas où l'on associe un véhicule déjà existant au client
-        if(client.getVehiculeId() != null && client.getVehicules().isEmpty()){
-            Vehicule vehicule = null;
-            try{
-                vehicule = this.vehiculeService.getVehiculeById(client.getVehiculeId());
-                vehicule.setClient(client);
-            }catch (NotFoundException e){
-                throw new ServiceException("Impossible de trouver un véhicule avec l'id " + client.getVehiculeId() + ".",new NullPointerException());
-            }
-            client.setVehicules(new HashSet<>());
-            client.getVehicules().add(vehicule);
-        }
-
         try {
             return this.clientRepository.save(client);
         } catch (Exception e) {
             throw new DBException("Erreur lors de la création du client en base.", e);
         }
     }
+
     /**
      * Mettre à jour un client
      * @param client
@@ -160,25 +148,10 @@ public class ClientService {
             throw new NotFoundException("Impossible de trouver un client avec l'id " + client.getId() + ".", new NullPointerException());
         }
 
-        // Récupérer le vehiculeID
-        if(existingClient.getVehiculeId() != null){
-            Vehicule vehicule = null;
-            try{
-                vehicule = this.vehiculeService.getVehiculeById(client.getVehiculeId());
-                vehicule.setClient(existingClient);
-            }catch (NotFoundException e){
-                throw new ServiceException("Impossible de trouver un véhicule avec l'id " + existingClient.getVehiculeId() + ".", e);
-            }
-            existingClient.setVehicules(new HashSet<>());
-            existingClient.getVehicules().add(vehicule);
-
-        }
-
         existingClient.setNom(client.getNom());
         existingClient.setPrenom(client.getPrenom());
         existingClient.setTelephone(client.getTelephone());
         existingClient.setEmail(client.getEmail());
-        existingClient.setVehicules(client.getVehicules());
 
         try {
             return this.clientRepository.save(existingClient);

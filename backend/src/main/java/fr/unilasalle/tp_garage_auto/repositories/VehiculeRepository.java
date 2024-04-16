@@ -11,7 +11,6 @@ import java.util.Set;
 public interface VehiculeRepository extends JpaRepository<Vehicule, Long> {
 
     Set<Vehicule> findByClientId(Long clientId);
-
     Set<Vehicule> findByMarqueContainingIgnoreCase(String marque);
     Set<Vehicule> findByModeleContainingIgnoreCase(String modele);
     Set<Vehicule> findByAnnee(Integer annee);
