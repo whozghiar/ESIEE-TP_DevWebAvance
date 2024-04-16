@@ -7,8 +7,25 @@ interface Appointment {
   id: number;
   typeService: string;
   date: string;
-  vehicule: {};
+  vehicule: Vehicule;
   technicien: {};
+}
+
+interface Vehicule {
+  id: number;
+  marque: string;
+  modele: string;
+  annee: number;
+  immatriculation: string;
+  client : Client;
+}
+
+interface Client {
+  id: number;
+  nom: string;
+  prenom: string;
+  telephone: string;
+  email: string;
 }
 
 interface Day {

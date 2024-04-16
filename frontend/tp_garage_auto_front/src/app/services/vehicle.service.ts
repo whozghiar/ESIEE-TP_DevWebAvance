@@ -8,9 +8,9 @@ export class VehicleService {
   private vehicleArray: any[] = [];
 
   constructor(private httpClient: HttpClient) {
-    console.log('Constructeur VehicleService');
-    this.refreshVehicles();
-    console.log('constructor vehicles');
+    setTimeout(() => {
+      this.refreshVehicles();
+    }, 1000);
   }
 
   refreshVehicles() {

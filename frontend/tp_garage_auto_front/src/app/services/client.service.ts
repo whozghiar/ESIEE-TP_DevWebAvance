@@ -8,7 +8,9 @@ export class ClientService {
   private clientArray: any[] = [];
 
   constructor(private httpClient: HttpClient) {
-    this.refreshClients();
+    setTimeout(() => {
+      this.refreshClients();
+    }, 1000);
   }
 
   refreshClients() {

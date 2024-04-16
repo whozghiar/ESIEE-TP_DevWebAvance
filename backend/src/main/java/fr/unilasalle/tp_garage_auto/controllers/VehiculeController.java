@@ -89,7 +89,7 @@ public class VehiculeController {
             description = "Récupérer un vehicule en fonction de son id",
             tags = { "vehicule" },
             security = { @SecurityRequirement(name = "bearerAuth") })
-    public ResponseEntity<Vehicule> getVehiculeById(@PathVariable Long id) {
+    public ResponseEntity<Vehicule> getVehiculeById(@PathVariable (name = "id") Long id) {
         log.info("Récupération du vehicule avec l'id " + id);
         Vehicule vehicule = this.vehiculeService.getVehiculeById(id);
         log.info("Vehicule récupéré avec succès : \n\t" + vehicule);
@@ -169,7 +169,7 @@ public class VehiculeController {
             description = "Mettre à jour un vehicule en fonction de ses informations",
             tags = { "vehicule" },
             security = { @SecurityRequirement(name = "bearerAuth") })
-    public ResponseEntity<Vehicule> putVehicule(@PathVariable Long id,@RequestBody Vehicule vehicule) {
+    public ResponseEntity<Vehicule> putVehicule(@PathVariable (name = "id") Long id,@RequestBody Vehicule vehicule) {
         log.info("Mise à jour du vehicule ...");
         Vehicule savedObjet = this.vehiculeService.updateVehicule(id, vehicule);
         log.info("Vehicule mis à jour avec succès : \n\t" + savedObjet);
@@ -205,7 +205,7 @@ public class VehiculeController {
             description = "Supprimer un vehicule en fonction de son id",
             tags = { "vehicule" },
             security = { @SecurityRequirement(name = "bearerAuth") })
-    public ResponseEntity<Void> deleteVehicule(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteVehicule(@PathVariable (name = "id") Long id) {
         log.info("Suppression du vehicule ...");
         this.vehiculeService.deleteVehicule(id);
         log.info("Vehicule supprimé avec succès.");

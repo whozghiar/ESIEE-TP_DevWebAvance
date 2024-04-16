@@ -1,6 +1,7 @@
 package fr.unilasalle.tp_garage_auto.beans;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
@@ -66,6 +67,7 @@ public class Vehicule {
     // Relation avec Client
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     //@JsonBackReference("client-vehicule")
     private Client client;
 

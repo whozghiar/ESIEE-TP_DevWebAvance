@@ -84,7 +84,7 @@ public class RendezVousController {
             description = "Récupérer un rendez-vous en fonction de son id",
             tags = { "rendez-vous" },
             security = { @SecurityRequirement(name = "bearerAuth") })
-    public ResponseEntity<RendezVous> getRendezVousById(@PathVariable Long id) {
+    public ResponseEntity<RendezVous> getRendezVousById(@PathVariable (name = "id") Long id) {
         log.info("Récupération du rendez-vous avec l'id " + id);
         RendezVous rendezVous = this.rendezVousService.getRendezVousById(id);
         log.info("Rendez-vous récupéré avec succès : \n\t" + rendezVous);
@@ -182,7 +182,7 @@ public class RendezVousController {
             description = "Mettre à jour un rendez-vous en fonction de ses informations",
             tags = { "rendez-vous" },
             security = { @SecurityRequirement(name = "bearerAuth") })
-    public ResponseEntity<RendezVous> putRendezVous(@PathVariable Long id,@RequestBody RendezVous rendezVous) throws ServiceException {
+    public ResponseEntity<RendezVous> putRendezVous(@PathVariable (name = "id") Long id,@RequestBody RendezVous rendezVous) throws ServiceException {
         log.info("Mise à jour du rendez-vous ...");
         RendezVous savedObjet = this.rendezVousService.updateRendezVous(id,rendezVous);
         log.info("Rendez-vous mis à jour avec succès : \n\t" + savedObjet);
@@ -200,7 +200,7 @@ public class RendezVousController {
             description = "Supprimer un rendez-vous",
             tags = { "rendez-vous" },
             security = { @SecurityRequirement(name = "bearerAuth") })
-    public ResponseEntity<Void> deleteRendezVous(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteRendezVous(@PathVariable (name = "id") Long id) {
         log.info("Suppression du rendez-vous avec l'id " + id + ".");
         this.rendezVousService.deleteRendezVous(id);
         log.info("Rendez-vous supprimé avec succès.");

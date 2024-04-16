@@ -7,7 +7,9 @@ import { HttpClient } from '@angular/common/http';
 export class AppointmentService {
   private appointmentArray: any[] = [];
   constructor(private httpClient: HttpClient) {
-    this.refreshAppointments();
+    setTimeout(() => {
+      this.refreshAppointments();
+    }, 1000);
   }
 
   refreshAppointments() {

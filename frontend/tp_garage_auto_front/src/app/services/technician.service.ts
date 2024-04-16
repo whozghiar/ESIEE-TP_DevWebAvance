@@ -8,7 +8,9 @@ export class TechnicianService {
   private technicianArray: any[] = [];
 
   constructor(private httpClient: HttpClient) {
-    this.refreshTechnicians();
+    setTimeout(() => {
+      this.refreshTechnicians();
+    }, 1000);
   }
 
   refreshTechnicians() {
