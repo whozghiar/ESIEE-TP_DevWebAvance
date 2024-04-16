@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.security.access.AccessDeniedException;
 
@@ -58,14 +59,25 @@ public class GlobalExceptionHandler {
     }
 
     // Gestionnaire pour AccessDeniedException
-    @ExceptionHandler(AccessDeniedException.class)
+    @ExceptionHandler({AccessDeniedException.class, HttpClientErrorException.Forbidden.class})
     public ResponseEntity<API_ERRORS> handleAccessDeniedException(AccessDeniedException e, WebRequest request) {
-        API_ERRORS body = new API_ERRORS(LocalDateTime.now(), HttpStatus.FORBIDDEN, "Accès refusé", Collections.singletonList(e.getMessage()));
+        API_ERRORS body = new API_ERRORS(LocalDateTime.now(), HttpStatus.FORBIDDEN, "Accès interdit", Collections.singletonList(e.getMessage()));
         body.getErrors_msg().forEach(msg ->{
             log.error(body.getType() + " : \n\t" + msg);
         });
         return new ResponseEntity<>(body, HttpStatus.FORBIDDEN);
     }
+
+    // Gestionnaire pour UnauthorizedException
+    @ExceptionHandler(HttpClientErrorException.Unauthorized.class)
+    public ResponseEntity<API_ERRORS> handleForbiddenException(HttpClientErrorException.Unauthorized e, WebRequest request) {
+        API_ERRORS body = new API_ERRORS(LocalDateTime.now(), HttpStatus.UNAUTHORIZED, "Accès non authorisé", Collections.singletonList(e.getMessage()));
+        body.getErrors_msg().forEach(msg ->{
+            log.error(body.getType() + " : \n\t" + msg);
+        });
+        return new ResponseEntity<>(body, HttpStatus.FORBIDDEN);
+    }
+
 
     // Gestionnaire de RuntimeException
     @ExceptionHandler(RuntimeException.class)

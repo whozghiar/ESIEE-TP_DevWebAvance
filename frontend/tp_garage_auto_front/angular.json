@@ -54,6 +54,11 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options": {
+            "buildTarget": "tp-garage-auto-front:build",
+            "proxyConfig": "./proxy.conf.json"
+          },
+
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "buildTarget": "tp_garage_auto_front:build",
@@ -95,5 +100,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

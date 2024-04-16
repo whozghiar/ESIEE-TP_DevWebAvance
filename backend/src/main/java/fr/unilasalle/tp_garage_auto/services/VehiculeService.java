@@ -167,7 +167,6 @@ public class VehiculeService {
         existingVehicule.setModele(vehicule.getModele());
         existingVehicule.setAnnee(vehicule.getAnnee());
         existingVehicule.setClient(vehicule.getClient());
-        existingVehicule.setRendezVous(vehicule.getRendezVous());
 
         try {
             return vehiculeRepository.save(vehicule);

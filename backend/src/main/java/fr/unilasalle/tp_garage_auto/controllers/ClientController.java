@@ -2,6 +2,11 @@ package fr.unilasalle.tp_garage_auto.controllers;
 
 import fr.unilasalle.tp_garage_auto.beans.Client;
 import fr.unilasalle.tp_garage_auto.exceptions.ServiceException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,6 +23,13 @@ import java.util.Set;
 @RequestMapping("client")
 @RequiredArgsConstructor
 @Slf4j
+@SecurityScheme(
+        name = "bearerAuth",
+        scheme = "bearer",
+        bearerFormat = "JWT",
+        type = SecuritySchemeType.HTTP,
+        in = SecuritySchemeIn.HEADER
+)
 public class ClientController {
 
     private final ClientService clientService;
@@ -32,19 +44,23 @@ public class ClientController {
      * @return
      */
     @GetMapping
-    //@PreAuthorize("hasAnyRole('admin','technicien','client')")
-    public ResponseEntity<?> getClients(@RequestParam(required = false) Optional<String> nom,
-                                        @RequestParam(required = false) Optional<String> prenom,
-                                        @RequestParam(required = false) Optional<String> email,
-                                        @RequestParam(required = false) Optional<String> telephone) throws ServiceException {
-        if (nom.isPresent()) {
-            return getClientByNom(nom.get());
-        } else if (prenom.isPresent()) {
-            return getClientByPrenom(prenom.get());
-        } else if (email.isPresent()) {
-            return getClientByEmail(email.get());
-        } else if (telephone.isPresent()) {
-            return getClientByTelephone(telephone.get());
+    @PreAuthorize("hasAnyRole('admin','technicien','client')")
+    @Operation(summary = "Récupérer tous les clients",
+            description = "Récupérer tous les clients en fonction de certains critères",
+            tags = { "client" },
+            security = { @SecurityRequirement(name = "bearerAuth") })
+    public ResponseEntity<?> getClients(@RequestParam(required = false) String nom,
+                                        @RequestParam(required = false) String prenom,
+                                        @RequestParam(required = false) String email,
+                                        @RequestParam(required = false) String telephone) throws ServiceException {
+        if (nom != null) {
+            return getClientByNom(nom);
+        } else if (prenom != null) {
+            return getClientByPrenom(prenom);
+        } else if (email != null) {
+            return getClientByEmail(email);
+        } else if (telephone != null) {
+            return getClientByTelephone(telephone);
         } else {
             log.info("Récupération de tous les clients ...");
             Set<Client> clients = this.clientService.getAllClients();
@@ -59,7 +75,11 @@ public class ClientController {
      * @return
      */
     @GetMapping("/{id}")
-    //@PreAuthorize("hasAnyRole('admin','technicien','client')")
+    @PreAuthorize("hasAnyRole('admin','technicien','client')")
+    @Operation(summary = "Récupérer un client par son id",
+            description = "Récupérer un client par son id",
+            tags = { "client" },
+            security = { @SecurityRequirement(name = "bearerAuth") })
     public ResponseEntity<Client> getClientById(@PathVariable Long id) {
         log.info("Récupération du client avec l'id " + id);
         Client client = this.clientService.getClientById(id);
@@ -129,7 +149,11 @@ public class ClientController {
      * @return
      */
     @PostMapping
-    //@PreAuthorize("hasAnyRole('admin','technicien')")
+    @PreAuthorize("hasAnyRole('admin','technicien')")
+    @Operation(summary = "Créer un client",
+            description = "Créer un client",
+            tags = { "client" },
+            security = { @SecurityRequirement(name = "bearerAuth") })
     public ResponseEntity<Client> postClient(@RequestBody Client client) throws ServiceException {
 
         log.info("Création d'un client ...");
@@ -146,7 +170,11 @@ public class ClientController {
      * @return
      */
     @PutMapping("/{id}")
-    //@PreAuthorize("hasAnyRole('admin','technicien')")
+    @PreAuthorize("hasAnyRole('admin','technicien')")
+    @Operation(summary = "Mettre à jour un client",
+            description = "Mettre à jour un client",
+            tags = { "client" },
+            security = { @SecurityRequirement(name = "bearerAuth") })
     public ResponseEntity<Client> putClient(@PathVariable Long id, @RequestBody Client client) throws ServiceException {
         log.info("Mis à jour du client ...");
         Client savedObjet = this.clientService.updateClient(id,client);
@@ -160,7 +188,11 @@ public class ClientController {
      * @return
      */
     @DeleteMapping("/{id}")
-    //@PreAuthorize("hasAnyRole('admin','technicien')")
+    @PreAuthorize("hasAnyRole('admin','technicien')")
+    @Operation(summary = "Supprimer un client",
+            description = "Supprimer un client",
+            tags = { "client" },
+            security = { @SecurityRequirement(name = "bearerAuth") })
     public ResponseEntity<Void> deleteClient(@PathVariable Long id) {
         log.info("Suppression du client avec l'id " + id);
         this.clientService.deleteClient(id);

@@ -36,15 +36,19 @@ public class SecurityConfig {
         http
                 // Requêtes autorisées
                 .authorizeHttpRequests(authorize -> authorize
-                        //.requestMatchers("/", "/images/**").permitAll()
-                        .requestMatchers("swagger-ui/**","swagger-ui.html","swagger-resources/**","v3/api-docs/**").permitAll()//authenticated()
+                        .requestMatchers("swagger-ui/**","swagger-ui.html","swagger-resources/**","v3/api-docs/**")
+                                .permitAll()
+                                //.authenticated()
                         // Ne pas autoriser les autres requêtes
-                        .anyRequest().permitAll()//denyAll()
+                        .anyRequest()
+                            .authenticated()
                 );
         http
                 // Autoriser les requêtes POST/PUT/DELETE
                 .csrf(AbstractHttpConfigurer::disable);
-
+        http
+                // Autoriser les requêtes CORS : Cross-Origin Resource Sharing
+                .cors(AbstractHttpConfigurer::disable);
         http
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt

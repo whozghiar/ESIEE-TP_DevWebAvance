@@ -15,4 +15,5 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     Client findByEmailContainingIgnoreCase(String email);
 
     Client findByTelephoneContainingIgnoreCase(String telephone);
+
 }

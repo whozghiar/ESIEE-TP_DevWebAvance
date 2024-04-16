@@ -1,6 +1,7 @@
 package fr.unilasalle.tp_garage_auto.beans;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -32,18 +33,22 @@ public class Technicien {
     @NotNull(message = "Le nom ne peut pas être nul")
     @NotEmpty(message = "Le nom ne peut pas être vide")
     @Size(min = 2, max = 50, message = "Le nom doit être compris entre 2 et 50 caractères")
+    @Schema(description = "Nom du technicien", example = "AUBRY")
     private String nom;
 
     @NotBlank(message = "Le prénom est obligatoire")
     @NotNull(message = "Le prénom ne peut pas être nul")
     @NotEmpty(message = "Le prénom ne peut pas être vide")
     @Size(min = 2, max = 50, message = "Le prénom doit être compris entre 2 et 50 caractères")
+    @Schema(description = "Prénom du technicien", example = "Martine")
     private String prenom;
 
 
+    /*
     @OneToMany(mappedBy = "technicien", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference("technicien-rendezVous")
     private Set<RendezVous> rendezVous;
+     */
 
 
 

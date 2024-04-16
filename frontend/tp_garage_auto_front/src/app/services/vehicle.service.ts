@@ -8,16 +8,16 @@ export class VehicleService {
   private vehicleArray: any[] = [];
 
   constructor(private httpClient: HttpClient) {
+    console.log('Constructeur VehicleService');
     this.refreshVehicles();
     console.log('constructor vehicles');
   }
 
   refreshVehicles() {
     this.httpClient.get('/api/vehicule').subscribe((vehicles: any) => {
-      console.log(vehicles, 'get vehicles requete envoyée');
       this.vehicleArray = vehicles;
     });
-    console.log(this.vehicleArray + 'refresh vehicles');
+    console.log("Véhicules : \n\t", this.vehicleArray);
   }
 
   getAllVehicles() {
@@ -34,10 +34,8 @@ export class VehicleService {
       immatriculation: vehicleSent.plateNumber,
       rendezVous: vehicleSent.appointmentsVehicle,
     };
-    console.log(vehicle, 'vehicle ajout');
-    this.httpClient.post('/api/vehicule', vehicle).subscribe(() => {
+    this.httpClient.post('/api/vehicules', vehicle).subscribe(() => {
       this.refreshVehicles();
-      //console.log(vehicle, 'vehicle ajout requete envoyée" ');
     });
   }
 

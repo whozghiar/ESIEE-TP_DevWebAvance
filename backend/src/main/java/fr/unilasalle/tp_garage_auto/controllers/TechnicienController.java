@@ -8,6 +8,11 @@ import fr.unilasalle.tp_garage_auto.exceptions.DTOException;
 import fr.unilasalle.tp_garage_auto.exceptions.NotFoundException;
 import fr.unilasalle.tp_garage_auto.exceptions.ServiceException;
 import fr.unilasalle.tp_garage_auto.services.TechnicienService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -23,6 +28,13 @@ import java.util.Set;
 @RequestMapping("technicien")
 @RequiredArgsConstructor
 @Slf4j
+@SecurityScheme(
+        name = "bearerAuth",
+        scheme = "bearer",
+        bearerFormat = "JWT",
+        type = SecuritySchemeType.HTTP,
+        in = SecuritySchemeIn.HEADER
+)
 public class TechnicienController {
     private final TechnicienService technicienService;
 
@@ -34,16 +46,17 @@ public class TechnicienController {
      * @return
      */
     @GetMapping
-    //@PreAuthorize("hasAnyRole('admin','technicien','client')")
-    public ResponseEntity<?> getTechnicien(@RequestParam(required = false) Optional<String> nom,
-                                           @RequestParam(required = false) Optional<String> prenom,
-                                           @RequestParam(required = false) Optional<Long> rendezVousId) throws ServiceException {
-        if (nom.isPresent()) {
-            return getTechnicienByNom(nom.get());
-        } else if (prenom.isPresent()) {
-            return getTechnicienByPrenom(prenom.get());
-        } else if (rendezVousId.isPresent()) {
-            return getTechnicienByRendezVousId(rendezVousId.get());
+    @PreAuthorize("hasAnyRole('admin','technicien','client')")
+    @Operation(summary = "Récupérer tous les techniciens",
+            description = "Récupérer tous les techniciens en fonction de certains critères",
+            tags = { "technicien" },
+            security = { @SecurityRequirement(name = "bearerAuth") })
+    public ResponseEntity<?> getTechnicien(@RequestParam(required = false, name = "nom") String nom,
+                                           @RequestParam(required = false, name="prenom") String prenom) throws ServiceException {
+        if (nom != null) {
+            return getTechnicienByNom(nom);
+        } else if (prenom != null) {
+            return getTechnicienByPrenom(prenom);
         } else {
             log.info("Récupération de tous les techniciens ...");
             Set<Technicien> technicien = this.technicienService.getAllTechniciens();
@@ -59,7 +72,11 @@ public class TechnicienController {
      * @return
      */
     @GetMapping("/{id}")
-    //@PreAuthorize("hasAnyRole('admin','technicien','client')")
+    @PreAuthorize("hasAnyRole('admin','technicien','client')")
+    @Operation(summary = "Récupérer un technicien par son id",
+            description = "Récupérer un technicien en fonction de son id",
+            tags = { "technicien" },
+            security = { @SecurityRequirement(name = "bearerAuth") })
     public ResponseEntity<Technicien> getTechnicienById(@PathVariable Long id) {
         log.info("Récupération du technicien avec l'id " + id);
         Technicien technicien = this.technicienService.getTechnicienById(id);
@@ -92,24 +109,16 @@ public class TechnicienController {
     }
 
     /**
-     * Méthode GET pour récupérer les techniciens par rendezVousId
-     * @param rendezVousId
-     * @return
-     */
-    public ResponseEntity<Technicien> getTechnicienByRendezVousId(Long rendezVousId) {
-        log.info("Récupération du technicien avec le rendezVousId " + rendezVousId);
-        Technicien technicien = this.technicienService.getTechnicienByRendezVousId(rendezVousId);
-        log.info("Technicien récupéré avec succès : \n\t" + technicien);
-        return new ResponseEntity<>(technicien, HttpStatus.OK);
-    }
-
-    /**
      * Méthode POST pour créer un technicien
      * @param technicien
      * @return
      */
     @PostMapping
-    //@PreAuthorize("hasAnyRole('admin','technicien')")
+    @PreAuthorize("hasAnyRole('admin','technicien')")
+    @Operation(summary = "Créer un technicien",
+            description = "Créer un technicien en fonction de ses informations",
+            tags = { "technicien" },
+            security = { @SecurityRequirement(name = "bearerAuth") })
     public ResponseEntity<Technicien> postTechnicien(@RequestBody Technicien technicien) throws ServiceException {
         log.info("Création d'un technicien ...");
         Technicien savedObjet = this.technicienService.createTechnicien(technicien);
@@ -125,7 +134,11 @@ public class TechnicienController {
      * @return
      */
     @PutMapping("/{id}")
-    //@PreAuthorize("hasAnyRole('admin','technicien')")
+    @PreAuthorize("hasAnyRole('admin','technicien')")
+    @Operation(summary = "Mettre à jour un technicien",
+            description = "Mettre à jour un technicien en fonction de ses informations",
+            tags = { "technicien" },
+            security = { @SecurityRequirement(name = "bearerAuth") })
     public ResponseEntity<Technicien> putTechnicien(@PathVariable Long id,@RequestBody Technicien technicien) throws ServiceException {
         log.info("Mise à jour du technicien ...");
         Technicien savedObjet = this.technicienService.updateTechnicien(id,technicien);
@@ -139,7 +152,11 @@ public class TechnicienController {
      * @return
      */
     @DeleteMapping("/{id}")
-    //@PreAuthorize("hasAnyRole('admin','technicien')")
+    @PreAuthorize("hasAnyRole('admin','technicien')")
+    @Operation(summary = "Supprimer un technicien",
+            description = "Supprimer un technicien en fonction de son id",
+            tags = { "technicien" },
+            security = { @SecurityRequirement(name = "bearerAuth") })
     public ResponseEntity<Void> deleteTechnicien(@PathVariable Long id) {
         log.info("Suppression du technicien avec l'id " + id + ".");
         this.technicienService.deleteTechnicien(id);
