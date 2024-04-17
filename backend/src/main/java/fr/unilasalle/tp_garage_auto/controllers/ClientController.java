@@ -20,7 +20,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("api/client")
+@RequestMapping("client")
 @RequiredArgsConstructor
 @Slf4j
 @SecurityScheme(
@@ -37,9 +37,10 @@ public class ClientController {
 
     /**
      * Méthode GET pour récupérer tous les clients
-     * @param nom : nom du client
-     * @param prenom : prenom du client
-     * @param email : email du client
+     *
+     * @param nom       : nom du client
+     * @param prenom    : prenom du client
+     * @param email     : email du client
      * @param telephone : telephone du client
      * @return
      */
@@ -47,12 +48,12 @@ public class ClientController {
     @PreAuthorize("hasAnyRole('admin','technicien','client')")
     @Operation(summary = "Récupérer tous les clients",
             description = "Récupérer tous les clients en fonction de certains critères",
-            tags = { "client" },
-            security = { @SecurityRequirement(name = "bearerAuth") })
-    public ResponseEntity<?> getClients(@RequestParam(required = false) String nom,
-                                        @RequestParam(required = false) String prenom,
-                                        @RequestParam(required = false) String email,
-                                        @RequestParam(required = false) String telephone) throws ServiceException {
+            tags = {"client"},
+            security = {@SecurityRequirement(name = "bearerAuth")})
+    public ResponseEntity<?> getClients(@RequestParam(required = false,name = "nom") String nom,
+                                        @RequestParam(required = false,name = "prenom") String prenom,
+                                        @RequestParam(required = false,name = "email") String email,
+                                        @RequestParam(required = false,name = "telephone") String telephone) throws ServiceException {
         if (nom != null) {
             return getClientByNom(nom);
         } else if (prenom != null) {
@@ -71,6 +72,7 @@ public class ClientController {
 
     /**
      * Méthode GET pour récupérer un client par id
+     *
      * @param id
      * @return
      */
@@ -78,9 +80,9 @@ public class ClientController {
     @PreAuthorize("hasAnyRole('admin','technicien','client')")
     @Operation(summary = "Récupérer un client par son id",
             description = "Récupérer un client par son id",
-            tags = { "client" },
-            security = { @SecurityRequirement(name = "bearerAuth") })
-    public ResponseEntity<Client> getClientById(@PathVariable Long id) {
+            tags = {"client"},
+            security = {@SecurityRequirement(name = "bearerAuth")})
+    public ResponseEntity<Client> getClientById(@PathVariable (name = "id") Long id) {
         log.info("Récupération du client avec l'id " + id);
         Client client = this.clientService.getClientById(id);
         log.info("Client récupéré avec succès : \n\t" + client);
@@ -91,6 +93,7 @@ public class ClientController {
 
     /**
      * Récupérer les clients par nom
+     *
      * @param nom
      * @return
      */
@@ -103,6 +106,7 @@ public class ClientController {
 
     /**
      * Récupérer les clients par prénom
+     *
      * @param prenom
      * @return
      */
@@ -117,6 +121,7 @@ public class ClientController {
 
     /**
      * Récupérer les clients par email
+     *
      * @param email
      * @return
      */
@@ -130,6 +135,7 @@ public class ClientController {
 
     /**
      * Récupérer les clients par téléphone
+     *
      * @param telephone
      * @return
      */
@@ -145,6 +151,7 @@ public class ClientController {
 
     /**
      * Méthode POST pour créer un client
+     *
      * @param client
      * @return
      */
@@ -152,8 +159,8 @@ public class ClientController {
     @PreAuthorize("hasAnyRole('admin','technicien')")
     @Operation(summary = "Créer un client",
             description = "Créer un client",
-            tags = { "client" },
-            security = { @SecurityRequirement(name = "bearerAuth") })
+            tags = {"client"},
+            security = {@SecurityRequirement(name = "bearerAuth")})
     public ResponseEntity<Client> postClient(@RequestBody Client client) throws ServiceException {
 
         log.info("Création d'un client ...");
@@ -165,6 +172,7 @@ public class ClientController {
 
     /**
      * Méthode PUT pour mettre à jour un client
+     *
      * @param id
      * @param client
      * @return
@@ -173,17 +181,18 @@ public class ClientController {
     @PreAuthorize("hasAnyRole('admin','technicien')")
     @Operation(summary = "Mettre à jour un client",
             description = "Mettre à jour un client",
-            tags = { "client" },
-            security = { @SecurityRequirement(name = "bearerAuth") })
-    public ResponseEntity<Client> putClient(@PathVariable Long id, @RequestBody Client client) throws ServiceException {
+            tags = {"client"},
+            security = {@SecurityRequirement(name = "bearerAuth")})
+    public ResponseEntity<Client> putClient(@PathVariable (name = "id") Long id, @RequestBody Client client) throws ServiceException {
         log.info("Mis à jour du client ...");
-        Client savedObjet = this.clientService.updateClient(id,client);
+        Client savedObjet = this.clientService.updateClient(id, client);
         log.info("Client mis à jour avec succès : \n\t" + savedObjet);
         return new ResponseEntity<>(savedObjet, HttpStatus.ACCEPTED);
     }
 
     /**
      * Méthode DELETE pour supprimer un client
+     *
      * @param id
      * @return
      */
@@ -191,16 +200,14 @@ public class ClientController {
     @PreAuthorize("hasAnyRole('admin','technicien')")
     @Operation(summary = "Supprimer un client",
             description = "Supprimer un client",
-            tags = { "client" },
-            security = { @SecurityRequirement(name = "bearerAuth") })
-    public ResponseEntity<Void> deleteClient(@PathVariable Long id) {
+            tags = {"client"},
+            security = {@SecurityRequirement(name = "bearerAuth")})
+    public ResponseEntity<Void> deleteClient(@PathVariable (name = "id") Long id) {
         log.info("Suppression du client avec l'id " + id);
         this.clientService.deleteClient(id);
         log.info("Client supprimé avec succès.");
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
 
 
 }

@@ -8,7 +8,9 @@ export class ClientService {
   private clientArray: any[] = [];
 
   constructor(private httpClient: HttpClient) {
-    this.refreshClients();
+    setTimeout(() => {
+      this.refreshClients();
+    }, 1000);
   }
 
   refreshClients() {
@@ -24,22 +26,24 @@ export class ClientService {
 
   addClient(clientSent: any) {
     let client = {
-      name: clientSent.name,
-      surname: clientSent.surname,
-      availability: clientSent.availability,
-      avatar: clientSent.avatar,
+      prenom: clientSent.prenom,
+      nom: clientSent.nom,
+      email: clientSent.email,
+      telephone: clientSent.telephone,
     };
     // Uncomment the following lines when your API endpoint is ready
-    // this.httpClient.post("/api/technicians", technician).subscribe(() => {
-    //   this.refreshTechnicians();
-    // })
+    this.httpClient.post('/api/client', client).subscribe(() => {
+      this.refreshClients();
+    });
+    console.log('client added');
   }
 
   removeClient(id: number) {
     // Uncomment the following lines when your API endpoint is ready
-    // this.httpClient.delete("/api/client/" + id).subscribe(() => {
-    //   this.refreshClients();
-    // })
+    this.httpClient.delete('/api/client/' + id).subscribe(() => {
+      this.refreshClients();
+    });
+    console.log('client removed');
   }
 
   getAvailableTechniciansCount() {

@@ -1,6 +1,7 @@
 package fr.unilasalle.tp_garage_auto.beans;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
@@ -41,12 +42,14 @@ public class RendezVous {
     // Relation avec Véhicule
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "vehicule_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     //@JsonBackReference("vehicule-rendezVous")
     private Vehicule vehicule;
 
     // Relation avec Technicien
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "technicien_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     //@JsonBackReference("technicien-rendezVous")
     private Technicien technicien;
 }

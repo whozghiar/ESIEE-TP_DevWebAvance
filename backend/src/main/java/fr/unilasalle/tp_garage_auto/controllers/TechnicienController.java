@@ -25,7 +25,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("api/technicien")
+@RequestMapping("technicien")
 @RequiredArgsConstructor
 @Slf4j
 @SecurityScheme(
@@ -77,7 +77,7 @@ public class TechnicienController {
             description = "Récupérer un technicien en fonction de son id",
             tags = { "technicien" },
             security = { @SecurityRequirement(name = "bearerAuth") })
-    public ResponseEntity<Technicien> getTechnicienById(@PathVariable Long id) {
+    public ResponseEntity<Technicien> getTechnicienById(@PathVariable (name = "id") Long id) {
         log.info("Récupération du technicien avec l'id " + id);
         Technicien technicien = this.technicienService.getTechnicienById(id);
         log.info("Technicien récupéré avec succès : \n\t" + technicien);
@@ -139,7 +139,7 @@ public class TechnicienController {
             description = "Mettre à jour un technicien en fonction de ses informations",
             tags = { "technicien" },
             security = { @SecurityRequirement(name = "bearerAuth") })
-    public ResponseEntity<Technicien> putTechnicien(@PathVariable Long id,@RequestBody Technicien technicien) throws ServiceException {
+    public ResponseEntity<Technicien> putTechnicien(@PathVariable (name = "id") Long id,@RequestBody Technicien technicien) throws ServiceException {
         log.info("Mise à jour du technicien ...");
         Technicien savedObjet = this.technicienService.updateTechnicien(id,technicien);
         log.info("Technicien mis à jour avec succès : \n\t" + savedObjet);
@@ -157,7 +157,7 @@ public class TechnicienController {
             description = "Supprimer un technicien en fonction de son id",
             tags = { "technicien" },
             security = { @SecurityRequirement(name = "bearerAuth") })
-    public ResponseEntity<Void> deleteTechnicien(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteTechnicien(@PathVariable (name = "id") Long id) {
         log.info("Suppression du technicien avec l'id " + id + ".");
         this.technicienService.deleteTechnicien(id);
         log.info("Technicien supprimé avec succès.");

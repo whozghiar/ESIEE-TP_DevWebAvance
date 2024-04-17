@@ -60,6 +60,10 @@
           },
 
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "buildTarget": "tp_garage_auto_front:build",
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "tp_garage_auto_front:build:production"

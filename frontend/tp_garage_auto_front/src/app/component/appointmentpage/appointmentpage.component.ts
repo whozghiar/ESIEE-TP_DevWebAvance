@@ -4,8 +4,28 @@ import { AppointmentService } from '../../services/appointment.service';
 import { AppointmentformComponent } from '../appointmentform/appointmentform.component';
 
 interface Appointment {
-  time: string;
-  clientName: string;
+  id: number;
+  typeService: string;
+  date: string;
+  vehicule: Vehicule;
+  technicien: {};
+}
+
+interface Vehicule {
+  id: number;
+  marque: string;
+  modele: string;
+  annee: number;
+  immatriculation: string;
+  client : Client;
+}
+
+interface Client {
+  id: number;
+  nom: string;
+  prenom: string;
+  telephone: string;
+  email: string;
 }
 
 interface Day {
@@ -23,10 +43,9 @@ interface Day {
 export class AppointmentpageComponent implements OnInit {
   appointment: any = {
     date: '',
-    time: '',
-    vehicle: '',
-    client: '',
-    description: '',
+    typeService: '',
+    vehicule: '',
+    technicien: '',
   };
 
   // Exemple de données pour le calendrier
@@ -51,6 +70,7 @@ export class AppointmentpageComponent implements OnInit {
 
   constructor(protected appointmentService: AppointmentService) {
     this.days = this.appointmentService.getAllAppointments();
+    console.log(this.days, 'days appointements');
   }
 
   ngOnInit() {
@@ -60,11 +80,18 @@ export class AppointmentpageComponent implements OnInit {
   generateDays(month: number, year: number) {
     let daysInMonth = new Date(year, month, 0).getDate();
     let daysArray = [];
+    let appointments = this.appointmentService.getAllAppointments();
 
     for (let i = 1; i <= daysInMonth; i++) {
+      let dayAppointments = appointments.filter((appointment) => {
+        let [day, month, year] = appointment.date.split('/').map(Number);
+        return (
+          day === i && month === this.currentMonth && year === this.currentYear
+        );
+      });
       daysArray.push({
         date: i,
-        appointments: [], // Ici, vous pouvez ajouter les rendez-vous pour chaque jour
+        appointments: dayAppointments,
       });
     }
 
