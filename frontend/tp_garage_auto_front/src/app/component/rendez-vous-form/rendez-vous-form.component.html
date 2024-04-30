@@ -1,0 +1,57 @@
+<div class="flex justify-center items-center h-screen">
+  <div class="flex flex-col w-full">
+    <form *ngIf="step === 1" [formGroup]="clientForm">
+      <input formControlName="nom" placeholder="Nom" class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4">
+      <div *ngIf="clientForm.get('nom')?.invalid && clientForm.get('nom')?.touched" class="text-red-500">
+        Le nom est invalide.
+      </div>
+      <input formControlName="prenom" placeholder="Prénom" class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4">
+      <div *ngIf="clientForm.get('prenom')?.invalid && clientForm.get('prenom')?.touched" class="text-red-500">
+        Le prénom est invalide.
+      </div>
+      <input formControlName="email" placeholder="Email" class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4">
+      <div *ngIf="clientForm.get('email')?.invalid && clientForm.get('email')?.touched" class="text-red-500">
+        L'email est invalide.
+      </div>
+      <input formControlName="telephone" placeholder="Téléphone" class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4">
+      <div *ngIf="clientForm.get('telephone')?.invalid && clientForm.get('telephone')?.touched" class="text-red-500">
+        Le téléphone est invalide.
+      </div>
+      <button type="button" (click)="nextStep()" class="bg-blue-600 text-white rounded shadow p-3">Suivant</button>
+    </form>
+
+    <form *ngIf="step === 2" [formGroup]="vehiculeForm">
+      <input formControlName="marque" placeholder="Marque" class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4">
+      <div *ngIf="vehiculeForm.get('marque')?.invalid && vehiculeForm.get('marque')?.touched" class="text-red-500">
+        La marque est invalide.
+      </div>
+      <input formControlName="modele" placeholder="Modèle" class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4">
+      <div *ngIf="vehiculeForm.get('modele')?.invalid && vehiculeForm.get('modele')?.touched" class="text-red-500">
+        Le modèle est invalide.
+      </div>
+      <input formControlName="immatriculation" placeholder="Immatriculation" class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4">
+      <div *ngIf="vehiculeForm.get('immatriculation')?.invalid && vehiculeForm.get('immatriculation')?.touched" class="text-red-500">
+        L'immatriculation est invalide.
+      </div>
+      <input formControlName="annee" placeholder="Année" class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4">
+      <div *ngIf="vehiculeForm.get('annee')?.invalid && vehiculeForm.get('annee')?.touched" class="text-red-500">
+        L'année est invalide.
+      </div>
+      <button type="button" (click)="previousStep()" class="bg-blue-600 text-white rounded shadow p-3">Précédent</button>
+      <button type="button" (click)="nextStep()" class="bg-blue-600 text-white rounded shadow p-3">Suivant</button>
+    </form>
+
+    <form *ngIf="step === 3" [formGroup]="rendezVousForm">
+      <input formControlName="date" type="date" placeholder="dd/mm/yyyy" class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4">
+      <div *ngIf="rendezVousForm.get('date')?.invalid && rendezVousForm.get('date')?.touched" class="text-red-500">
+        La date est invalide.
+      </div>
+      <input formControlName="typeService" placeholder="Type de Service" class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4">
+      <div *ngIf="rendezVousForm.get('typeService')?.invalid && rendezVousForm.get('typeService')?.touched" class="text-red-500">
+        Le type de service est invalide.
+      </div>
+      <button type="button" (click)="previousStep()" class="bg-blue-600 text-white rounded shadow p-3">Précédent</button>
+      <button type="button" (click)="submitRendezVous()" class="bg-blue-600 text-white rounded shadow p-3">Dépôt du rendez-vous</button>
+    </form>
+  </div>
+</div>

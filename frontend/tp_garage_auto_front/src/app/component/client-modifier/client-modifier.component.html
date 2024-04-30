@@ -1,0 +1,20 @@
+<form (ngSubmit)="updateClient()">
+  <div>
+    <span>🖊️</span>
+    <input [(ngModel)]="client.nom" name="nom">
+  </div>
+  <div>
+    <span>🖊️</span>
+    <input [(ngModel)]="client.prenom" name="prenom">
+  </div>
+  <div>
+    <span>🖊️</span>
+    <input [(ngModel)]="client.email" name="email">
+  </div>
+  <div>
+    <span>🖊️</span>
+    <input [(ngModel)]="client.telephone" name="telephone">
+  </div>
+  <button type="submit">Valider</button>
+  <span (click)="cancelUpdate()">🔴</span>
+</form>
