@@ -1,4 +1,5 @@
-<form (ngSubmit)="updateClient()" class="flex flex-col relative border p-4 rounded-lg shadow-lg">
+<!-- technicien-modifier.component.html -->
+<form (ngSubmit)="updateTechnicien()" class="flex flex-col relative border p-4 rounded-lg shadow-lg">
   <button (click)="cancelUpdate()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded top-2 right-2 self-end">
     Retour
   </button>
@@ -26,32 +27,6 @@
     <div *ngIf="prenomControl.invalid && (prenomControl.dirty || prenomControl.touched)">
       <div *ngIf="prenomControl.errors?.['required']">Le prénom est requis.</div>
       <div *ngIf="prenomControl.errors?.['pattern']">Le prénom doit être alphabétique.</div>
-    </div>
-  </div>
-  <div class="flex flex-col mb-4">
-    <div class="flex justify-between items-center">
-      <input [formControl]="emailControl" name="email" placeholder="luludupont@exemple.com" class="flex-1 border p-2">
-      <div>
-        <button *ngIf="!editingEmail" (click)="editEmail()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
-        <button *ngIf="editingEmail" (click)="cancelEmailUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
-      </div>
-    </div>
-    <div *ngIf="emailControl.invalid && (emailControl.dirty || emailControl.touched)">
-      <div *ngIf="emailControl.errors?.['required']">L'email est requis.</div>
-      <div *ngIf="emailControl.errors?.['email']">L'email doit être valide.</div>
-    </div>
-  </div>
-  <div class="flex flex-col mb-4">
-    <div class="flex justify-between items-center">
-      <input [formControl]="telephoneControl" name="telephone" placeholder="0634472547" class="flex-1 border p-2">
-      <div>
-        <button *ngIf="!editingTelephone" (click)="editTelephone()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
-        <button *ngIf="editingTelephone" (click)="cancelTelephoneUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
-      </div>
-    </div>
-    <div *ngIf="telephoneControl.invalid && (telephoneControl.dirty || telephoneControl.touched)">
-      <div *ngIf="telephoneControl.errors?.['required']">Le N° de téléphone est requis.</div>
-      <div *ngIf="telephoneControl.errors?.['pattern']">Le N° de téléphone doit être valide.</div>
     </div>
   </div>
   <button type="submit" [disabled]="formGroup.invalid" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded self-end">Valider</button>

@@ -1,25 +1,21 @@
-<div
-  class="border px-4 py-2 flex items-center rounded-lg bg-gradient-to-r from-blue-900 via-blue-600 to-blue-400 text-white"
->
+<!-- technicien-card.component.html -->
+<div class="border px-4 py-2 flex items-center rounded-lg bg-gradient-to-r from-blue-900 via-blue-600 to-blue-400 text-white">
   <div class="h-12 w-12 rounded-full flex items-center justify-center bg-blue-200 text-blue-900">
-    {{client.id}}
+    {{technicien.id}}
   </div>
   <div>
-    <div class="font-bold text-lg">{{ client.nom }} {{ client.prenom }}</div>
-    <div class="text-sm text-cyan-200">{{ client.email }}</div>
+    <div class="font-bold text-lg">{{ technicien.nom }} {{ technicien.prenom }}</div>
   </div>
-
-  <div class="text-sm text-cyan-200">{{ client.telephone }}</div>
 
   <div *ngIf="!isEditing" class="min-w-8 ml-auto text-white font-bold text-xl rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">
     <span (click)="switchToModifier()">🔧</span>
   </div>
 
   <button class="min-w-8 ml-auto text-white font-bold text-xl rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110"
-    (click)="deleteClient()">
+          (click)="deleteTechnicien()">
     ❌
   </button>
 </div>
 <div>
-  <app-client-modifier *ngIf="isEditing" [client]="client" (cancel)="switchToCard()"></app-client-modifier>
+  <app-technicien-modifier *ngIf="isEditing" [technicien]="technicien" (cancel)="switchToCard()"></app-technicien-modifier>
 </div>

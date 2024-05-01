@@ -2,21 +2,25 @@ import {Component, OnInit} from '@angular/core';
 import {Client} from "../../modeles/ClientModele/client";
 import {ClientService} from "../../services/ClientService/client.service";
 import {ClientCardComponent} from "../client-card/client-card.component";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {HttpResponse} from "@angular/common/http";
+import {LoadingSpinnerComponent} from "../loading-spinner/loading-spinner.component";
 
 @Component({
   selector: 'app-client-page',
   standalone: true,
   imports: [
     ClientCardComponent,
-    NgForOf
+    NgForOf,
+    LoadingSpinnerComponent,
+    NgIf
   ],
   templateUrl: './client-page.component.html',
   styleUrl: './client-page.component.css'
 })
 export class ClientPageComponent implements OnInit {
   clients!: Client[];
+  isLoading: boolean = true;
 
   constructor(private clientService: ClientService) { }
 
@@ -25,6 +29,7 @@ export class ClientPageComponent implements OnInit {
       if (response.body !== null) {
         this.clients = response.body;
       }
+      this.isLoading = false;
     });
   }
 
