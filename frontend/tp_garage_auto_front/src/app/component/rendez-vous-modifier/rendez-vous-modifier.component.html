@@ -1,1 +1,29 @@
-<p>rendez-vous-modifier works!</p>
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+<form *ngIf="!isLoading" (ngSubmit)="updateRendezVous()" class="flex flex-col relative border p-4 rounded-lg shadow-lg">
+  <button (click)="cancelUpdate()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded top-2 right-2 self-end">
+    Retour
+  </button>
+  <div class="flex flex-col mb-4 mt-4">
+    <select [formControl]="typeControl" name="type" class="flex-1 border p-2">
+      <option value="Contrôle Technique">Contrôle Technique</option>
+      <option value="Révision">Révision</option>
+      <option value="Réparation">Réparation</option>
+    </select>
+  </div>
+  <div class="flex flex-col mb-4">
+    <input [formControl]="dateControl" name="date" type="date" class="flex-1 border p-2">
+  </div>
+  <div class="flex flex-col mb-4">
+    <select [formControl]="vehiculeControl" name="vehicule" class="flex-1 border p-2">
+      <select [formControl]="technicienControl" name="technicien" class="flex-1 border p-2">
+        <option *ngFor="let vehicule of vehicules" [value]="vehicule.id">{{ vehicule.id }} - {{ vehicule.immatriculation }} {{ vehicule.client?.nom }}</option>
+      </select>
+    </select>
+  </div>
+  <div class="flex flex-col mb-4">
+    <select [formControl]="technicienControl" name="technicien" class="flex-1 border p-2">
+      <option *ngFor="let technicien of techniciens" [value]="technicien.id">{{ technicien.id }} - {{ technicien.nom }}</option>
+    </select>
+  </div>
+  <button type="submit" [disabled]="formGroup.invalid" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded self-end">Valider</button>
+</form>

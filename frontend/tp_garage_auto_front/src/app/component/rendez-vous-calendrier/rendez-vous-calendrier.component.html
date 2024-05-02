@@ -15,7 +15,7 @@
     </div>
     <div *ngIf="!isLoading; else loading">
       <div class="days grid grid-cols-7 gap-4">
-        <div *ngFor="let day of days" [class.disabled]="day.disabled" class="day flex justify-center items-center h-12 w-12 rounded-full" [class.bg-red-500]="day.hasAppointment" [class.bg-gray-200]="!day.hasAppointment" [class.text-white]="day.hasAppointment">
+        <div *ngFor="let day of days" [class.disabled]="day.disabled" class="day flex justify-center items-center h-12 w-12 rounded-full" [class.bg-red-500]="day.hasAppointment" [class.bg-gray-200]="!day.hasAppointment" [class.text-white]="day.hasAppointment" (click)="onDayClick(day)">
           {{ day.date }}
         </div>
       </div>

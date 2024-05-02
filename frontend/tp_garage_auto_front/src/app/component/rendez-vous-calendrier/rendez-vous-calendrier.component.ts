@@ -1,13 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {RendezVousService} from "../../services/RendezVousService/rendez-vous.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {LoadingSpinnerComponent} from "../loading-spinner/loading-spinner.component";
 import {FormsModule} from "@angular/forms";
+import {RendezVous} from "../../modeles/RendezVousModele/rendez-vous";
 
 interface Day {
   date: number;
   hasAppointment: boolean;
   disabled: boolean;
+  rendezVous?: RendezVous;
 }
 
 @Component({
@@ -31,6 +33,8 @@ export class RendezVousCalendrierComponent implements OnInit {
   months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
   years = Array(80).fill(0).map((x,i)=>i+2000); // Années de 2000 à 2079
   isLoading = true;
+
+  @Output() rendezVousSelected = new EventEmitter<RendezVous>();
 
   constructor(private rendezVousService: RendezVousService) {
     const date = new Date();
@@ -62,6 +66,7 @@ export class RendezVousCalendrierComponent implements OnInit {
             if (day) {
               day.hasAppointment = true;
               day.disabled = true;
+              day.rendezVous = rendezVous;
             }
           }
         });
@@ -94,5 +99,12 @@ export class RendezVousCalendrierComponent implements OnInit {
   parseDate(dateString: string): Date {
     const [day, month, year] = dateString.split("/");
     return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+  }
+
+  onDayClick(day: Day) {
+    if (day.hasAppointment && day.rendezVous) {
+      console.log('Emitting rendezVousSelected event', day.rendezVous);
+      this.rendezVousSelected.emit(day.rendezVous);
+    }
   }
 }

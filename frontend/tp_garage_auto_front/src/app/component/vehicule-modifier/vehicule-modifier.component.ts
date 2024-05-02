@@ -50,8 +50,9 @@ export class VehiculeModifierComponent implements OnInit{
     client: this.clientControl
   });
 
-  constructor(private vehiculeService: VehiculeService, private clientService: ClientService) {
-  }
+  constructor(
+    private vehiculeService: VehiculeService,
+    private clientService: ClientService) {  }
 
   ngOnInit() {
     // Récupération de la liste des clients
@@ -61,13 +62,13 @@ export class VehiculeModifierComponent implements OnInit{
       }
       this.isLoading = false;
     });
-    console.log(this.vehicule.client);
+
+
     this.marqueControl.setValue(this.vehicule.marque);
     this.modeleControl.setValue(this.vehicule.modele);
     this.immatriculationControl.setValue(this.vehicule.immatriculation);
     this.anneeControl.setValue(this.vehicule.annee.toString());
 
-    let clientStr = this.vehicule.client?.id?.toString() + ' - ' + this.vehicule.client?.nom + ' ' + this.vehicule.client?.prenom;
     this.clientControl.setValue(!this.vehicule.client?.id ? null : this.vehicule.client.id.toString());
   }
 

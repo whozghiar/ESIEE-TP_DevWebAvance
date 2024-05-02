@@ -6,6 +6,7 @@ import {ClientPageComponent} from "./component/client-page/client-page.component
 import {TechnicienPageComponent} from "./component/technicien-page/technicien-page.component";
 import {VehiculePageComponent} from "./component/vehicule-page/vehicule-page.component";
 import {RendezVousCalendrierComponent} from "./component/rendez-vous-calendrier/rendez-vous-calendrier.component";
+import {RendezVousPageComponent} from "./component/rendez-vous-page/rendez-vous-page.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -14,6 +15,6 @@ export const routes: Routes = [
   { path: 'technicien', component: TechnicienPageComponent},
   { path: 'vehicule', component: VehiculePageComponent},
   { path: 'rendez-vous-form', component:RendezVousFormComponent},
-  { path: 'calendrier', component:RendezVousCalendrierComponent},
+  { path: 'calendrier', component:RendezVousPageComponent},
   { path: '**', redirectTo: 'home' },
 ];
