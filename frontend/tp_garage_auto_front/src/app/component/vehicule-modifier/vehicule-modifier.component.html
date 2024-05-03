@@ -6,6 +6,9 @@
   <div class="flex flex-col mb-4 mt-4">
     <div class="flex justify-between items-center">
       <input [formControl]="marqueControl" name="marque" placeholder="Marque" class="flex-1 border p-2">
+      <div *ngIf="marqueControl.invalid && (marqueControl.dirty || marqueControl.touched)" class="text-red-500">
+        La marque est requise.
+      </div>
       <div>
         <button *ngIf="!editingMarque" (click)="editMarque()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
         <button *ngIf="editingMarque" (click)="cancelMarqueUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
@@ -15,6 +18,9 @@
   <div class="flex flex-col mb-4">
     <div class="flex justify-between items-center">
       <input [formControl]="modeleControl" name="modele" placeholder="Modèle" class="flex-1 border p-2">
+      <div *ngIf="modeleControl.invalid && (modeleControl.dirty || modeleControl.touched)" class="text-red-500">
+        Le modèle est requis.
+      </div>
       <div>
         <button *ngIf="!editingModele" (click)="editModele()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
         <button *ngIf="editingModele" (click)="cancelModeleUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
@@ -24,6 +30,9 @@
   <div class="flex flex-col mb-4">
     <div class="flex justify-between items-center">
       <input [formControl]="immatriculationControl" name="immatriculation" placeholder="Immatriculation" class="flex-1 border p-2">
+      <div *ngIf="immatriculationControl.invalid && (immatriculationControl.dirty || immatriculationControl.touched)" class="text-red-500">
+        L'immatriculation est requise et doit respecter le format français (ex: AA-123-AA ou 1234 AA 56).
+      </div>
       <div>
         <button *ngIf="!editingImmatriculation" (click)="editImmatriculation()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
         <button *ngIf="editingImmatriculation" (click)="cancelImmatriculationUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
@@ -33,6 +42,9 @@
   <div class="flex flex-col mb-4">
     <div class="flex justify-between items-center">
       <input [formControl]="anneeControl" name="annee" placeholder="Année" class="flex-1 border p-2">
+      <div *ngIf="anneeControl.invalid && (anneeControl.dirty || anneeControl.touched)" class="text-red-500">
+        L'année est requise.
+      </div>
       <div>
         <button *ngIf="!editingAnnee" (click)="editAnnee()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
         <button *ngIf="editingAnnee" (click)="cancelAnneeUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>

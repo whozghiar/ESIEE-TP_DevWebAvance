@@ -1,2 +1,4 @@
-<app-rendez-vous-calendrier (rendezVousSelected)="onRendezVousSelected($event)"></app-rendez-vous-calendrier>
-
+<div class="flex flex-row  mt-20">
+  <app-rendez-vous-calendrier class="flex-grow" (rendezVousSelected)="onRendezVousSelected($event)"></app-rendez-vous-calendrier>
+  <app-rendez-vous-modifier class="flex-shrink " *ngIf="selectedRendezVous" [rendezVous]="selectedRendezVous" (cancel)="onRendezVousModificationCancelled()"></app-rendez-vous-modifier>
+</div>

@@ -28,8 +28,7 @@ export class VehiculeModifierComponent implements OnInit{
 
   marqueControl = new FormControl({value:'',disabled:true}, [Validators.required]);
   modeleControl = new FormControl({value:'',disabled:true}, [Validators.required]);
-  immatriculationControl = new FormControl({value:'',disabled:true}, [Validators.required]);
-  anneeControl = new FormControl({value:'',disabled:true}, [Validators.required]);
+  immatriculationControl = new FormControl({value:'',disabled:true}, [Validators.required, Validators.pattern('^(?:\\d{4} \\w{2} \\d{2}|\\w{2}-\\d{3}-\\w{2})$')]);  anneeControl = new FormControl({value:'',disabled:true}, [Validators.required]);
   clientControl = new FormControl({value:'',disabled:true}, [Validators.required]);
 
   editingMarque = false;
@@ -93,6 +92,8 @@ export class VehiculeModifierComponent implements OnInit{
       if (selectedClient != null) {
         this.vehicule.client = selectedClient;
       }
+
+      console.log(this.vehicule);
       this.vehiculeService.updateVehicule(this.vehicule.id, this.vehicule).subscribe(response => {
         if (response.status === 202) {
           this.cancel.emit();

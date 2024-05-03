@@ -30,10 +30,10 @@ export class RendezVousModifierComponent implements OnInit {
   vehicules : Vehicule[] = [];
   techniciens: Technicien[] = [];
 
-  typeControl = new FormControl({value:'',disabled:true}, [Validators.required]);
-  dateControl = new FormControl({value:'',disabled:true}, [Validators.required]);
-  vehiculeControl = new FormControl({value:'',disabled:true}, [Validators.required]);
-  technicienControl = new FormControl({value:'',disabled:true}, [Validators.required]);
+  typeControl = new FormControl({value:'',disabled:false}, [Validators.required]);
+  dateControl = new FormControl({value:'',disabled:false}, [Validators.required]);
+  vehiculeControl = new FormControl({value:'',disabled:false}, [Validators.required]);
+  technicienControl = new FormControl({value:'',disabled:false}, [Validators.required]);
 
   formGroup = new FormGroup({
     type: this.typeControl,
@@ -56,36 +56,46 @@ export class RendezVousModifierComponent implements OnInit {
       if (response.body !== null) {
         this.vehicules = response.body;
         this.vehiculeControl.setValue(!this.rendezVous.vehicule?.id ? null : this.rendezVous.vehicule.id.toString());
-        console.log("Vehicules1 : " + this.vehicules);
       }
       this.isLoadingVehicules = false;
       this.checkLoading();
     });
 
+
     this.technicienService.getTechniciens().subscribe(response => {
       if (response.body !== null) {
         this.techniciens = response.body;
         this.technicienControl.setValue(!this.rendezVous.technicien?.id ? null : this.rendezVous.technicien.id.toString());
-        console.log("Techniciens1 : " + this.techniciens);
       }
       this.isLoadingTechniciens = false;
       this.checkLoading();
     });
 
     this.typeControl.setValue(this.rendezVous.typeService);
-    this.dateControl.setValue(this.rendezVous.date.toString());
+
+    if(this.rendezVous.date != null){
+      let [day,month, year] = this.rendezVous.date.split('/');
+      this.dateControl.setValue(year + '-' + month + '-' + day);
+    }else{
+      this.dateControl.setValue(null);
+    }
+
   }
 
   updateRendezVous(){
     let selectedVehicule;
     let selectedTechnicien;
 
+    console.log("Mise à jour du rendez-vous");
+
     if(this.rendezVous.id != null){
       if(this.typeControl.value != null){
         this.rendezVous.typeService = this.typeControl.value;
       }
       if(this.dateControl.value != null){
-        this.rendezVous.date = this.dateControl.value;
+        // Mettre au format dd/mm/yyyy
+        let [year, month, day] = this.dateControl.value.split('-');
+        this.rendezVous.date = day + '/' + month + '/' + year;
       }
 
       selectedVehicule = this.vehicules.find(vehicule => {
@@ -104,6 +114,8 @@ export class RendezVousModifierComponent implements OnInit {
         this.rendezVous.technicien = selectedTechnicien;
       }
 
+      console.log(this.rendezVous);
+
       this.rendezVousService.updateRendezVous(this.rendezVous.id, this.rendezVous).subscribe(response => {
         if (response.status === 202) {
           this.cancel.emit();
@@ -119,7 +131,6 @@ export class RendezVousModifierComponent implements OnInit {
   checkLoading() {
     if(!this.isLoadingVehicules && !this.isLoadingTechniciens) {
       this.isLoading = false;
-      console.log("Loading done !");
     }
   }
 
