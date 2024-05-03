@@ -1,0 +1,7 @@
+<div class="container mx-auto flex items-center justify-center h-screen">
+  <ng-container [ngSwitch]="step">
+    <app-client-form *ngSwitchCase="1" (nextStep)="onNextStepClient($event)" [client]="client"></app-client-form>
+    <app-vehicule-form *ngSwitchCase="2" [vehicule]="vehicule" [client]="client" (nextStep)="onNextStepVehicule($event)" (previousStep)="onPreviousStep()"></app-vehicule-form>
+    <app-rendez-vous-form *ngSwitchCase="3" [vehicule]="vehicule" (previousStep)="onPreviousStep()"></app-rendez-vous-form>
+  </ng-container>
+</div>

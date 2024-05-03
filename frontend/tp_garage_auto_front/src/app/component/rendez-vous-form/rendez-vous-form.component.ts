@@ -1,81 +1,62 @@
-import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
+import {Vehicule} from "../../modeles/VehiculeModele/vehicule";
+import {RendezVousService} from "../../services/RendezVousService/rendez-vous.service";
+import {RendezVousCalendrierComponent} from "../rendez-vous-calendrier/rendez-vous-calendrier.component";
 
 @Component({
   selector: 'app-rendez-vous-form',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    RendezVousCalendrierComponent
   ],
   templateUrl: './rendez-vous-form.component.html',
   styleUrl: './rendez-vous-form.component.css'
 })
-export class RendezVousFormComponent {
-  step: number = 1;
-  clientForm : FormGroup;
-  vehiculeForm : FormGroup;
-  rendezVousForm : FormGroup;
+export class RendezVousFormComponent implements OnInit{
+
+  @Output() previousStep = new EventEmitter<Vehicule>();
+  @Input() vehicule!: Vehicule;
+
+  // Contrôles de formulaire
+  dateControl = new FormControl({value:'',disabled:true}, [Validators.required]);
+  typeServiceControl = new FormControl({value:'',disabled:true}, [Validators.required, Validators.pattern(/^[a-zA-Z]*$/)]);
+
+
+  rendezVousForm = new FormGroup({
+    date: this.dateControl,
+    typeService: this.typeServiceControl
+  });
 
   constructor(
-    private fb: FormBuilder
-  ) {
-    this.clientForm = this.fb.group({
-      nom: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]*$/)]],
-      prenom: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]*$/)]],
-      email: ['', [Validators.required, Validators.email]],
-      telephone: ['', [Validators.required, Validators.pattern(/^0[1-9][0-9]{8}$/)]]
-    });
+    private rendezVousService: RendezVousService,
+  ){}
 
-    const currentYear = new Date().getFullYear(); // Récupère l'année actuelle
-
-    this.vehiculeForm = this.fb.group({
-      marque: ['', Validators.required],
-      modele: ['', Validators.required],
-      immatriculation: ['', [Validators.required, Validators.pattern(/^[A-Z]{2}-\d{3}-[A-Z]{2}$/)]],
-      annee: ['', [Validators.required, Validators.max(currentYear)]]
-    });
-
-    this.rendezVousForm = this.fb.group({
-      date: ['', [Validators.required, this.dateValidator]],
-      typeService: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]*$/)]]
-    });
+  ngOnInit() {
+    console.log("RendezVousFormComponent initialized");
+    console.log('Vehicule', this.vehicule)
   }
 
-  dateValidator(control: FormGroup): {[key: string]: any} | null {
-    const dateControl = control.get('date');
-    const selectedDate = new Date(dateControl?.value);
-    const now = new Date();
-    if (selectedDate < now) {
-      return { 'dateValidator': true };
-    }
-    return null;
-  }
-
-  nextStep() {
-    if (this.step === 1 && this.clientForm.valid) {
-      this.step++;
-    } else if (this.step === 2 && this.vehiculeForm.valid) {
-      this.step++;
-    } else if (this.step === 3 && this.rendezVousForm.valid) {
-      this.submitRendezVous();
+  onSubmit(){
+    if(this.rendezVousForm.valid){
+      const rendezVous = {
+        date: this.rendezVousForm.value.date || '',
+        typeService: this.rendezVousForm.value.typeService || ''
+      };
+      console.log(rendezVous);
     }
   }
 
-  previousStep() {
-    if(this.step > 1) {
-      this.step--;
-    }
+  onPrevious(){
+    this.previousStep.emit();
   }
 
-  submitRendezVous() {
-    const data = {
-      client: this.clientForm.value,
-      vehicule: this.vehiculeForm.value,
-      rendezVous: this.rendezVousForm.value
-    };
 
-    console.log(data);
+  onDateSelected(date: string) {
+    console.log('Received dateSelected event', date);
+    this.dateControl.setValue(date);
   }
 }

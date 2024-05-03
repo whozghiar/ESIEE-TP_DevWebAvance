@@ -35,6 +35,7 @@ export class RendezVousCalendrierComponent implements OnInit {
   isLoading = true;
 
   @Output() rendezVousSelected = new EventEmitter<RendezVous>();
+  @Output() jourSelected = new EventEmitter<string>();
 
   constructor(private rendezVousService: RendezVousService) {
     const date = new Date();
@@ -106,5 +107,10 @@ export class RendezVousCalendrierComponent implements OnInit {
       console.log('Emitting rendezVousSelected event', day.rendezVous);
       this.rendezVousSelected.emit(day.rendezVous);
     }
+    // Ajout pour la création de rendez-vous
+    else{
+      this.jourSelected.emit(day.date.toString());
+    }
   }
+
 }

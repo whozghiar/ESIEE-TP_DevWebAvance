@@ -1,0 +1,20 @@
+<form [formGroup]="vehiculeForm" (ngSubmit)="onSubmit()">
+  <input formControlName="marque" placeholder="Marque" class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4">
+  <div *ngIf="vehiculeForm.get('marque')?.invalid && vehiculeForm.get('marque')?.touched" class="text-red-500">
+    La marque est invalide.
+  </div>
+  <input formControlName="modele" placeholder="Modèle" class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4">
+  <div *ngIf="vehiculeForm.get('modele')?.invalid && vehiculeForm.get('modele')?.touched" class="text-red-500">
+    Le modèle est invalide.
+  </div>
+  <input formControlName="immatriculation" placeholder="Immatriculation" class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4">
+  <div *ngIf="vehiculeForm.get('immatriculation')?.invalid && vehiculeForm.get('immatriculation')?.touched" class="text-red-500">
+    L'immatriculation est invalide.
+  </div>
+  <input formControlName="annee" placeholder="Année" class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4">
+  <div *ngIf="vehiculeForm.get('annee')?.invalid && vehiculeForm.get('annee')?.touched" class="text-red-500">
+    L'année est invalide.
+  </div>
+  <button type="button" (click)="onPrevious()" class="bg-blue-600 text-white rounded shadow p-3">Précédent</button>
+  <button type="submit" class="bg-blue-600 text-white rounded shadow p-3">Suivant</button>
+</form>
