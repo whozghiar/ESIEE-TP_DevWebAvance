@@ -1,14 +1,14 @@
 <!-- technicien-modifier.component.html -->
 <form (ngSubmit)="updateTechnicien()" class="flex flex-col relative border p-4 rounded-lg shadow-lg">
-  <button (click)="cancelUpdate()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded top-2 right-2 self-end">
+  <button type="button" (click)="cancelUpdate()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded top-2 right-2 self-end">
     Retour
   </button>
   <div class="flex flex-col mb-4 mt-4">
     <div class="flex justify-between items-center">
       <input [formControl]="nomControl" name="nom" placeholder="Dupont" class="flex-1 border p-2">
       <div>
-        <button *ngIf="!editingNom" (click)="editNom()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
-        <button *ngIf="editingNom" (click)="cancelNomUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
+        <button type="button" *ngIf="!editingNom" (click)="editNom()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
+        <button type="button" *ngIf="editingNom" (click)="cancelNomUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
       </div>
     </div>
     <div *ngIf="nomControl.invalid && (nomControl.dirty || nomControl.touched)" class="text-red-500">
@@ -20,8 +20,8 @@
     <div class="flex justify-between items-center">
       <input [formControl]="prenomControl" name="prenom" placeholder="Lucien" class="flex-1 border p-2">
       <div>
-        <button *ngIf="!editingPrenom" (click)="editPrenom()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
-        <button *ngIf="editingPrenom" (click)="cancelPrenomUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
+        <button type="button" *ngIf="!editingPrenom" (click)="editPrenom()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
+        <button type="button" *ngIf="editingPrenom" (click)="cancelPrenomUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
       </div>
     </div>
     <div *ngIf="prenomControl.invalid && (prenomControl.dirty || prenomControl.touched)">

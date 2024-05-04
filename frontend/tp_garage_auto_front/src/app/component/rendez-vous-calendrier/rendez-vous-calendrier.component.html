@@ -1,21 +1,21 @@
 <div class="flex justify-center items-center min-h-screen bg-gray-100">
   <div class="calendar bg-white rounded-lg shadow p-6">
     <div class="month flex justify-between items-center mb-6">
-      <button (click)="prevMonth()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Prev</button>
+      <button type="button" (click)="prevMonth()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Prev</button>
       <select [(ngModel)]="currentMonth" (change)="getDaysInMonth()">
         <option *ngFor="let month of months; let i = index" [value]="i">{{ month }}</option>
       </select>
       <select [(ngModel)]="currentYear" (change)="getDaysInMonth()">
         <option *ngFor="let year of years" [value]="year">{{ year }}</option>
       </select>
-      <button (click)="nextMonth()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Next</button>
+      <button type="button" (click)="nextMonth()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Next</button>
     </div>
     <div class="weekdays grid grid-cols-7 gap-4 mb-4">
       <div *ngFor="let day of weekdays" class="text-center">{{ day }}</div>
     </div>
     <div *ngIf="!isLoading; else loading">
       <div class="days grid grid-cols-7 gap-4">
-        <div *ngFor="let day of days" [class.disabled]="day.disabled" class="day flex justify-center items-center h-12 w-12 rounded-full" [class.bg-red-500]="day.hasAppointment" [class.bg-gray-200]="!day.hasAppointment" [class.text-white]="day.hasAppointment" (click)="onDayClick(day)">
+        <div *ngFor="let day of days" [class.disabled]="day.disabled" class="day flex justify-center items-center h-12 w-12 rounded-full transition-all duration-200 hover:scale-110 cursor-pointer" [class.bg-red-500]="day.hasAppointment" [class.bg-gray-200]="!day.hasAppointment" [class.text-white]="day.hasAppointment" (click)="onDayClick(day)">
           {{ day.date }}
         </div>
       </div>

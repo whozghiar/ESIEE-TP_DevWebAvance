@@ -20,10 +20,10 @@ export class ClientFormComponent implements OnInit{
   @Output() nextStep = new EventEmitter<Client>();
 
   // Contrôles de formulaire
-  nomControl = new FormControl({value:'',disabled:false}, [Validators.required, Validators.pattern(/^[a-zA-Z]*$/)]);
-  prenomControl = new FormControl({value:'',disabled:false}, [Validators.required, Validators.pattern(/^[a-zA-Z]*$/)]);
-  emailControl = new FormControl({value:'',disabled:false}, [Validators.required, Validators.email]);
-  telephoneControl = new FormControl({value:'',disabled:false}, [Validators.required, Validators.pattern(/^0[1-9][0-9]{8}$/)]);
+  nomControl = new FormControl({value:'lomege',disabled:false}, [Validators.required, Validators.pattern(/^[a-zA-Z]*$/)]);
+  prenomControl = new FormControl({value:'Theo',disabled:false}, [Validators.required, Validators.pattern(/^[a-zA-Z]*$/)]);
+  emailControl = new FormControl({value:'theo@mail.com',disabled:false}, [Validators.required, Validators.email]);
+  telephoneControl = new FormControl({value:'0634472514',disabled:false}, [Validators.required, Validators.pattern(/^0[1-9][0-9]{8}$/)]);
 
   clientForm = new FormGroup({
     nom: this.nomControl,
@@ -51,7 +51,7 @@ export class ClientFormComponent implements OnInit{
   onSubmit(){
     if(this.clientForm.valid){
       const ClientToEmit: Client = {
-        nom: this.clientForm.value.nom || '',
+        nom: this.clientForm.value.nom?.toUpperCase() || '',
         prenom: this.clientForm.value.prenom || '',
         email: this.clientForm.value.email || '',
         telephone: this.clientForm.value.telephone || ''

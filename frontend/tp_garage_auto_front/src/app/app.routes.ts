@@ -15,7 +15,6 @@ export const routes: Routes = [
   { path: 'client', component: ClientPageComponent},
   { path: 'technicien', component: TechnicienPageComponent},
   { path: 'vehicule', component: VehiculePageComponent},
-  { path: 'rendez-vous-form', component:RendezVousFormComponent},
   { path: 'calendrier', component:RendezVousPageComponent},
   { path: 'depot', component: DepotComponent},
   { path: '**', redirectTo: 'home' },

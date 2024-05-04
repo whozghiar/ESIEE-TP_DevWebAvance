@@ -31,10 +31,10 @@ export class VehiculeFormComponent implements OnInit{
   @Output() previousStep = new EventEmitter<Client>();
 
   // Contrôles de formulaire
-  marqueControl = new FormControl({value:'',disabled:false}, [Validators.required]);
-  modeleControl = new FormControl({value:'',disabled:false}, [Validators.required]);
-  anneeControl = new FormControl({value:'',disabled:false}, [Validators.required,this.yearValidator]);
-  immatriculationControl = new FormControl({value:'',disabled:false}, [Validators.required, Validators.pattern(/^[A-Z]{2}-[0-9]{3}-[A-Z]{2}$/)]);
+  marqueControl = new FormControl({value:'Citroën',disabled:false}, [Validators.required]);
+  modeleControl = new FormControl({value:'C1',disabled:false}, [Validators.required]);
+  anneeControl = new FormControl({value:'2021',disabled:false}, [Validators.required,this.yearValidator]);
+  immatriculationControl = new FormControl({value:'AB-444-DC',disabled:false}, [Validators.required, Validators.pattern(/^[A-Z]{2}-[0-9]{3}-[A-Z]{2}$/)]);
 
   vehiculeForm = new FormGroup({
     marque: this.marqueControl,

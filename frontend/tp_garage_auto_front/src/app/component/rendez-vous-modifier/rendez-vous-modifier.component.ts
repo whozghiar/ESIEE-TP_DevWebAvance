@@ -134,4 +134,13 @@ export class RendezVousModifierComponent implements OnInit {
     }
   }
 
+  deleteRendezVous() {
+    if(this.rendezVous.id != null){
+      this.rendezVousService.deleteRendezVous(this.rendezVous.id).subscribe(response => {
+        if(response.status === 204){
+          this.cancel.emit();
+        }
+      });
+    }
+  }
 }

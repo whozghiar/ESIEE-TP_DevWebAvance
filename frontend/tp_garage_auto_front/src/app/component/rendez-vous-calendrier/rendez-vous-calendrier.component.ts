@@ -109,7 +109,8 @@ export class RendezVousCalendrierComponent implements OnInit {
     }
     // Ajout pour la création de rendez-vous
     else{
-      this.jourSelected.emit(day.date.toString());
+      const selectedDate = `${String(day.date).padStart(2, '0')}/${String(this.currentMonth + 1).padStart(2, '0')}/${this.currentYear}`;
+      this.jourSelected.emit(selectedDate);
     }
   }
 

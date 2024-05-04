@@ -2,5 +2,24 @@
   <button type="button" (click)="onPrevious()" class="bg-blue-600 text-white rounded shadow p-3">Précédent</button>
   <app-rendez-vous-calendrier (jourSelected)="onDateSelected($event)"></app-rendez-vous-calendrier>
 
+  <p class="text-3xl font-bold">La date du rendez-vous :
+    <span class = "text-green-600">
+    {{ rendezVousForm.value.date }}
+    </span>
+  </p>
+  <div *ngIf="dateControl.invalid && dateControl.touched" class="text-red-500">
+    Date invalide. Veuillez entrer une date au format dd/mm/yyyy.
+  </div>
+
+  <select formControlName="typeService" class="form-select mt-1 block w-full">
+    <option value="Révision">Révision</option>
+    <option value="Contrôle Technique">Contrôle Technique</option>
+    <option value="Réparation">Réparation</option>
+  </select>
+  <div *ngIf="typeServiceControl.invalid && typeServiceControl.touched" class="text-red-500">
+    Veuillez sélectionner un type de service.
+  </div>
   <button type="submit" class="bg-blue-600 text-white rounded shadow p-3">Dépôt du rendez-vous</button>
+
 </form>
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>

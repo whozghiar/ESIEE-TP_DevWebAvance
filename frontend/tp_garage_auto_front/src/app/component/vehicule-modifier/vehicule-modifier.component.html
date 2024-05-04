@@ -1,6 +1,6 @@
 <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
 <form *ngIf="!isLoading" (ngSubmit)="updateVehicule()" class="flex flex-col relative border p-4 rounded-lg shadow-lg">
-  <button (click)="cancelUpdate()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded top-2 right-2 self-end">
+  <button type="button" (click)="cancelUpdate()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded top-2 right-2 self-end">
     Retour
   </button>
   <div class="flex flex-col mb-4 mt-4">
@@ -10,8 +10,8 @@
         La marque est requise.
       </div>
       <div>
-        <button *ngIf="!editingMarque" (click)="editMarque()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
-        <button *ngIf="editingMarque" (click)="cancelMarqueUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
+        <button type="button" *ngIf="!editingMarque" (click)="editMarque()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
+        <button type="button" *ngIf="editingMarque" (click)="cancelMarqueUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
       </div>
     </div>
   </div>
@@ -22,8 +22,8 @@
         Le modèle est requis.
       </div>
       <div>
-        <button *ngIf="!editingModele" (click)="editModele()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
-        <button *ngIf="editingModele" (click)="cancelModeleUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
+        <button type="button" *ngIf="!editingModele" (click)="editModele()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
+        <button type="button" *ngIf="editingModele" (click)="cancelModeleUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
       </div>
     </div>
   </div>
@@ -34,8 +34,8 @@
         L'immatriculation est requise et doit respecter le format français (ex: AA-123-AA ou 1234 AA 56).
       </div>
       <div>
-        <button *ngIf="!editingImmatriculation" (click)="editImmatriculation()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
-        <button *ngIf="editingImmatriculation" (click)="cancelImmatriculationUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
+        <button type="button" *ngIf="!editingImmatriculation" (click)="editImmatriculation()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
+        <button type="button" *ngIf="editingImmatriculation" (click)="cancelImmatriculationUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
       </div>
     </div>
   </div>
@@ -46,8 +46,8 @@
         L'année est requise.
       </div>
       <div>
-        <button *ngIf="!editingAnnee" (click)="editAnnee()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
-        <button *ngIf="editingAnnee" (click)="cancelAnneeUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
+        <button type="button" *ngIf="!editingAnnee" (click)="editAnnee()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
+        <button type="button" *ngIf="editingAnnee" (click)="cancelAnneeUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
       </div>
     </div>
   </div>
@@ -57,8 +57,8 @@
       <select [formControl]="clientControl" name="client" class="flex-1 border p-2">
         <option *ngFor="let client of clients" [value]="client.id">{{ client.id }} - {{ client.nom }} {{ client.prenom }}</option>      </select>
       <div>
-        <button *ngIf="!editingClient" (click)="editClient()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
-        <button *ngIf="editingClient" (click)="cancelClientUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
+        <button type="button" *ngIf="!editingClient" (click)="editClient()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
+        <button type="button" *ngIf="editingClient" (click)="cancelClientUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {RendezVous} from "../../modeles/RendezVousModele/rendez-vous";
 import {RendezVousCalendrierComponent} from "../rendez-vous-calendrier/rendez-vous-calendrier.component";
 import {RendezVousModifierComponent} from "../rendez-vous-modifier/rendez-vous-modifier.component";
@@ -18,7 +18,10 @@ import {LoadingSpinnerComponent} from "../loading-spinner/loading-spinner.compon
   styleUrl: './rendez-vous-page.component.css'
 })
 export class RendezVousPageComponent implements OnInit {
+
   selectedRendezVous: RendezVous | null = null;
+
+  @ViewChild(RendezVousCalendrierComponent) calendar!: RendezVousCalendrierComponent;
 
   constructor() { }
 
@@ -32,5 +35,6 @@ export class RendezVousPageComponent implements OnInit {
 
   onRendezVousModificationCancelled() {
     this.selectedRendezVous = null;
+    this.calendar.getDaysInMonth();
   }
 }
