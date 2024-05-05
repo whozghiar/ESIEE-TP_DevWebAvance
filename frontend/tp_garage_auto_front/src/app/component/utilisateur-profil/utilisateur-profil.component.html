@@ -1,0 +1,62 @@
+<div class="flex flex-col mt-20" *ngIf="!isLoading; else loading">
+  <div class="flex flex-col bg-white p-6 rounded-lg shadow-lg">
+    <div class="mb-4">
+      <label class="font-bold">Nom:</label>
+      <div class="mt-1 text-gray-800">{{ client.nom }}</div>
+    </div>
+    <div class="mb-4">
+      <label class="font-bold">Prénom:</label>
+      <div class="mt-1 text-gray-800">{{ client.prenom }}</div>
+    </div>
+    <div class="mb-4">
+      <label class="font-bold">Email:</label>
+      <div class="mt-1 text-gray-800">{{ client.email }}</div>
+    </div>
+    <form class="space-y-4">
+      <div class="flex justify-between items-center">
+        <input [formControl]="telephoneControl" [readonly]="!editingTelephone" class="flex-1 border border-gray-300 p-2 rounded-lg focus:ring focus:ring-blue-500 transition duration-300 ease-in-out">
+        <div>
+          <button type="button" *ngIf="!editingTelephone" (click)="editTelephone()" class="p-2 text-blue-600 hover:text-blue-800 transition duration-300 ease-in-out">
+            <span class="text-lg cursor-pointer hover:text-red-600 transition duration-300">🖊️</span>
+          </button>
+          <button type="button" *ngIf="editingTelephone" (click)="cancelTelephoneUpdate()" class="p-2 text-red-600 hover:text-red-800 transition duration-300 ease-in-out">
+            <span class="text-lg cursor-pointer hover:text-red-600 transition duration-300">❌</span>
+          </button>
+        </div>
+      </div>
+      <div *ngIf="telephoneControl.invalid && telephoneControl.touched" class="text-red-500">
+        Le numéro de téléphone est invalide.
+      </div>
+      <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out" [disabled]="telephoneControl.invalid" (click)="updateClient()">Sauvegarder</button>
+    </form>
+  </div>
+
+  <div *ngIf="vehicules && vehicules.length > 0" class="flex flex-col bg-white p-6 rounded-lg shadow-lg">
+    <h1 class="text-2xl font-bold mb-4">Liste des véhicules</h1>
+    <div *ngFor="let vehicule of vehicules">
+      <app-vehicule-card [vehicule]="vehicule"></app-vehicule-card>
+    </div>
+  </div>
+  <div class="flex flex-col bg-white p-6 rounded-lg shadow-lg">
+    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mt-4" (click)="showVehiculeForm = !showVehiculeForm" *ngIf="!showVehiculeForm">Ajouter un véhicule</button>
+    <app-vehicule-form *ngIf="showVehiculeForm" class="mt-4" [client]="client" (vehiculeToEmit)="addVehicule($event)" (cancel)="showVehiculeForm = false"></app-vehicule-form>
+  </div>
+  <div *ngIf="rendezVous && rendezVous.length > 0" class="flex flex-col bg-white p-6 rounded-lg shadow-lg">
+    <h1 class="text-2xl font-bold mb-4">Rendez-vous à venir</h1>
+    <div *ngFor="let rdv of this.rdvFutur()">
+      <app-rendez-vous-card [rendezVous]="rdv"></app-rendez-vous-card>
+    </div>
+  </div>
+
+  <div *ngIf="rendezVous && rendezVous.length > 0" class="flex flex-col bg-white p-6 rounded-lg shadow-lg">
+    <h1 class="text-2xl font-bold mb-4">Rendez-vous passés</h1>
+    <div *ngFor="let rdv of this.rdvPasse()">
+      <app-rendez-vous-card [rendezVous]="rdv"></app-rendez-vous-card>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #loading>
+  <app-loading-spinner></app-loading-spinner>
+</ng-template>

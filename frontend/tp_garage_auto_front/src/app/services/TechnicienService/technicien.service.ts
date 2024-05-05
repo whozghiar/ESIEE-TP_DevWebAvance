@@ -23,6 +23,10 @@ export class TechnicienService {
     return this.httpClient.get<Technicien>(`${this.apiUrl}/${id}`, { observe: 'response' });
   }
 
+  public getTechnicienByEmail(email: string) {
+    return this.httpClient.get<Technicien>(`${this.apiUrl}/email/${email}`, { observe: 'response' });
+  }
+
   public addTechnicien(technicien: Technicien) {
     return this.httpClient.post<Technicien>(this.apiUrl, technicien, { observe: 'response' });
   }

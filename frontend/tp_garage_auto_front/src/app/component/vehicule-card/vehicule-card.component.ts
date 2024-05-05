@@ -2,14 +2,15 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {VehiculeService} from "../../services/VehiculesService/vehicule.service";
 import {Vehicule} from "../../modeles/VehiculeModele/vehicule";
 import {VehiculeModifierComponent} from "../vehicule-modifier/vehicule-modifier.component";
-import {NgIf} from "@angular/common";
+import {NgIf, NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-vehicule-card',
   standalone: true,
   imports: [
     VehiculeModifierComponent,
-    NgIf
+    NgIf,
+    NgOptimizedImage
   ],
   templateUrl: './vehicule-card.component.html',
   styleUrl: './vehicule-card.component.css'

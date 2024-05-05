@@ -1,7 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavBarComponent } from './component/nav-bar/nav-bar.component';
-import { ClientService } from './services/ClientService/client.service';
 import {OidcSecurityService} from "angular-auth-oidc-client";
 
 
@@ -17,13 +16,8 @@ export class AppComponent implements OnInit{
   title = 'tp_garage_auto_front';
   private readonly oidcSecurityService = inject(OidcSecurityService);
 
-  clients: any[] = [];
-  appointments: any[] = [];
-  technicians: any[] = [];
-  vehicles: any[] = [];
 
   constructor(
-    private clientService: ClientService,
   ) {}
 
   ngOnInit() {
@@ -39,8 +33,6 @@ export class AppComponent implements OnInit{
     });
   }
 
-
-
   login() {
     this.oidcSecurityService.authorize();
   }
@@ -49,5 +41,4 @@ export class AppComponent implements OnInit{
     this.oidcSecurityService.logoff().subscribe((result) => console.log(result));
   }
 }
-
 

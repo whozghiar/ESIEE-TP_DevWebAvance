@@ -1,1 +1,37 @@
-<p>rendez-vous-card works!</p>
+<div class="bg-white shadow-lg rounded-lg p-4 max-w-md mx-auto my-4">
+  <div class="py-2">
+    <h2 class="text-lg font-bold text-gray-800">Rendez-Vous</h2>
+    <p class="text-sm text-gray-600">ID: {{ rendezVous.id }}</p>
+  </div>
+
+  <div class="py-2">
+    <h3 class="font-semibold">Date</h3>
+    <p class="text-gray-800">{{ rendezVous.date }}</p>
+  </div>
+
+  <div class="py-2">
+    <h3 class="font-semibold">Type de Service</h3>
+    <p class="text-blue-600">{{ rendezVous.typeService }}</p>
+  </div>
+
+  <div class="py-2">
+    <h3 class="font-semibold">Technicien</h3>
+    <p class="text-gray-800">{{ rendezVous.technicien?.prenom }} {{ rendezVous.technicien?.nom }}</p>
+  </div>
+
+  <div class="py-2">
+    <h3 class="font-semibold">Véhicule</h3>
+    <p class="text-gray-800">{{ rendezVous.vehicule?.marque }} {{ rendezVous.vehicule?.modele }}</p>
+    <p class="text-sm text-gray-600">{{ rendezVous.vehicule?.immatriculation }} - {{ rendezVous.vehicule?.annee }}</p>
+    <p class="text-sm text-gray-500">Client: {{ rendezVous.vehicule?.client?.prenom }} {{ rendezVous.vehicule?.client?.nom }}</p>
+  </div>
+
+  <div class="flex justify-end space-x-2 mt-4" *ngIf="this.isUserAuthorized()">
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      Modifier
+    </button>
+    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+      Supprimer
+    </button>
+  </div>
+</div>

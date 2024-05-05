@@ -25,10 +25,8 @@ import {VehiculeService} from "../../services/VehiculesService/vehicule.service"
 export class VehiculeFormComponent implements OnInit{
 
   @Input() client!: Client;
-  @Input() vehicule!: Vehicule;
-
-  @Output() nextStep = new EventEmitter<Vehicule>();
-  @Output() previousStep = new EventEmitter<Client>();
+  @Output() cancel = new EventEmitter<void>();
+  @Output() vehiculeToEmit = new EventEmitter<Vehicule>();
 
   // Contrôles de formulaire
   marqueControl = new FormControl({value:'Citroën',disabled:false}, [Validators.required]);
@@ -43,21 +41,10 @@ export class VehiculeFormComponent implements OnInit{
     immatriculation: this.immatriculationControl
   });
 
-  constructor(
-    private vehiculeService : VehiculeService) {
+  constructor(){
   }
 
   ngOnInit() {
-    console.log("VehiculeFormComponent initialized");
-    console.log('Client', this.client)
-
-    // Si on revient sur le formulaire de véhicule, on remplit les champs avec les valeurs précédemment saisies
-    if(this.vehicule){
-      this.marqueControl.setValue(this.vehicule.marque);
-      this.modeleControl.setValue(this.vehicule.modele);
-      this.anneeControl.setValue(this.vehicule.annee.toString());
-      this.immatriculationControl.setValue(this.vehicule.immatriculation);
-    }
   }
 
 
@@ -70,12 +57,13 @@ export class VehiculeFormComponent implements OnInit{
         immatriculation: this.vehiculeForm.value.immatriculation || '',
         client: this.client
       };
-      this.nextStep.emit(vehiculeToEmit);
+
+      this.vehiculeToEmit.emit(vehiculeToEmit);
     }
   }
 
-  onPrevious(){
-    this.previousStep.emit(this.client);
+  cancelForm() {
+    this.cancel.emit();
   }
 
   yearValidator(control: AbstractControl): ValidationErrors | null {

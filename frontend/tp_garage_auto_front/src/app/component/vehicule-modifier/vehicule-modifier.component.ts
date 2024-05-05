@@ -6,6 +6,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {Client} from "../../modeles/ClientModele/client";
 import {ClientService} from "../../services/ClientService/client.service";
 import {LoadingSpinnerComponent} from "../loading-spinner/loading-spinner.component";
+import {AuthguardService} from "../../services/AuthGuardService/authguard.service";
 
 @Component({
   selector: 'app-vehicule-modifier',
@@ -51,7 +52,9 @@ export class VehiculeModifierComponent implements OnInit{
 
   constructor(
     private vehiculeService: VehiculeService,
-    private clientService: ClientService) {  }
+    private clientService: ClientService,
+    protected authguardService: AuthguardService
+    ) {  }
 
   ngOnInit() {
     // Récupération de la liste des clients
@@ -68,7 +71,7 @@ export class VehiculeModifierComponent implements OnInit{
     this.immatriculationControl.setValue(this.vehicule.immatriculation);
     this.anneeControl.setValue(this.vehicule.annee.toString());
 
-    this.clientControl.setValue(!this.vehicule.client?.id ? null : this.vehicule.client.id.toString());
+    this.clientControl.setValue(!this.vehicule.client?.id ? null : this.vehicule.client.id.toString()); // Peut être placer dans le if
   }
 
   updateVehicule() {

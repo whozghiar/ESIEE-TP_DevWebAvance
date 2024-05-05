@@ -10,7 +10,7 @@ export class VehiculeService {
 
   constructor(private httpClient: HttpClient) {}
 
-  public getVehicules(client_id?: string, marque?: string, modele?: string, annee?: string, immatriculation?: string) {
+  public getVehicules(client_id?: number, marque?: string, modele?: string, annee?: string, immatriculation?: string) {
     let params = new HttpParams();
     if (client_id) params = params.append('client_id', client_id);
     if (marque) params = params.append('marque', marque);
