@@ -87,24 +87,24 @@
               routerLink="rendez-vous">
               Rendez-Vous
             </div>
-            <div *ngIf="this.authGuardService.isAdmin()">
-
-              <!-- Onglets Administrateur -->
-              <div
-                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-                routerLink="vehicule">
-                Véhicules
-              </div>
-              <div
-                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-                routerLink="technicien">
-                Technicien
-              </div>
-              <div
-                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-                routerLink="client">
-                Client
-              </div>
+            <!-- Onglets Administrateur -->
+            <div
+              *ngIf="this.authGuardService.isAdmin()"
+              class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
+              routerLink="vehicule">
+              Véhicules
+            </div>
+            <div
+              *ngIf="this.authGuardService.isAdmin()"
+              class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
+              routerLink="technicien">
+              Technicien
+            </div>
+            <div
+              *ngIf="this.authGuardService.isAdmin()"
+              class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
+              routerLink="client">
+              Client
             </div>
           </div>
         </div>
@@ -131,49 +131,6 @@
             </button>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <!-- Mobile menu, show/hide based on menu state. -->
-  <div class="sm:hidden" id="mobile-menu">
-    <div class="space-y-1 px-2 pb-3 pt-2">
-      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-      <a
-        routerLink="home"
-        class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium cursor-pointer"
-        aria-current="page">
-        Garage Auto
-      </a>
-      <div *ngIf="this.authGuardService.isClient()">
-        <a
-          routerLink="calendrier"
-          class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-        >Calendrier</a
-        >
-      </div>
-      <div *ngIf="this.authGuardService.isTechnicien() || this.authGuardService.isAdmin()">
-        <a
-          routerLink="rendez-vous"
-          class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-        >Rendez-Vous</a
-        >
-      </div>
-      <div *ngIf="this.authGuardService.isAdmin()">
-        <a
-          routerLink="vehicule"
-          class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-        >Véhicules</a
-        >
-        <a
-          routerLink="technicien"
-          class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-        >Technicien</a
-        >
-        <a
-          routerLink="client"
-          class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-        >Client</a
-        >
       </div>
     </div>
   </div>

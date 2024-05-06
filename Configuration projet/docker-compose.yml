@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: garage
+    ports:
+      - "3306:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: Password123!
+      MYSQL_DATABASE: tp_garage_auto
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: amazing_nobel
+    environment:
+      KC_DB: mariadb
+      KC_DB_URL: jdbc:mariadb://mariadb/keycloak
+      KC_DB_USERNAME: root
+      KC_DB_PASSWORD: Password123!
+      KC_IMPORT: /tmp/config/realm-export.json
+    command:
+      - start-dev
+    ports:
+      - "8085:8080"
+    depends_on:
+      - mariadb
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+      - ./config:/tmp/config
+
+volumes:
+  mariadb_data:
+  keycloak_data:
