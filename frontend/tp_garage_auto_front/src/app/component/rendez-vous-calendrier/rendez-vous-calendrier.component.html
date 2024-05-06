@@ -1,27 +1,65 @@
-<div class="flex justify-center items-center min-h-screen bg-gray-100">
-  <div class="calendar bg-white rounded-lg shadow p-6">
-    <div class="month flex justify-between items-center mb-6">
-      <button type="button" (click)="prevMonth()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Prev</button>
-      <select [(ngModel)]="currentMonth" (change)="getDaysInMonth()">
-        <option *ngFor="let month of months; let i = index" [value]="i">{{ month }}</option>
-      </select>
-      <select [(ngModel)]="currentYear" (change)="getDaysInMonth()">
-        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
-      </select>
-      <button type="button" (click)="nextMonth()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Next</button>
-    </div>
-    <div class="weekdays grid grid-cols-7 gap-4 mb-4">
-      <div *ngFor="let day of weekdays" class="text-center">{{ day }}</div>
-    </div>
-    <div *ngIf="!isLoading; else loading">
-      <div class="days grid grid-cols-7 gap-4">
-        <div *ngFor="let day of days" [class.disabled]="day.disabled" class="day flex justify-center items-center h-12 w-12 rounded-full transition-all duration-200 hover:scale-110 cursor-pointer" [class.bg-red-500]="day.hasAppointment" [class.bg-gray-200]="!day.hasAppointment" [class.text-white]="day.hasAppointment" (click)="onDayClick(day)">
-          {{ day.date }}
+<ng-template #loading>
+  <app-loading-spinner></app-loading-spinner>
+ </ng-template>
+
+<div class="container mx-auto px-4 pt-20" *ngIf="rendezVous.length>0 else loading">
+  <div class="flex flex-wrap justify-center">
+    <!-- Rendez-vous -->
+    <div class="w-full md:w-8/12 lg:w-6/12 xl:w-4/12 px-4" *ngIf="selectedDate && !hasRendezVous(selectedDate)">
+      <div class="relative flex flex-col min-w-0 break-words bg-gray-100 w-full mb-6 shadow-xl rounded-lg transition duration-300 ease-in-out hover:shadow-2xl">
+        <div class="flex-auto p-5 lg:p-10 animate-fade-in-down">
+          <h4 class="text-2xl font-semibold text-gray-800">Créer un nouveau rendez-vous</h4>
+          <p class="leading-relaxed mt-1 mb-4 text-gray-600">
+            Cliquez sur un jour pour sélectionner la date.
+          </p>
+          <app-rendez-vous-form [jour]="selectedDate" (cancel)="loadRendezVous()"></app-rendez-vous-form>
         </div>
       </div>
     </div>
-    <ng-template #loading>
-      <app-loading-spinner></app-loading-spinner>
-    </ng-template>
+    <!-- Calendrier -->
+    <div class="w-full md:w-8/12 lg:w-6/12 xl:w-8/12 px-4">
+      <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-xl rounded-lg bg-gradient-to-r from-blue-900 via-blue-600 to-blue-400 text-white transition duration-300 ease-in-out hover:shadow-2xl">
+        <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
+          <div class="flex flex-wrap items-center">
+            <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+              <h2 class="text-2xl font-semibold">Calendrier des rendez-vous</h2>
+            </div>
+          </div>
+        </div>
+        <div class="flex-auto animate-fade-in-up w-full h-full">
+          <div class="flex items-center justify-center w-full h-full">
+            <div class="flex flex-col m-5 w-full h-full">
+              <div class="text-center flex justify-center space-x-4 my-5">
+                <button class="bg-indigo-500 hover:bg-purple-800 text-white py-2 px-4 rounded transition duration-200 ease-in-out shadow" (click)="prevMonth()">Mois Précédent</button>
+                <h1 class="text-2xl font-bold animate-pulse">{{ currentMonth }} / {{ currentYear }}</h1>
+                <button class="bg-indigo-500 hover:bg-purple-800 text-white py-2 px-4 rounded transition duration-200 ease-in-out shadow" (click)="nextMonth()">Mois Suivant</button>
+              </div>
+              <div class="grid text-center border rounded-t-lg bg-indigo-500 border-indigo-900 text-white grid-cols-7 shadow">
+                <div>Lundi</div>
+                <div>Mardi</div>
+                <div>Mercredi</div>
+                <div>Jeudi</div>
+                <div>Vendredi</div>
+                <div>Samedi</div>
+                <div>Dimanche</div>
+              </div>
+              <div class="grid grid-cols-7 border-t rounded-b border-gray-200 bg-indigo-50">
+                <!-- Jours -->
+                <div *ngFor="let day of days; let i = index"
+                     [ngClass]="{'border-r border-b border-gray-200 transition duration-200 ease-in-out shadow-inner': true,
+                   'bg-red-500 hover:bg-red-600': day.rendezVous,
+                   'bg-indigo-100 hover:bg-indigo-200 cursor-pointer': !day.rendezVous}"
+                     [class.rounded-bl]="i === 28"
+                     (click)="handleDayClick(day.date)">
+                  <div class="p-2 text-right text-gray-800 font-bold">
+                    {{ day.date.split('/')[0] }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

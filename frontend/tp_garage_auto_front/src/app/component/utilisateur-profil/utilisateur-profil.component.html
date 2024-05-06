@@ -53,14 +53,14 @@
     </app-vehicule-form>
   </div>
 
-  <div *ngIf="rendezVous && rendezVous.length > 0" class="flex flex-col bg-white p-6 rounded-lg shadow-lg">
+  <div *ngIf="rendezVous && rendezVous.length > 0" class="flex flex-row bg-white p-6 rounded-lg shadow-lg space-x-2">
     <h1 class="text-2xl font-bold mb-4">Rendez-vous à venir</h1>
     <div *ngFor="let rdv of this.rdvFutur()">
       <app-rendez-vous-card [rendezVous]="rdv"></app-rendez-vous-card>
     </div>
   </div>
 
-  <div *ngIf="rendezVous && rendezVous.length > 0" class="flex flex-col bg-white p-6 rounded-lg shadow-lg">
+  <div *ngIf="rendezVous && rendezVous.length > 0" class="flex flex-row bg-white p-6 rounded-lg shadow-lg space-x-2">
     <h1 class="text-2xl font-bold mb-4">Rendez-vous passés</h1>
     <div *ngFor="let rdv of this.rdvPasse()">
       <app-rendez-vous-card [rendezVous]="rdv"></app-rendez-vous-card>

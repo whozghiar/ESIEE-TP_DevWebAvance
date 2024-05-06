@@ -36,10 +36,12 @@ import {VehiculeModifierComponent} from "../vehicule-modifier/vehicule-modifier.
 export class RendezVousPageComponent implements OnInit{
 
   rendezVous: RendezVous[] = [];
+  technicien!: Technicien;
   isLoadingRendezVous = true;
 
   constructor(
     private rendezVousService: RendezVousService,
+    private technicienService : TechnicienService,
     private authguardService: AuthguardService
   ) { }
 
@@ -55,9 +57,35 @@ export class RendezVousPageComponent implements OnInit{
     this.rendezVousService.getRendezVous().subscribe(response => {
       if (response.body !== null && response.status === 200) {
         this.rendezVous = response.body;
+        if(this.authguardService.isTechnicien()){
+          this.loadTechnicien();
+        }
       }
       this.isLoadingRendezVous = false;
     });
+  }
+
+  /**
+   * Appelle le service pour récupérer le technicien
+   */
+  loadTechnicien(): void {
+    const email = this.authguardService.getEmail();
+    this.technicienService.getTechnicienByEmail(email).subscribe(response => {
+      if (response.body !== null && response.status === 200) {
+        this.technicien = response.body;
+        this.filterRendezVous();
+      }else{
+        console.log("Erreur lors de la récupération du technicien");
+      }
+    });
+  }
+
+  filterRendezVous(): void {
+    if (this.technicien) {
+      this.rendezVous = this.rendezVous.filter(rendezVous => {
+        return rendezVous.technicien && rendezVous.technicien.id === this.technicien.id;
+      });
+    }
   }
 
 

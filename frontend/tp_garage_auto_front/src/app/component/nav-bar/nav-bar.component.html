@@ -67,67 +67,50 @@
         </div>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <div
-              class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+              class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
               aria-current="page"
-              routerLink="dashboard"
-            >
+              routerLink="home">
               Garage Auto
             </div>
-            <div
-              class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-              routerLink="calendrier"
-            >
+            <div *ngIf="this.authGuardService.isClient()"
+              class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
+              aria-current="page"
+              routerLink="calendrier">
+              Calendrier
+            </div>
+
+            <!-- Onglets Technicien & Administrateur -->
+
+            <div *ngIf="this.authGuardService.isTechnicien() || this.authGuardService.isAdmin()"
+              class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
+              routerLink="rendez-vous">
               Rendez-Vous
             </div>
-            <div
-              class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-              routerLink="vehicule"
-            >
-              Véhicules
-            </div>
-            <div
-              class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-              routerLink="technicien"
-            >
-              Technicien
-            </div>
-            <div
-              class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-              routerLink="client"
-            >
-              Client
+            <div *ngIf="this.authGuardService.isAdmin()">
+
+              <!-- Onglets Administrateur -->
+              <div
+                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
+                routerLink="vehicule">
+                Véhicules
+              </div>
+              <div
+                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
+                routerLink="technicien">
+                Technicien
+              </div>
+              <div
+                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
+                routerLink="client">
+                Client
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div
-        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
-      >
-        <button
-          type="button"
-          class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-        >
-          <span class="absolute -inset-1.5"></span>
-          <span class="sr-only">View notifications</span>
-          <svg
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
-            />
-          </svg>
-        </button>
-
-        <!-- Profile dropdown -->
+        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
         <div class="relative ml-3">
           <div>
             <button
@@ -136,7 +119,7 @@
               id="user-menu-button"
               aria-expanded="false"
               aria-haspopup="true"
-              (click)="toggleDropdown()"
+              routerLink="/profil"
             >
               <span class="absolute -inset-1.5"></span>
               <span class="sr-only">Open user menu</span>
@@ -147,86 +130,51 @@
               />
             </button>
           </div>
-
-          <!--
-            Dropdown menu, show/hide based on menu state.
-
-            Entering: "transition ease-out duration-100"
-              From: "transform opacity-0 scale-95"
-              To: "transform opacity-100 scale-100"
-            Leaving: "transition ease-in duration-75"
-              From: "transform opacity-100 scale-100"
-              To: "transform opacity-0 scale-95"
-          -->
-          <div
-            class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-            role="menu"
-            aria-orientation="vertical"
-            aria-labelledby="user-menu-button"
-            tabindex="-1"
-            *ngIf="isDropdownOpen"
-          >
-            <!-- Active: "bg-gray-100", Not Active: "" -->
-            <a
-              href="/utilisateur"
-              class="block px-4 py-2 text-sm text-gray-700"
-              role="menuitem"
-              tabindex="-1"
-              id="user-menu-item-0"
-              >Your Profile</a
-            >
-            <a
-              href="#"
-              class="block px-4 py-2 text-sm text-gray-700"
-              role="menuitem"
-              tabindex="-1"
-              id="user-menu-item-1"
-              >Settings</a
-            >
-            <a
-              href="#"
-              class="block px-4 py-2 text-sm text-gray-700"
-              role="menuitem"
-              tabindex="-1"
-              id="user-menu-item-2"
-              >Sign out</a
-            >
-          </div>
         </div>
       </div>
     </div>
   </div>
-
   <!-- Mobile menu, show/hide based on menu state. -->
   <div class="sm:hidden" id="mobile-menu">
     <div class="space-y-1 px-2 pb-3 pt-2">
       <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
       <a
-        routerLink="vehicule"
-        class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
-        aria-current="page"
-        >Garage Auto</a
-      >
-      <a
-        routerLink="calendrier"
-        class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+        routerLink="home"
+        class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium cursor-pointer"
+        aria-current="page">
+        Garage Auto
+      </a>
+      <div *ngIf="this.authGuardService.isClient()">
+        <a
+          routerLink="calendrier"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+        >Calendrier</a
+        >
+      </div>
+      <div *ngIf="this.authGuardService.isTechnicien() || this.authGuardService.isAdmin()">
+        <a
+          routerLink="rendez-vous"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
         >Rendez-Vous</a
-      >
-      <a
-        routerLink="vehicule"
-        class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+        >
+      </div>
+      <div *ngIf="this.authGuardService.isAdmin()">
+        <a
+          routerLink="vehicule"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
         >Véhicules</a
-      >
-      <a
-        routerLink="technicien"
-        class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+        >
+        <a
+          routerLink="technicien"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
         >Technicien</a
-      >
-      <a
-        routerLink="client"
-        class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+        >
+        <a
+          routerLink="client"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
         >Client</a
-      >
+        >
+      </div>
     </div>
   </div>
 </nav>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIf } from '@angular/common';
+import {AuthguardService} from "../../services/AuthGuardService/authguard.service";
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,7 +13,8 @@ import { NgIf } from '@angular/common';
 export class NavBarComponent {
   isDropdownOpen = false; // Ajoute cette ligne
 
-  toggleDropdown(): void {
-    this.isDropdownOpen = !this.isDropdownOpen;
+  constructor(
+    protected authGuardService: AuthguardService
+  ) {
   }
 }
