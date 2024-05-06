@@ -1,17 +1,30 @@
 import { Routes } from '@angular/router';
-import { VehiculepageComponent } from './component/vehiculepage/vehiculepage.component';
-import { TechnicianpageComponent } from './component/technicianpage/technicianpage.component';
-import { VehiculeformComponent } from './component/vehiculeform/vehiculeform.component';
-import { AppointmentpageComponent } from './component/appointmentpage/appointmentpage.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
-import { ClientpageComponent } from './component/clientpage/clientpage.component';
+import {HomeComponent} from "./component/home/home.component";
+import {ClientPageComponent} from "./component/client-page/client-page.component";
+import {TechnicienPageComponent} from "./component/technicien-page/technicien-page.component";
+import {VehiculePageComponent} from "./component/vehicule-page/vehicule-page.component";
+import {RendezVousPageComponent} from "./component/rendez-vous-page/rendez-vous-page.component";
+import {UtilisateurProfilComponent} from "./component/utilisateur-profil/utilisateur-profil.component";
+import {AuthguardService} from "./services/AuthGuardService/authguard.service";
+import {AdminAuthGuardService} from "./services/AdminAuthGuardService/admin-auth-guard.service";
+import {ClientAuthGuardService} from "./services/ClientAuthGuardService/client-auth-guard.service";
+import {TechnicienAuthGuardService} from "./services/TechnicienAuthGuardService/technicien-auth-guard.service";
+import {AdminOrTechnicienAuthGuardService} from "./services/AdminOrTechnicienAuthGuardService/admin-auth-guard.service";
+import {RendezVousCalendrierComponent} from "./component/rendez-vous-calendrier/rendez-vous-calendrier.component";
+
 
 export const routes: Routes = [
-  { path: 'techniciens', component: TechnicianpageComponent },
-  { path: 'clients', component: ClientpageComponent },
-  { path: 'vehicules', component: VehiculepageComponent },
-  { path: 'appointments', component: AppointmentpageComponent },
-  { path: 'vehicules/:id', component: VehiculeformComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: '**', redirectTo: 'dashboard' },
+  { path: 'home', component: HomeComponent},
+
+  { path: 'client', component: ClientPageComponent, canActivate: [AdminAuthGuardService]},
+  { path: 'technicien', component: TechnicienPageComponent, canActivate: [AdminAuthGuardService]},
+  { path: 'vehicule', component: VehiculePageComponent, canActivate: [AdminAuthGuardService]},
+  { path: 'rendez-vous', component: RendezVousPageComponent, canActivate: [AdminOrTechnicienAuthGuardService]},
+
+  { path: 'calendrier', component: RendezVousCalendrierComponent, canActivate:[ClientAuthGuardService]},
+
+  { path: 'profil', component: UtilisateurProfilComponent, canActivate : [ClientAuthGuardService]},
+
+  { path: '**', redirectTo: 'home' },
 ];

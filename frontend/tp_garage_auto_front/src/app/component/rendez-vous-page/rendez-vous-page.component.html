@@ -1,0 +1,7 @@
+<div class="flex justify-center items-center h-screen">
+  <div class="shadow-2xl rounded-lg overflow-hidden p-4 mb-6 bg-white">
+    <div class="grid grid-cols-3 gap-4">
+      <app-rendez-vous-card *ngFor="let rdv of rendezVous; let i = index" [rendezVous]="rdv" class="col-span-1"></app-rendez-vous-card>
+    </div>
+  </div>
+</div>

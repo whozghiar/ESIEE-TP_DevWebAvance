@@ -1,0 +1,66 @@
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+<form *ngIf="!isLoading" (ngSubmit)="updateVehicule()" class="flex flex-col relative border p-8 rounded-lg shadow-lg bg-white max-w-4xl mx-auto my-5">
+  <div class="flex justify-between items-start mb-6">
+    <button type="button" (click)="cancelUpdate()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
+      Retour
+    </button>
+  </div>
+
+  <div class="mb-6">
+    <div class="flex items-center space-x-4">
+      <input [formControl]="marqueControl" name="marque" placeholder="Marque" class="flex-1 border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300">
+      <div *ngIf="marqueControl.invalid && (marqueControl.dirty || marqueControl.touched)" class="text-red-500">
+        La marque est requise.
+      </div>
+      <button type="button" *ngIf="!editingMarque" (click)="editMarque()" class="text-lg cursor-pointer hover:text-indigo-600 transition duration-300">🖊️</button>
+      <button type="button" *ngIf="editingMarque" (click)="cancelMarqueUpdate()" class="text-lg cursor-pointer hover:text-red-600 transition duration-300">❌</button>
+    </div>
+  </div>
+
+  <div class="mb-6">
+    <div class="flex items-center space-x-4">
+      <input [formControl]="modeleControl" name="modele" placeholder="Modèle" class="flex-1 border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300">
+      <div *ngIf="modeleControl.invalid && (modeleControl.dirty || modeleControl.touched)" class="text-red-500">
+        Le modèle est requis.
+      </div>
+      <button type="button" *ngIf="!editingModele" (click)="editModele()" class="text-lg cursor-pointer hover:text-indigo-600 transition duration-300">🖊️</button>
+      <button type="button" *ngIf="editingModele" (click)="cancelModeleUpdate()" class="text-lg cursor-pointer hover:text-red-600 transition duration-300">❌</button>
+    </div>
+  </div>
+
+  <div class="mb-6">
+    <div class="flex items-center space-x-4">
+      <input [formControl]="immatriculationControl" name="immatriculation" placeholder="Immatriculation" class="flex-1 border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300">
+      <div *ngIf="immatriculationControl.invalid && (immatriculationControl.dirty || immatriculationControl.touched)" class="text-red-500">
+        L'immatriculation est requise et doit respecter le format français.
+      </div>
+      <button type="button" *ngIf="!editingImmatriculation" (click)="editImmatriculation()" class="text-lg cursor-pointer hover:text-indigo-600 transition duration-300">🖊️</button>
+      <button type="button" *ngIf="editingImmatriculation" (click)="cancelImmatriculationUpdate()" class="text-lg cursor-pointer hover:text-red-600 transition duration-300">❌</button>
+    </div>
+  </div>
+
+  <div class="mb-6">
+    <div class="flex items-center space-x-4">
+      <input [formControl]="anneeControl" name="annee" placeholder="Année" class="flex-1 border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300">
+      <div *ngIf="anneeControl.invalid && (anneeControl.dirty || anneeControl.touched)" class="text-red-500">
+        L'année est requise.
+      </div>
+      <button type="button" *ngIf="!editingAnnee" (click)="editAnnee()" class="text-lg cursor-pointer hover:text-indigo-600 transition duration-300">🖊️</button>
+      <button type="button" *ngIf="editingAnnee" (click)="cancelAnneeUpdate()" class="text-lg cursor-pointer hover:text-red-600 transition duration-300">❌</button>
+    </div>
+  </div>
+
+  <div class="mb-6" *ngIf="authguardService.isAdmin()">
+    <div class="flex items-center space-x-4">
+      <select [formControl]="clientControl" name="client" class="flex-1 border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300">
+        <option *ngFor="let client of clients" [value]="client.id">{{ client.id }} - {{ client.nom }} {{ client.prenom }}</option>
+      </select>
+      <button type="button" *ngIf="!editingClient" (click)="editClient()" class="text-lg cursor-pointer hover:text-indigo-600 transition duration-300">🖊️</button>
+      <button type="button" *ngIf="editingClient" (click)="cancelClientUpdate()" class="text-lg cursor-pointer hover:text-red-600 transition duration-300">❌</button>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="formGroup.invalid" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg self-end transition duration-300 ease-in-out">
+    Valider
+  </button>
+</form>

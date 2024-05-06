@@ -1,0 +1,47 @@
+<form [formGroup]="vehiculeForm" (ngSubmit)="onSubmit()" class="max-w-lg mx-auto p-8 bg-white shadow-lg rounded-lg">
+  <!-- Input marque -->
+  <div class="mb-4">
+    <p class="text-gray-600 text-sm">Marque</p>
+    <input formControlName="marque" placeholder="Ex : Renault" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 ease-in-out">
+    <div *ngIf="vehiculeForm.get('marque')?.invalid && vehiculeForm.get('marque')?.touched" class="text-red-500 text-sm mt-1">
+      La marque est invalide.
+    </div>
+  </div>
+
+  <!-- Input modèle -->
+  <div class="mb-4">
+    <p class="text-gray-600 text-sm">Modèle</p>
+    <input formControlName="modele" placeholder="Ex : Modus" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 ease-in-out">
+    <div *ngIf="vehiculeForm.get('modele')?.invalid && vehiculeForm.get('modele')?.touched" class="text-red-500 text-sm mt-1">
+      Le modèle est invalide.
+    </div>
+  </div>
+
+  <!-- Input immatriculation -->
+  <div class="mb-4">
+    <p class="text-gray-600 text-sm">Immatriculation</p>
+    <input formControlName="immatriculation" placeholder="EX : AB-123-CD" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 ease-in-out">
+    <div *ngIf="vehiculeForm.get('immatriculation')?.invalid && vehiculeForm.get('immatriculation')?.touched" class="text-red-500 text-sm mt-1">
+      L'immatriculation est invalide.
+    </div>
+  </div>
+
+  <!-- Input annee -->
+  <div class="mb-4">
+    <p class="text-gray-600 text-sm">Année</p>
+    <input formControlName="annee" placeholder="Ex : 2004" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 ease-in-out">
+    <div *ngIf="vehiculeForm.get('annee')?.invalid && vehiculeForm.get('annee')?.touched" class="text-red-500 text-sm mt-1">
+      L'année est invalide.
+    </div>
+  </div>
+
+  <!-- Buttons Cancel & Submit -->
+  <div class="flex justify-between">
+    <button type="button" (click)="cancelForm()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
+      Annuler
+    </button>
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
+      Valider
+    </button>
+  </div>
+</form>

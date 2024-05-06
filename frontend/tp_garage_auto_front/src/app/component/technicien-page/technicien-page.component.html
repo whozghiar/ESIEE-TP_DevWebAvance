@@ -1,0 +1,17 @@
+<div class="container mx-auto px-4 pt-20">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  <div *ngIf="!isLoading" class="flex flex-wrap gap-y-6 justify-center">
+    <div class="w-full md:w-8/12 lg:w-6/12 xl:w-4/12 px-4">
+      <div class="max-w-2xl my-5">
+        <h2 class="text-3xl font-bold tracking-tight text-blue-900 sm:text-4xl">
+          Liste des techniciens
+        </h2>
+      </div>
+      <div class="shadow-2xl rounded-lg overflow-hidden p-4 mb-6 bg-white">
+        <div class="space-y-4">
+          <app-technicien-card *ngFor="let technicien of techniciens; let i = index" [technicien]="technicien" (technicienDeleted)="onTechnicienDeleted(i)"></app-technicien-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

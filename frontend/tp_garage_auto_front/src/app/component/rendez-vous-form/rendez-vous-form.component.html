@@ -1,0 +1,48 @@
+<ng-template #loading>
+  <app-loading-spinner></app-loading-spinner>
+</ng-template>
+
+<div class="flex flex-col w-full" *ngIf="(!isClientLoading && !isVehiculeLoading); else loading">
+  <div class="flex flex-col gap-3">
+    <!-- Bouton de retour -->
+    <button
+      type="button"
+      class="bg-red-600 text-white rounded shadow p-3"
+      (click)="onCancel()">
+      Retour
+    </button>
+    <form (ngSubmit)="onSubmit()">
+      <input
+        [formControl]="dateControl"
+        class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4"
+        placeholder="Date du rendez-vous..."
+        [value]="jour"
+        readonly
+      />
+
+      <select
+        class="mt-1 w-full border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4"
+        [formControl]="typeServiceControl"
+      >
+        <option *ngFor="let service of servicesTypes" [value]="service">
+          {{ service }}
+        </option>
+      </select>
+
+      <select
+        class="mt-1 w-full border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4"
+        [formControl]="vehiculeControl"
+      >
+        <option *ngFor="let vehicule of vehicules" [value]="vehicule.id">
+          {{ vehicule.modele }} {{ vehicule.marque }}
+        </option>
+      </select>
+      <button
+        type="submit"
+        [disabled]="formGroup.invalid"
+        class="bg-blue-600 text-white rounded shadow p-3">
+        Ajouter Rendez-vous
+      </button>
+    </form>
+  </div>
+</div>

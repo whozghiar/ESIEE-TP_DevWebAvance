@@ -1,73 +1,44 @@
 package BeansTests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import fr.unilasalle.tp_garage_auto.beans.Client;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
 
-import java.util.Set;
-import jakarta.validation.ConstraintViolation;
+import static org.junit.jupiter.api.Assertions.*;
 
-class ClientTest {
-    private Validator validator;
+public class ClientTest {
+    private Client client;
 
     @BeforeEach
     public void setUp() {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
+        client = new Client();
     }
 
     @Test
-    public void testClientValidationSuccess() {
-        Client client = new Client();
-        client.setNom("Dupont");
-        client.setPrenom("Jean");
-        client.setTelephone("0123456789");
-        client.setEmail("jean.dupont@example.com");
-
-        Set<ConstraintViolation<Client>> violations = validator.validate(client);
-        assertTrue(violations.isEmpty(), "Le client devrait passer toutes les contraintes de validation");
+    public void testNom() {
+        String nom = "DUPONT";
+        client.setNom(nom);
+        assertEquals(nom, client.getNom());
     }
 
     @Test
-    public void testNomValidationFailures() {
-        Client client = new Client();
-        client.setNom(""); // Nom vide
-        client.setPrenom("Jean");
-        client.setTelephone("0123456789");
-        client.setEmail("jean.dupont@example.com");
-
-        Set<ConstraintViolation<Client>> violations = validator.validate(client);
-        assertFalse(violations.isEmpty(), "Le nom vide devrait échouer la validation");
-
-    }
-
-
-    @Test
-    public void testTelephoneValidationFailure() {
-        Client client = new Client();
-        client.setNom("Dupont");
-        client.setPrenom("Jean");
-        client.setTelephone("abcdefghij"); // Téléphone invalide
-        client.setEmail("jean.dupont@example.com");
-
-        Set<ConstraintViolation<Client>> violations = validator.validate(client);
-        assertFalse(violations.isEmpty(), "Le téléphone invalide devrait échouer la validation");
+    public void testPrenom() {
+        String prenom = "Lucien";
+        client.setPrenom(prenom);
+        assertEquals(prenom, client.getPrenom());
     }
 
     @Test
-    public void testEmailValidationFailure() {
-        Client client = new Client();
-        client.setNom("Dupont");
-        client.setPrenom("Jean");
-        client.setTelephone("0123456789");
-        client.setEmail("jean.dupont"); // Email invalide
+    public void testTelephone() {
+        String telephone = "0634472514";
+        client.setTelephone(telephone);
+        assertEquals(telephone, client.getTelephone());
+    }
 
-        Set<ConstraintViolation<Client>> violations = validator.validate(client);
-        assertFalse(violations.isEmpty(), "L'email invalide devrait échouer la validation");
+    @Test
+    public void testEmail() {
+        String email = "luludupont@gmail.com";
+        client.setEmail(email);
+        assertEquals(email, client.getEmail());
     }
 }

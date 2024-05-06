@@ -1,0 +1,39 @@
+<div class="relative border px-4 py-4 rounded-lg bg-gradient-to-r from-blue-900 via-blue-600 to-blue-400 shadow-lg text-white">
+  <div class="flex items-center space-x-4">
+    <!-- Espace pour image du véhicule (à ajouter plus tard) -->
+    <div class="h-24 w-24 rounded-full bg-blue-300 bg-opacity-20 flex items-center justify-center">
+      <img src="../../../assets/vehicule/{{vehicule.modele}}.jpg" class="h-full w-full object-cover rounded-full items-center">
+    </div>
+
+    <!-- ID Véhicule -->
+    <div class="h-12 w-12 rounded-full flex items-center justify-center bg-blue-200 text-blue-900 font-bold">
+      {{ vehicule.id }}
+    </div>
+
+    <!-- Information Véhicule -->
+    <div class="flex-grow">
+      <div class="font-bold text-lg">{{ vehicule.marque }} {{ vehicule.modele }}</div>
+      <div class="text-sm">{{ vehicule.immatriculation }}</div>
+    </div>
+
+    <!-- Année Véhicule -->
+    <div class="text-sm flex-none ml-4">
+      {{ vehicule.annee }}
+    </div>
+  </div>
+
+  <!-- Boutons Suppression/Modification -->
+  <div class="absolute top-2 right-2 flex space-x-2">
+    <div *ngIf="!isEditing" class="text-white font-bold text-xl rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">
+      <span (click)="switchToModifier()">🔧</span>
+    </div>
+
+    <button (click)="deleteVehicule()" class="text-white font-bold text-xl rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+      ❌
+    </button>
+  </div>
+</div>
+
+<div>
+  <app-vehicule-modifier *ngIf="isEditing" [vehicule]="vehicule" (cancel)="switchToCard()"></app-vehicule-modifier>
+</div>

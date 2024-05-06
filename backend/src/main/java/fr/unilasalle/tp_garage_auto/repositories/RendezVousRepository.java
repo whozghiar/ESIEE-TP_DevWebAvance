@@ -10,7 +10,6 @@ import java.util.Set;
 @Repository
 public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
 
-    //Set<RendezVous> findByClientId(Long clientId);
     Set<RendezVous> findByTechnicienId(Long technicienId);
     Set<RendezVous> findByVehiculeId(Long vehiculeId);
 
@@ -20,5 +19,15 @@ public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
 
     @Query("SELECT rv FROM RendezVous rv JOIN rv.vehicule v JOIN v.client c WHERE c.id = :clientId")
     Set<RendezVous> findByClientId(Long clientId);
+
+    @Query("SELECT COUNT(rv) FROM RendezVous rv WHERE rv.typeService = :typeService")
+    Long countByTypeService(String typeService);
+
+    @Query("SELECT COUNT(rv) FROM RendezVous rv")
+    Long countAllRendezVous();
+
+
+
+
 
 }

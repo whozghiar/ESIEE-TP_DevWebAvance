@@ -1,0 +1,19 @@
+<form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+  <input formControlName="nom" placeholder="Nom" class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4">
+  <div *ngIf="clientForm.get('nom')?.invalid && clientForm.get('nom')?.touched" class="text-red-500">
+    Le nom est invalide.
+  </div>
+  <input formControlName="prenom" placeholder="Prénom" class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4">
+  <div *ngIf="clientForm.get('prenom')?.invalid && clientForm.get('prenom')?.touched" class="text-red-500">
+    Le prénom est invalide.
+  </div>
+  <input formControlName="email" placeholder="Email" class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4">
+  <div *ngIf="clientForm.get('email')?.invalid && clientForm.get('email')?.touched" class="text-red-500">
+    L'email est invalide.
+  </div>
+  <input formControlName="telephone" placeholder="Téléphone" class="mt-1 block border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out sm:text-sm py-3 px-4">
+  <div *ngIf="clientForm.get('telephone')?.invalid && clientForm.get('telephone')?.touched" class="text-red-500">
+    Le téléphone est invalide.
+  </div>
+  <button type="submit" class="bg-blue-600 text-white rounded shadow p-3">Suivant</button>
+</form>

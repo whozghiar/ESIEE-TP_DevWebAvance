@@ -25,7 +25,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("technicien")
+@RequestMapping("api/technicien")
 @RequiredArgsConstructor
 @Slf4j
 @SecurityScheme(
@@ -85,6 +85,24 @@ public class TechnicienController {
     }
 
     /**
+     * Méthode GET pour récupérer un technicien par email
+     * @param email
+     * @return
+     */
+    @GetMapping("/email/{email}")
+    @PreAuthorize("hasAnyRole('admin','technicien')")
+    @Operation(summary = "Récupérer un technicien par son email",
+            description = "Récupérer un technicien en fonction de son email",
+            tags = { "technicien" },
+            security = { @SecurityRequirement(name = "bearerAuth") })
+    public ResponseEntity<Technicien> getTechnicienByEmail(@PathVariable (name = "email") String email) {
+        log.info("Récupération du technicien avec l'email " + email);
+        Technicien technicien = this.technicienService.getTechnicienByEmail(email);
+        log.info("Technicien récupéré avec succès : \n\t" + technicien);
+        return new ResponseEntity<>(technicien, HttpStatus.OK);
+    }
+
+    /**
      * Méthode GET pour récupérer les techniciens par nom
      * @param nom
      * @return
@@ -134,7 +152,7 @@ public class TechnicienController {
      * @return
      */
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    @PreAuthorize("hasAnyRole('admin')")
     @Operation(summary = "Mettre à jour un technicien",
             description = "Mettre à jour un technicien en fonction de ses informations",
             tags = { "technicien" },
@@ -152,7 +170,7 @@ public class TechnicienController {
      * @return
      */
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    @PreAuthorize("hasAnyRole('admin')")
     @Operation(summary = "Supprimer un technicien",
             description = "Supprimer un technicien en fonction de son id",
             tags = { "technicien" },

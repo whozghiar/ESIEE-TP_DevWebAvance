@@ -26,7 +26,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("vehicule")
+@RequestMapping("api/vehicule")
 @RequiredArgsConstructor
 @Slf4j
 @SecurityScheme(
@@ -164,7 +164,7 @@ public class VehiculeController {
      * @return
      */
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    @PreAuthorize("hasAnyRole('admin','client')")
     @Operation(summary = "Mettre à jour un vehicule",
             description = "Mettre à jour un vehicule en fonction de ses informations",
             tags = { "vehicule" },
@@ -182,7 +182,7 @@ public class VehiculeController {
      * @return
      */
     @PostMapping
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    @PreAuthorize("hasAnyRole('admin','client')")
     @Operation(summary = "Créer un vehicule",
             description = "Créer un vehicule en fonction de ses informations",
             tags = { "vehicule" },
@@ -200,7 +200,7 @@ public class VehiculeController {
      * @return
      */
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    @PreAuthorize("hasAnyRole('admin','client')")
     @Operation(summary = "Supprimer un vehicule",
             description = "Supprimer un vehicule en fonction de son id",
             tags = { "vehicule" },
