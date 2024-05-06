@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("rendez-vous")
+@RequestMapping("api/rendez-vous")
 @RequiredArgsConstructor
 @Slf4j
 @SecurityScheme(
@@ -39,7 +39,7 @@ public class RendezVousController {
      * @param typeService : type de service
      * @param vehicule_id : id du véhicule
      * @param technicien_id : id du technicien
-     * @param clientId : id du client
+     * @param client_id : id du client
      * @return
      */
     @GetMapping
@@ -53,7 +53,7 @@ public class RendezVousController {
                                            @RequestParam(required = false, name = "typeService") String typeService,
                                            @RequestParam(required = false, name = "vehicule_id") Long vehicule_id,
                                            @RequestParam(required = false, name = "technicien_id") Long technicien_id,
-                                           @RequestParam(required = false, name = "clientId") Long clientId) throws ServiceException {
+                                           @RequestParam(required = false, name = "client_id") Long client_id) throws ServiceException {
 
         if (date != null) {
             return getRendezVousByDate(date);
@@ -63,8 +63,8 @@ public class RendezVousController {
             return getRendezVousByVehiculeId(vehicule_id);
         } else if (technicien_id != null) {
             return getRendezVousByTechnicienId(technicien_id);
-        } else if (clientId != null) {
-            return getRendezVousByClientId(clientId);
+        } else if (client_id != null) {
+            return getRendezVousByClientId(client_id);
         } else {
             log.info("Récupération de tous les rendez-vous ...");
             Set<RendezVous> rendezVous = this.rendezVousService.getAllRendezVous();
@@ -158,7 +158,7 @@ public class RendezVousController {
      * @return
      */
     @PostMapping
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    @PreAuthorize("hasAnyRole('admin','technicien','client')")
     @Operation(summary = "Créer un rendez-vous",
             description = "Créer un rendez-vous en fonction de ses informations",
             tags = { "rendez-vous" },
@@ -195,7 +195,7 @@ public class RendezVousController {
      * @return
      */
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    @PreAuthorize("hasAnyRole('admin','client')")
     @Operation(summary = "Supprimer un rendez-vous",
             description = "Supprimer un rendez-vous",
             tags = { "rendez-vous" },

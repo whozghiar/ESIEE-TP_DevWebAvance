@@ -1,10 +1,12 @@
 package fr.unilasalle.tp_garage_auto.services;
 
+import fr.unilasalle.tp_garage_auto.beans.RendezVous;
 import fr.unilasalle.tp_garage_auto.beans.Technicien;
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
 import fr.unilasalle.tp_garage_auto.exceptions.DTOException;
 import fr.unilasalle.tp_garage_auto.exceptions.NotFoundException;
 import fr.unilasalle.tp_garage_auto.exceptions.ServiceException;
+import fr.unilasalle.tp_garage_auto.repositories.RendezVousRepository;
 import fr.unilasalle.tp_garage_auto.repositories.TechnicienRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class TechnicienService {
     private final TechnicienRepository technicienRepository;
+    private final RendezVousRepository rendezVousRepository;
 
     /**
      * Récupérer tous les techniciens
@@ -72,6 +75,19 @@ public class TechnicienService {
         return techniciens;
     }
 
+    /**
+     * Récupérer un technicien par email
+     * @param email
+     * @return
+     */
+    public Technicien getTechnicienByEmail(String email){
+        Technicien technicien = technicienRepository.findByEmail(email);
+        if(technicien == null){
+            throw new NotFoundException("Impossible de trouver de techniciens avec l'email " + email + ".",new NullPointerException());
+        }
+        return technicien;
+    }
+
 
     /**
      * Créer un technicien
@@ -121,8 +137,10 @@ public class TechnicienService {
             throw new NotFoundException("Impossible de trouver le technicien avec l'id " + technicien.getId() + ".",new NullPointerException());
         }
 
-        existingTechnicien.setNom(technicien.getNom());
-        existingTechnicien.setPrenom(technicien.getPrenom());
+        if(technicien.getNom() != null)
+            existingTechnicien.setNom(technicien.getNom());
+        if(technicien.getPrenom() != null)
+            existingTechnicien.setPrenom(technicien.getPrenom());
 
         try{
             return technicienRepository.save(technicien);
@@ -143,6 +161,14 @@ public class TechnicienService {
         Technicien existingTechnicien = technicienRepository.findById(id).orElse(null);
         if (existingTechnicien == null) {
             throw new NotFoundException("Impossible de trouver le technicien avec l'id " + id + ".",new NullPointerException());
+        }
+
+        Set<RendezVous> rendezVous = rendezVousRepository.findByTechnicienId(id);
+        if(!rendezVous.isEmpty()){
+            for(RendezVous rdv : rendezVous){
+                rdv.setTechnicien(null);
+                rendezVousRepository.save(rdv);
+            }
         }
 
         try {

@@ -1,13 +1,15 @@
 package fr.unilasalle.tp_garage_auto.beans;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 
 @Entity
@@ -23,6 +25,7 @@ import lombok.*;
 public class RendezVous {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Hidden
     private Long id;
 
     @NotBlank(message = "La date est obligatoire")
@@ -40,16 +43,16 @@ public class RendezVous {
     private String typeService;
 
     // Relation avec Véhicule
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "vehicule_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    //@JsonBackReference("vehicule-rendezVous")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Vehicule vehicule;
 
     // Relation avec Technicien
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "technicien_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    //@JsonBackReference("technicien-rendezVous")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Technicien technicien;
 }

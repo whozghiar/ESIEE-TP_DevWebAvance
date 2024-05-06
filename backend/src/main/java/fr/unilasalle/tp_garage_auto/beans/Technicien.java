@@ -1,25 +1,18 @@
 package fr.unilasalle.tp_garage_auto.beans;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString (exclude = "rendezVous")
 @Data
 @Builder
 @Valid
@@ -27,6 +20,7 @@ import java.util.Set;
 public class Technicien {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Hidden
     private Long id;
 
     @NotBlank(message = "Le nom est obligatoire")
@@ -43,13 +37,13 @@ public class Technicien {
     @Schema(description = "Prénom du technicien", example = "Martine")
     private String prenom;
 
-
-    /*
-    @OneToMany(mappedBy = "technicien", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference("technicien-rendezVous")
-    private Set<RendezVous> rendezVous;
-     */
-
+    @NotBlank(message = "L'email est obligatoire")
+    @NotEmpty(message = "L'email ne peut pas être vide")
+    @NotNull(message = "L'email ne peut pas être nul")
+    @Email(message = "L'email doit être valide")
+    @Schema(description = "Email du Technicien", example = "technicien@mail.com")
+    @Column(unique = true)
+    private String email;
 
 
 }

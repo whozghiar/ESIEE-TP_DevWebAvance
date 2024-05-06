@@ -3,12 +3,15 @@ package fr.unilasalle.tp_garage_auto.services;
 // ------ Imports Beans ------
 
 import fr.unilasalle.tp_garage_auto.beans.Client;
+import fr.unilasalle.tp_garage_auto.beans.RendezVous;
 import fr.unilasalle.tp_garage_auto.beans.Vehicule;
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
 import fr.unilasalle.tp_garage_auto.exceptions.DTOException;
 import fr.unilasalle.tp_garage_auto.exceptions.NotFoundException;
 import fr.unilasalle.tp_garage_auto.exceptions.ServiceException;
 import fr.unilasalle.tp_garage_auto.repositories.ClientRepository;
+import fr.unilasalle.tp_garage_auto.repositories.RendezVousRepository;
+import fr.unilasalle.tp_garage_auto.repositories.VehiculeRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +25,9 @@ import java.util.Set;
 @Slf4j
 public class ClientService {
 
-    private final VehiculeService vehiculeService;
     private final ClientRepository clientRepository;
+    private final VehiculeRepository vehiculeRepository;
+    private final RendezVousRepository rendezVousRepository;
 
     /**
      * Récupérer tous les clients
@@ -121,9 +125,15 @@ public class ClientService {
             throw new ServiceException("Le client ne peut pas avoir d'id.",new NullPointerException());
         }
 
+        Client existingClient = this.clientRepository.findByEmailContainingIgnoreCase(client.getEmail());
+        if (existingClient != null) {
+            throw new ServiceException("Un client avec l'email " + client.getEmail() + " existe déjà.", new NullPointerException());
+        }
+
         try {
             return this.clientRepository.save(client);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new DBException("Erreur lors de la création du client en base.", e);
         }
     }
@@ -148,10 +158,14 @@ public class ClientService {
             throw new NotFoundException("Impossible de trouver un client avec l'id " + client.getId() + ".", new NullPointerException());
         }
 
-        existingClient.setNom(client.getNom());
-        existingClient.setPrenom(client.getPrenom());
-        existingClient.setTelephone(client.getTelephone());
-        existingClient.setEmail(client.getEmail());
+        if (client.getNom() != null)
+            existingClient.setNom(client.getNom());
+        if (client.getPrenom() != null)
+            existingClient.setPrenom(client.getPrenom());
+        if (client.getTelephone() != null)
+            existingClient.setTelephone(client.getTelephone());
+        if (client.getEmail() != null)
+            existingClient.setEmail(client.getEmail());
 
         try {
             return this.clientRepository.save(existingClient);
@@ -171,6 +185,31 @@ public class ClientService {
         Client existingClient = this.clientRepository.findById(id).orElse(null);
         if (existingClient == null) {
             throw new NotFoundException("Impossible de trouver un client avec l'id " + id + ".", new NullPointerException());
+        }
+
+
+        // Si le client a des véhicules, on les supprime
+        Set<Vehicule> vehicules = this.vehiculeRepository.findByClientId(existingClient.getId());
+        if (!vehicules.isEmpty()) {
+            for (Vehicule vehicule : vehicules) {
+                try {
+                    this.vehiculeRepository.delete(vehicule);
+                } catch (DBException e) {
+                    throw new DBException("Erreur lors de la suppression du véhicule avec l'id " + vehicule.getId(), e);
+                }
+            }
+        }
+
+        // Si le client a des rendez-vous, on les supprime
+        Set<RendezVous> rendezVous = this.rendezVousRepository.findByClientId(existingClient.getId());
+        if (!rendezVous.isEmpty()) {
+            for (RendezVous rdv : rendezVous) {
+                try {
+                    this.rendezVousRepository.delete(rdv);
+                } catch (DBException e) {
+                    throw new DBException("Erreur lors de la suppression du rendez-vous avec l'id " + rdv.getId(), e);
+                }
+            }
         }
 
         try {

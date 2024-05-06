@@ -1,12 +1,17 @@
 package fr.unilasalle.tp_garage_auto.services;
 
+import fr.unilasalle.tp_garage_auto.beans.Client;
 import fr.unilasalle.tp_garage_auto.beans.RendezVous;
 import fr.unilasalle.tp_garage_auto.exceptions.DBException;
 import fr.unilasalle.tp_garage_auto.exceptions.NotFoundException;
 import fr.unilasalle.tp_garage_auto.exceptions.ServiceException;
 import fr.unilasalle.tp_garage_auto.repositories.RendezVousRepository;
+import fr.unilasalle.tp_garage_auto.repositories.TechnicienRepository;
+import fr.unilasalle.tp_garage_auto.repositories.VehiculeRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -16,7 +21,10 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class RendezVousService {
 
+    private static final Logger log = LoggerFactory.getLogger(RendezVousService.class);
     private final RendezVousRepository rendezVousRepository;
+    private final TechnicienRepository technicienRepository;
+    private final VehiculeRepository vehiculeRepository;
 
 
     /**
@@ -135,6 +143,18 @@ public class RendezVousService {
             throw new ServiceException("Le rendez-vous ne peut pas avoir d'id",new NullPointerException());
         }
 
+        // Si l'id du Technicien est renseigné, on récupère le technicien
+        if (rendezVous.getTechnicien() != null && rendezVous.getTechnicien().getId() != null) {
+            rendezVous.setTechnicien(technicienRepository.findById(rendezVous.getTechnicien().getId()).orElse(null));
+        }
+
+        // Si l'id du Vehicule est renseigné, on récupère le vehicule
+        if (rendezVous.getVehicule() != null && rendezVous.getVehicule().getId() != null) {
+            rendezVous.setVehicule(vehiculeRepository.findById(rendezVous.getVehicule().getId()).orElse(null));
+        }
+
+
+
         try{
             return rendezVousRepository.save(rendezVous);
         }catch (Exception e){
@@ -161,14 +181,42 @@ public class RendezVousService {
         }
 
         RendezVous existingRendezVous = rendezVousRepository.findById(id).orElse(null);
+
+        log.info("OMG RDV :  \n\t" + rendezVous.getTechnicien());
+
         if(existingRendezVous == null){
             throw new NotFoundException("Impossible de trouver un rendez-vous avec l'id " + rendezVous.getId() + ".",new NullPointerException());
         }
 
-        existingRendezVous.setDate(rendezVous.getDate());
-        existingRendezVous.setTypeService(rendezVous.getTypeService());
-        existingRendezVous.setVehicule(rendezVous.getVehicule());
-        existingRendezVous.setTechnicien(rendezVous.getTechnicien());
+        if(rendezVous.getDate() != null)
+            existingRendezVous.setDate(rendezVous.getDate());
+        if(rendezVous.getTypeService() != null)
+            existingRendezVous.setTypeService(rendezVous.getTypeService());
+
+        // Si le vehicule est renseigné :
+        if(rendezVous.getVehicule() != null){
+            // Si l'id du Vehicule est renseigné, on récupère le vehicule
+            if(rendezVous.getVehicule().getId() != null){
+                existingRendezVous.setVehicule(vehiculeRepository.findById(rendezVous.getVehicule().getId()).orElse(null));
+            }else{ // Sinon on récupère le vehicule renseigné
+                existingRendezVous.setVehicule(rendezVous.getVehicule());
+            }
+        }else{
+            existingRendezVous.setVehicule(null);
+        }
+
+
+        // Si le technicien est renseigné :
+        if(rendezVous.getTechnicien() != null) {
+            // Si l'id du Technicien est renseigné, on récupère le technicien
+            if (rendezVous.getTechnicien().getId() != null) {
+                existingRendezVous.setTechnicien(technicienRepository.findById(rendezVous.getTechnicien().getId()).orElse(null));
+            } else { // Sinon on récupère le technicien renseigné
+                existingRendezVous.setTechnicien(rendezVous.getTechnicien());
+            }
+        }else{
+            existingRendezVous.setTechnicien(null);
+        }
 
         try{
             return rendezVousRepository.save(existingRendezVous);

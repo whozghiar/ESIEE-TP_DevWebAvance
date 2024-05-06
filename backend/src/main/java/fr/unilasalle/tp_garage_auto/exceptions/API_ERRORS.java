@@ -16,5 +16,4 @@ public class API_ERRORS {
     private HttpStatus status;
     private String type;
     private List<String> errors_msg;
-
 }

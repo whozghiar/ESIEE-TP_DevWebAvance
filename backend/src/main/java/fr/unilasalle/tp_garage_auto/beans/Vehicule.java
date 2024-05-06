@@ -3,12 +3,15 @@ package fr.unilasalle.tp_garage_auto.beans;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -29,6 +32,7 @@ public class Vehicule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Hidden
     private Long id;
 
     @NotBlank(message = "La marque est obligatoire")
@@ -57,18 +61,11 @@ public class Vehicule {
     private Integer annee;
 
 
-    /*
-    // Relation avec RendezVous : un véhicule peut avoir plusieurs rendez-vous
-    @OneToMany(mappedBy = "vehicule", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference("vehicule-rendezVous")
-    private Set<RendezVous> rendezVous;
-     */
-
     // Relation avec Client
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "client_id",nullable = true)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    //@JsonBackReference("client-vehicule")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Client client;
 
 

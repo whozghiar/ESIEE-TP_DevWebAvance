@@ -20,7 +20,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("client")
+@RequestMapping("api/client")
 @RequiredArgsConstructor
 @Slf4j
 @SecurityScheme(
@@ -40,7 +40,6 @@ public class ClientController {
      *
      * @param nom       : nom du client
      * @param prenom    : prenom du client
-     * @param email     : email du client
      * @param telephone : telephone du client
      * @return
      */
@@ -52,14 +51,11 @@ public class ClientController {
             security = {@SecurityRequirement(name = "bearerAuth")})
     public ResponseEntity<?> getClients(@RequestParam(required = false,name = "nom") String nom,
                                         @RequestParam(required = false,name = "prenom") String prenom,
-                                        @RequestParam(required = false,name = "email") String email,
                                         @RequestParam(required = false,name = "telephone") String telephone) throws ServiceException {
         if (nom != null) {
             return getClientByNom(nom);
         } else if (prenom != null) {
             return getClientByPrenom(prenom);
-        } else if (email != null) {
-            return getClientByEmail(email);
         } else if (telephone != null) {
             return getClientByTelephone(telephone);
         } else {
@@ -90,6 +86,24 @@ public class ClientController {
 
     }
 
+    /**
+     * Récupérer les clients par email
+     *
+     * @param email
+     * @return
+     */
+    @GetMapping("/email/{email}")
+    @PreAuthorize("hasAnyRole('admin','technicien','client')")
+    @Operation(summary = "Récupérer un client par son email",
+            description = "Récupérer un client par son email",
+            tags = {"client"},
+            security = {@SecurityRequirement(name = "bearerAuth")})
+    public ResponseEntity<Client> getClientByEmail(@PathVariable(name = "email") String email) {
+        log.info("Récupération du client avec l'email " + email);
+        Client client = this.clientService.getClientByEmail(email);
+        log.info("Client récupéré avec succès : \n\t" + client);
+        return new ResponseEntity<>(client, HttpStatus.OK);
+    }
 
     /**
      * Récupérer les clients par nom
@@ -119,19 +133,6 @@ public class ClientController {
 
     }
 
-    /**
-     * Récupérer les clients par email
-     *
-     * @param email
-     * @return
-     */
-    public ResponseEntity<Client> getClientByEmail(String email) {
-
-        log.info("Récupération du client avec l'email " + email);
-        Client client = this.clientService.getClientByEmail(email);
-        log.info("Client récupéré avec succès : \n\t" + client);
-        return new ResponseEntity<>(client, HttpStatus.OK);
-    }
 
     /**
      * Récupérer les clients par téléphone
@@ -156,7 +157,7 @@ public class ClientController {
      * @return
      */
     @PostMapping
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    @PreAuthorize("hasAnyRole('admin')")
     @Operation(summary = "Créer un client",
             description = "Créer un client",
             tags = {"client"},
@@ -178,7 +179,7 @@ public class ClientController {
      * @return
      */
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    @PreAuthorize("hasAnyRole('admin','client')")
     @Operation(summary = "Mettre à jour un client",
             description = "Mettre à jour un client",
             tags = {"client"},
@@ -197,7 +198,7 @@ public class ClientController {
      * @return
      */
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin','technicien')")
+    @PreAuthorize("hasAnyRole('admin')")
     @Operation(summary = "Supprimer un client",
             description = "Supprimer un client",
             tags = {"client"},
