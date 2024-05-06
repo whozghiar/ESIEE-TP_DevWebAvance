@@ -2,7 +2,7 @@
   <app-loading-spinner></app-loading-spinner>
  </ng-template>
 
-<div class="container mx-auto px-4 pt-20" *ngIf="rendezVous.length>0 else loading">
+<div class="container mx-auto px-4 pt-20" *ngIf="rendezVous else loading">
   <div class="flex flex-wrap justify-center">
     <!-- Rendez-vous -->
     <div class="w-full md:w-8/12 lg:w-6/12 xl:w-4/12 px-4" *ngIf="selectedDate && !hasRendezVous(selectedDate)">
