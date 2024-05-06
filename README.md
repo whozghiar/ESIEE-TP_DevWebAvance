@@ -81,7 +81,12 @@ _Le rendez-vous est ajouté à la liste des rendez-vous du client dans son espac
   - **Username**: technicien
   - **Password**: technicien
   
+_Egalement un export de la configuration Keycloak est disponible dans le dossier Configuration <span style="color:green">projet/config</span>_
+
 ## Base de Données
 - **Username**: root
 - **Password**: Password123!
+
+_Egalement un export de la BDD est disponible dans le dossier Configuration <span style="color:green">projet/config</span>_
+
 

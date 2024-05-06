@@ -6,11 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b9dfc895-73fa-4b6c-a825-63ea15e22939" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP Garage java spring .txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/tp_garage_auto_front/src/app/component/nav-bar/nav-bar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tp_garage_auto_front/src/app/component/nav-bar/nav-bar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/tp_garage_auto_front/src/app/component/rendez-vous-calendrier/rendez-vous-calendrier.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tp_garage_auto_front/src/app/component/rendez-vous-calendrier/rendez-vous-calendrier.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +50,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1715007421182</updated>
-      <workItem from="1715007422485" duration="666000" />
+      <workItem from="1715007422485" duration="1009000" />
     </task>
     <servers />
   </component>
