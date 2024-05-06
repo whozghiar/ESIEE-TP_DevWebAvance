@@ -11,6 +11,7 @@ import {VehiculeCardComponent} from "../vehicule-card/vehicule-card.component";
 import {VehiculeFormComponent} from "../vehicule-form/vehicule-form.component";
 import {RendezVousService} from "../../services/RendezVousService/rendez-vous.service";
 import {RendezVousCardComponent} from "../rendez-vous-card/rendez-vous-card.component";
+import {RendezVous} from "../../modeles/RendezVousModele/rendez-vous";
 
 @Component({
   selector: 'app-utilisateur-profil',
@@ -32,7 +33,7 @@ export class UtilisateurProfilComponent implements OnInit{
 
   client!: Client;
   vehicules: Vehicule[] = [];
-  rendezVous: any;
+  rendezVous: RendezVous[] = [];
 
   isLoading = true;
   showVehiculeForm: boolean = false;
@@ -53,6 +54,9 @@ export class UtilisateurProfilComponent implements OnInit{
     this.loadClient();
   }
 
+  /**
+   * Charge le client connecté
+   */
   loadClient() {
     const email = this.authguardService.getEmail();
     this.clientService.getClientByEmail(email).subscribe(response => {
@@ -66,18 +70,17 @@ export class UtilisateurProfilComponent implements OnInit{
         this.isLoading = false;
       }
     });
-
   }
 
+  /**
+   * Charge les véhicules du client
+   */
   loadVehicules() {
     if (this.client) {
       this.vehiculeService.getVehicules(this.client.id).subscribe(response => {
-        if (response.status === 200) {
-          if (response.body !== null) {
-            this.vehicules = response.body;
-          }
-        }
-        if (response.status === 404) {
+        if (response.status === 200 && response.body !== null) {
+          this.vehicules = response.body;
+        }else if (response.status === 404) {
           console.log('Aucun véhicule trouvé');
         }
       });
@@ -90,12 +93,9 @@ export class UtilisateurProfilComponent implements OnInit{
   loadRendezVous() {
     if (this.client) {
       this.rendezVousService.getRendezVous(undefined, undefined, undefined, undefined, this.client.id).subscribe(response => {
-        if (response.status === 200) {
-          if (response.body !== null) {
-            this.rendezVous = response.body;
-          }
-        }
-        if (response.status === 404) {
+        if (response.status === 200 && response.body !== null) {
+          this.rendezVous = response.body;
+        }else if (response.status === 404) {
           console.log('Aucun rendez-vous trouvé');
         }
       });
@@ -103,24 +103,40 @@ export class UtilisateurProfilComponent implements OnInit{
   }
 
   updateClient() {
-    if (this.telephoneControl.valid) {
-      if (this.telephoneControl.value != null) {
+    this.updateClientWithForm();
+    this.saveClient();
+  }
+
+  /**
+   * Met à jour les valeurs du formulaire dans le client
+   */
+  updateClientWithForm(){
+    if(this.telephoneControl.valid){
+      if(this.telephoneControl.value != null){
         this.client.telephone = this.telephoneControl.value;
       }
-      this.clientService.updateClient(this.client).subscribe(response => {
-        if (response.status === 202) {
-          console.log("Client mis à jour");
-        }
-      });
-    } else {
+    }else{
       console.error("Le numéro de téléphone n'est pas valide")
     }
   }
+
+  /**
+   * Sauvegarde les modifications du client
+   */
+  saveClient(){
+    this.clientService.updateClient(this.client).subscribe(response => {
+      if (response.status === 202) {
+        console.log('Client updated');
+        this.editingTelephone = false;
+        this.telephoneControl.disable();
+      }
+    });
+  }
+
+
   addVehicule(vehicule: Vehicule) {
-    console.log(vehicule);
     this.vehiculeService.addVehicule(vehicule).subscribe(response => {
       if (response.status === 201) {
-        console.log('Vehicule added');
         this.showVehiculeForm = false;
         this.loadVehicules();
       }
@@ -138,8 +154,10 @@ export class UtilisateurProfilComponent implements OnInit{
     this.telephoneControl.disable();
   }
 
+  /**
+   * Récupère les rendez-vous futurs
+   */
   rdvFutur(){
-    // Récupère la date actuelle au format dd/mm/yyyy
     const now = new Date();
     const currentDate = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
     return this.rendezVous.filter((rdv: { date: string; }) => {
@@ -147,8 +165,10 @@ export class UtilisateurProfilComponent implements OnInit{
     });
   }
 
+  /**
+   * Récupère les rendez-vous passés
+   */
   rdvPasse(){
-    // Récupère la date actuelle au format dd/mm/yyyy
     const now = new Date();
     const currentDate = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
     return this.rendezVous.filter((rdv: { date: string; }) => {

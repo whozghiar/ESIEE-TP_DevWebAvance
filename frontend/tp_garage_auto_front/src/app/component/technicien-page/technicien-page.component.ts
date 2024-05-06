@@ -25,15 +25,19 @@ export class TechnicienPageComponent implements OnInit {
   constructor(private technicienService: TechnicienService) { }
 
   ngOnInit(): void {
-    this.technicienService.getTechniciens().subscribe(response => {
-      if (response.body !== null) {
-        this.techniciens = response.body;
-      }
-      this.isLoading = false;
-    });
+    this.loadTechniciens();
   }
 
   onTechnicienDeleted(index: number): void {
     this.techniciens.splice(index, 1);
+  }
+
+  loadTechniciens(): void {
+    this.technicienService.getTechniciens().subscribe(response => {
+      if (response.body !== null && response.status === 200) {
+        this.techniciens = response.body;
+      }
+      this.isLoading = false;
+    });
   }
 }

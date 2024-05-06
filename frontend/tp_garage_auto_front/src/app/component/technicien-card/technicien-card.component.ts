@@ -23,6 +23,9 @@ export class TechnicienCardComponent {
   constructor(private technicienService: TechnicienService) {
   }
 
+  /**
+   * Supprime le technicien
+   */
   deleteTechnicien() {
     if (this.technicien.id != null) {
       this.technicienService.deleteTechnicien(this.technicien.id).subscribe(response => {
@@ -34,10 +37,16 @@ export class TechnicienCardComponent {
     }
   }
 
+  /**
+   * Passe en mode modification
+   */
   switchToModifier() {
     this.isEditing = true;
   }
 
+  /**
+   * Passe en mode affichage
+   */
   switchToCard() {
     this.isEditing = false;
   }

@@ -8,7 +8,7 @@ export class RendezVous {
   vehicule?: Vehicule;
   technicien?: Technicien;
 
-  constructor(date: string, typeService: string, vehicule: Vehicule, technicien: Technicien, id?: number) {
+  constructor(date: string, typeService: string, vehicule: Vehicule, technicien: Technicien | undefined, id?: number) {
     this.date = date;
     this.typeService = typeService;
     this.vehicule = vehicule;

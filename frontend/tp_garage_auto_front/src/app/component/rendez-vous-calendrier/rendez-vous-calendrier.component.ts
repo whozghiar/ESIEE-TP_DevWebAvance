@@ -4,6 +4,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {LoadingSpinnerComponent} from "../loading-spinner/loading-spinner.component";
 import {FormsModule} from "@angular/forms";
 import {RendezVous} from "../../modeles/RendezVousModele/rendez-vous";
+import {AuthguardService} from "../../services/AuthGuardService/authguard.service";
 
 interface Day {
   date: number;
@@ -35,9 +36,13 @@ export class RendezVousCalendrierComponent implements OnInit {
   isLoading = true;
 
   @Output() rendezVousSelected = new EventEmitter<RendezVous>();
-  @Output() jourSelected = new EventEmitter<string>();
 
-  constructor(private rendezVousService: RendezVousService) {
+  @Output() jourSansRDV = new EventEmitter<string>();
+
+  constructor(
+    private rendezVousService: RendezVousService,
+    private authguardService: AuthguardService
+  ) {
     const date = new Date();
     this.currentMonth = date.getMonth();
     this.currentYear = date.getFullYear();
@@ -103,15 +108,11 @@ export class RendezVousCalendrierComponent implements OnInit {
   }
 
   onDayClick(day: Day) {
-    if (day.hasAppointment && day.rendezVous) {
-      console.log('Emitting rendezVousSelected event', day.rendezVous);
+    if (this.authguardService.isAdmin() && day.hasAppointment && day.rendezVous) {
       this.rendezVousSelected.emit(day.rendezVous);
-    }
-    // Ajout pour la création de rendez-vous
-    else{
-      const selectedDate = `${String(day.date).padStart(2, '0')}/${String(this.currentMonth + 1).padStart(2, '0')}/${this.currentYear}`;
-      this.jourSelected.emit(selectedDate);
+    } else if (this.authguardService.isClient() && !day.hasAppointment) {
+        const selectedDate = `${String(day.date).padStart(2, '0')}/${String(this.currentMonth + 1).padStart(2, '0')}/${this.currentYear}`;
+        this.jourSansRDV.emit(selectedDate);
     }
   }
-
 }

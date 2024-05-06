@@ -22,6 +22,9 @@ export class VehiculeCardComponent {
 
   constructor(private vehiculeService: VehiculeService) { }
 
+  /**
+   * Appelle le service Vehicule pour supprimer un véhicule
+   */
   deleteVehicule() {
     if (this.vehicule.id != null) {
       this.vehiculeService.deleteVehicule(this.vehicule.id).subscribe(response => {
@@ -33,10 +36,16 @@ export class VehiculeCardComponent {
     }
   }
 
+  /**
+   * Passe en mode modification
+   */
   switchToModifier() {
     this.isEditing = true;
   }
 
+  /**
+   * Passe en mode affichage
+   */
   switchToCard() {
     this.isEditing = false;
   }

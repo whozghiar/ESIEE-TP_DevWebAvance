@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {ClientFormComponent} from "../client-form/client-form.component";
 import {VehiculeFormComponent} from "../vehicule-form/vehicule-form.component";
-import {RendezVousFormComponent} from "../rendez-vous-form/rendez-vous-form.component";
 import {NgSwitch, NgSwitchCase} from "@angular/common";
 import {Vehicule} from "../../modeles/VehiculeModele/vehicule";
 import {Client} from "../../modeles/ClientModele/client";
@@ -12,7 +11,6 @@ import {Client} from "../../modeles/ClientModele/client";
   imports: [
     ClientFormComponent,
     VehiculeFormComponent,
-    RendezVousFormComponent,
     NgSwitch,
     NgSwitchCase
   ],

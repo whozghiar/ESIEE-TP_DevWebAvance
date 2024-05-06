@@ -3,7 +3,9 @@
   <button type="button" (click)="cancelUpdate()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded top-2 right-2 self-end">
     Retour
   </button>
+  <!-- Nom -->
   <div class="flex flex-col mb-4 mt-4">
+    <h2 class="text-lg font-bold">Nom</h2>
     <div class="flex justify-between items-center">
       <input [formControl]="nomControl" name="nom" placeholder="Dupont" class="flex-1 border p-2">
       <div>
@@ -16,7 +18,9 @@
       <div *ngIf="nomControl.errors?.['pattern']">Le nom doit être alphabétique.</div>
     </div>
   </div>
+  <!-- Prénom -->
   <div class="flex flex-col mb-4">
+    <h2 class="text-lg font-bold">Prénom</h2>
     <div class="flex justify-between items-center">
       <input [formControl]="prenomControl" name="prenom" placeholder="Lucien" class="flex-1 border p-2">
       <div>
@@ -27,6 +31,21 @@
     <div *ngIf="prenomControl.invalid && (prenomControl.dirty || prenomControl.touched)">
       <div *ngIf="prenomControl.errors?.['required']">Le prénom est requis.</div>
       <div *ngIf="prenomControl.errors?.['pattern']">Le prénom doit être alphabétique.</div>
+    </div>
+  </div>
+  <!-- Email -->
+  <div class="flex flex-col mb-4">
+    <h2 class="text-lg font-bold">Email</h2>
+    <div class="flex justify-between items-center">
+      <input [formControl]="emailControl" name="email" placeholder="luludupont@mail.com" class="flex-1 border p-2">
+      <div>
+        <button type="button" *ngIf="!editingEmail" (click)="editEmail()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">🖊️</button>
+        <button type="button" *ngIf="editingEmail" (click)="cancelEmailUpdate()" class="rounded-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer">❌</button>
+      </div>
+    </div>
+    <div *ngIf="emailControl.invalid && (emailControl.dirty || emailControl.touched)">
+      <div *ngIf="emailControl.errors?.['required']">L'email est requis.</div>
+      <div *ngIf="emailControl.errors?.['pattern']">L'email doit respecter le pattern email.</div>
     </div>
   </div>
   <button type="submit" [disabled]="formGroup.invalid" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded self-end">Valider</button>

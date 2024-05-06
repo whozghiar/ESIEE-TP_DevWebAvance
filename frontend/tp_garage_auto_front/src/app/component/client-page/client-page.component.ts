@@ -20,16 +20,23 @@ import {LoadingSpinnerComponent} from "../loading-spinner/loading-spinner.compon
 })
 export class ClientPageComponent implements OnInit {
   clients!: Client[];
-  isLoading: boolean = true;
+  isLoadingClients: boolean = true;
 
   constructor(private clientService: ClientService) { }
 
   ngOnInit(): void {
+    this.loadClients()
+  }
+
+  /**
+   * Méthode permettant de charger les clients depuis le service clientService
+   */
+  loadClients(): void {
     this.clientService.getClients().subscribe(response => {
-      if (response.body !== null) {
+      if (response.body !== null && response.status === 200) {
         this.clients = response.body;
       }
-      this.isLoading = false;
+      this.isLoadingClients = false;
     });
   }
 

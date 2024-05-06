@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import {HomeComponent} from "./component/home/home.component";
-import {RendezVousFormComponent} from "./component/rendez-vous-form/rendez-vous-form.component";
 import {ClientPageComponent} from "./component/client-page/client-page.component";
 import {TechnicienPageComponent} from "./component/technicien-page/technicien-page.component";
 import {VehiculePageComponent} from "./component/vehicule-page/vehicule-page.component";
